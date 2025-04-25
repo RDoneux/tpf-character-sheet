@@ -1,1 +1,22 @@
 <app-configuration-badge title="INITIATIVE" [value]="initiativeTotal" (onClick)="openInitiativeDialog()" />
+
+<ng-template #initiativeDialog>
+    <div class="initiative-dialog" [formGroup]="initiativeForm">
+        <h1 mat-dialog-title>Initiative Management</h1>
+
+        <div mat-dialog-container class="content">
+            <mat-form-field class="total">
+                <mat-label>Total</mat-label>
+                <input type="number" matInput formControlName="total" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Dex Modifier</mat-label>
+                <input type="number" matInput formControlName="dexterityModifier" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Misc Modifier</mat-label>
+                <input type="number" matInput formControlName="miscModifier" />
+            </mat-form-field>
+        </div>
+    </div>
+</ng-template>

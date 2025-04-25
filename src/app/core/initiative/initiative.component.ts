@@ -1,5 +1,5 @@
-import { Component, DestroyRef } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { Component, DestroyRef, TemplateRef, ViewChild } from '@angular/core'
+import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { Observable, firstValueFrom, debounceTime, map } from 'rxjs'
 import { buildForm } from '../../utils/form'
@@ -8,14 +8,19 @@ import { updateInitiative } from './state/initiative.actions'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
 import { ConfigurationBadgeComponent } from '../../fragments/configuration-badge/configuration-badge.component'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
     selector: 'app-initiative',
-    imports: [ConfigurationBadgeComponent],
+    imports: [ConfigurationBadgeComponent, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
     templateUrl: './initiative.component.html',
     styleUrl: './initiative.component.scss',
 })
 export class InitiativeComponent {
+    @ViewChild('initiativeDialog') initiativeDialog!: TemplateRef<any>
+
     initiative$!: Observable<IInitiative>
     initiativeForm!: FormGroup<IInitiativeForm>
 
@@ -25,7 +30,8 @@ export class InitiativeComponent {
 
     constructor(
         private store: Store<{ initiative: IInitiative; abilities: IAbilities }>,
-        private destroyRef: DestroyRef
+        private destroyRef: DestroyRef,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -56,7 +62,9 @@ export class InitiativeComponent {
         })
     }
 
-    openInitiativeDialog() {}
+    openInitiativeDialog() {
+        this.dialog.open(this.initiativeDialog)
+    }
 
     private calculateInitiative(value: Partial<IInitiative>): IInitiative {
         value.total = 0
