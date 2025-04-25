@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { OverviewComponent } from './overview.component'
+import { ArmourClassComponent } from './armour-class.component'
 import { mockStore } from '../../utils/mocks'
 
-describe('OverviewComponent', () => {
-    let component: OverviewComponent
-    let fixture: ComponentFixture<OverviewComponent>
+describe('ArmourClassComponent', () => {
+    let component: ArmourClassComponent
+    let fixture: ComponentFixture<ArmourClassComponent>
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [OverviewComponent],
+            imports: [ArmourClassComponent],
             providers: [mockStore],
         }).compileComponents()
 
-        fixture = TestBed.createComponent(OverviewComponent)
+        fixture = TestBed.createComponent(ArmourClassComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
     })

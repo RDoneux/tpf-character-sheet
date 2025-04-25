@@ -5,12 +5,24 @@ import { routes } from './app.routes'
 import { provideStore } from '@ngrx/store'
 import { abilitiesReducer } from './core/abilities/state/abilities.reducer'
 import { provideStoreDevtools } from '@ngrx/store-devtools'
+import { hitPointsReducer } from './core/hit-points/state/hit-points.reducer'
+import { storageMetaReducer, rehydrateState } from './utils/state'
+import { armourClassReducer } from './core/armour-class/state/armour-class.reducer'
+
+const appReducers = {
+    abilities: abilitiesReducer,
+    hitPoints: hitPointsReducer,
+    armourClass: armourClassReducer,
+}
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes),
-        provideStore({ abilities: abilitiesReducer }),
+        provideStore(appReducers, {
+            metaReducers: [storageMetaReducer],
+            initialState: rehydrateState(),
+        }),
         provideStoreDevtools(),
     ],
 }
