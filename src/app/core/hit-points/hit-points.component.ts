@@ -16,9 +16,7 @@ export class HitPointsComponent {
     hitPoints$!: Observable<IHitPoints>
 
     ngOnInit() {
-        this.hitPoints$ = this.store.select(
-            (state: { hitPoints: IHitPoints }) => state.hitPoints
-        )
+        this.hitPoints$ = this.store.select((state: { hitPoints: IHitPoints }) => state.hitPoints)
 
         this.store.dispatch(updateHitPointsTotal({ value: 10 }))
     }

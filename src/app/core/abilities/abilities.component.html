@@ -3,11 +3,7 @@
         @for (ability of abilities; track ability) {
             <div class="abilities__ability-container" [formGroupName]="ability">
                 <h3>{{ ability | uppercase }}</h3>
-                <input
-                    class="modifier"
-                    type="number"
-                    formControlName="modifier"
-                />
+                <input class="modifier" type="number" formControlName="modifier" />
                 <input class="score" type="number" formControlName="score" />
             </div>
         }

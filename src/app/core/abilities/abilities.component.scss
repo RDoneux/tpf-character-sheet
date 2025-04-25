@@ -1,0 +1,49 @@
+.abilities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    .abilities__ability-container {
+        background: var(--background-dark);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        min-width: 100px;
+        border: 1px solid var(--border-colour);
+        padding: 10px 0 30px 0;
+        position: relative;
+
+        h3 {
+            font-size: 12px;
+            margin: 0;
+            padding-bottom: 5px;
+        }
+
+        .modifier,
+        .score {
+            border: 1px solid var(--border-colour);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .modifier {
+            width: 75%;
+            height: 50px;
+            border-radius: 5px;
+            font-size: 30px;
+        }
+
+        .score {
+            border-radius: 50%;
+            width: 40px;
+            height: 35px;
+            position: absolute;
+            bottom: -15px;
+            background: #181818;
+        }
+    }
+}

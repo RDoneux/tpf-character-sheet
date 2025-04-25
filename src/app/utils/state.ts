@@ -3,9 +3,7 @@ import { camelCase } from 'lodash-es'
 
 const STORAGE_KEY = 'TPF-STATE:'
 
-export function storageMetaReducer<T>(
-    reducer: ActionReducer<T>
-): ActionReducer<T> {
+export function storageMetaReducer<T>(reducer: ActionReducer<T>): ActionReducer<T> {
     return (state, action) => {
         const nextState = reducer(state, action)
 
@@ -15,10 +13,7 @@ export function storageMetaReducer<T>(
         if (sliceName && nextState) {
             const sliceState = (nextState as any)[sliceName]
             if (sliceState !== undefined) {
-                localStorage.setItem(
-                    `${STORAGE_KEY}${sliceName}`,
-                    JSON.stringify(sliceState)
-                )
+                localStorage.setItem(`${STORAGE_KEY}${sliceName}`, JSON.stringify(sliceState))
             }
         }
 

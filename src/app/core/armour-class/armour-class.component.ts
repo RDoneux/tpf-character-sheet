@@ -16,9 +16,7 @@ export class ArmourClassComponent {
     armourClass$!: Observable<IArmourClass>
 
     ngOnInit() {
-        this.armourClass$ = this.store.select(
-            (state: { armourClass: IArmourClass }) => state.armourClass
-        )
+        this.armourClass$ = this.store.select((state: { armourClass: IArmourClass }) => state.armourClass)
 
         this.store.dispatch(updateArmourClassTotal({ total: 10 }))
     }
