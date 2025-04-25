@@ -1,7 +1,7 @@
 import { Component, DestroyRef, TemplateRef, ViewChild } from '@angular/core'
 import { IArmourClass, IArmourClassForm, initialArmourClassState } from './interfaces/i-armour-class'
 import { Store } from '@ngrx/store'
-import { debounceTime, firstValueFrom, map, Observable, take } from 'rxjs'
+import { debounceTime, firstValueFrom, map, Observable, take, takeUntil } from 'rxjs'
 import { updateArmourClass } from './state/armour-class.actions'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
@@ -37,7 +37,6 @@ export class ArmourClassComponent {
 
     ngOnInit() {
         this.armourClass$ = this.store.select((state: { armourClass: IArmourClass }) => state.armourClass)
-        const abilities$ = this.store.select((state: { abilities: IAbilities }) => state.abilities)
 
         firstValueFrom(this.armourClass$).then((armourClass: IArmourClass) => {
             this.armourClassForm = buildForm<IArmourClass>(armourClass)
@@ -51,14 +50,15 @@ export class ArmourClassComponent {
                     this.store.dispatch(updateArmourClass({ armourClass: value as IArmourClass }))
                 })
 
-            abilities$.subscribe((value: IAbilities) => {
+            const abilities$ = this.store.select((state: { abilities: IAbilities }) => state.abilities)
+            abilities$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IAbilities) => {
                 this.armourClassForm.patchValue({
                     dexterityModifier: value.dexterity?.modifier,
                 } as Partial<IArmourClass>)
             })
         })
 
-        this.armourClass$.subscribe((value: IArmourClass) => {
+        this.armourClass$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IArmourClass) => {
             this.armourClassForm?.patchValue(value, { emitEvent: false })
         })
     }

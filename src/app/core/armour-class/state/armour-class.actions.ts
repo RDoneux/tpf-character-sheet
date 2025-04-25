@@ -7,3 +7,10 @@ export const updateArmourClass = createAction(
         armourClass: IArmourClass
     }>()
 )
+
+export const updateDexterityModifier = createAction(
+    '[Armour Class] Update Dexterity Modifier',
+    props<{
+        dexterityModifier: number
+    }>()
+)

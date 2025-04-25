@@ -1,11 +1,12 @@
-import { Component } from '@angular/core'
+import { Component, DestroyRef } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { IAbilities, IAbilitiesForm, IAbilityDef, initialAbilityState } from './interfaces/i-abilities'
-import { debounceTime, firstValueFrom, map, Observable } from 'rxjs'
+import { debounceTime, firstValueFrom, map, Observable, takeUntil } from 'rxjs'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { buildForm } from '../../utils/form'
 import { UpperCasePipe } from '@angular/common'
 import { updateAllAbilities } from './state/abilities.actions'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
     selector: 'app-abilities',
@@ -14,7 +15,10 @@ import { updateAllAbilities } from './state/abilities.actions'
     styleUrl: './abilities.component.scss',
 })
 export class AbilitiesComponent {
-    constructor(private store: Store<{ abilities: IAbilities }>) {}
+    constructor(
+        private store: Store<{ abilities: IAbilities }>,
+        private destroyRef: DestroyRef
+    ) {}
 
     abilities$!: Observable<IAbilities>
 
@@ -28,6 +32,7 @@ export class AbilitiesComponent {
             this.abilitiesForm = buildForm<IAbilities>(abilities)
             this.abilitiesForm.valueChanges
                 .pipe(
+                    takeUntilDestroyed(this.destroyRef),
                     debounceTime(200),
                     map((value) => this.mapModifiers(value))
                 )
@@ -36,7 +41,7 @@ export class AbilitiesComponent {
                 })
         })
 
-        this.abilities$.subscribe((value: IAbilities) => {
+        this.abilities$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IAbilities) => {
             this.abilitiesForm?.patchValue(value, { emitEvent: false })
         })
     }
