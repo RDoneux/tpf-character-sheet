@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store'
-import { updateHitPoints } from './hit-points.actions'
+import { updateCurrentHitPoints, updateHitPoints } from './hit-points.actions'
 import { initialHitPointsState } from '../interfaces/i-hitpoints'
 
 export const hitPointsReducer = createReducer(
@@ -7,5 +7,9 @@ export const hitPointsReducer = createReducer(
     on(updateHitPoints, (state, { value }) => ({
         ...state,
         ...value,
+    })),
+    on(updateCurrentHitPoints, (state, { value }) => ({
+        ...state,
+        currentHitPoints: value,
     }))
 )
