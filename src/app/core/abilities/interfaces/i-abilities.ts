@@ -27,3 +27,42 @@ export interface IAbilities {
 }
 
 export interface IAbilitiesForm extends FormGroupType<IAbilities> {}
+
+export const initialAbilityState: IAbilities = {
+    strength: {
+        score: null,
+        modifier: null,
+        temporaryScore: null,
+        temporaryModifier: null,
+    },
+    dexterity: {
+        score: null,
+        modifier: null,
+        temporaryScore: null,
+        temporaryModifier: null,
+    },
+    constitution: {
+        score: null,
+        modifier: null,
+        temporaryScore: null,
+        temporaryModifier: null,
+    },
+    intelligence: {
+        score: null,
+        modifier: null,
+        temporaryScore: null,
+        temporaryModifier: null,
+    },
+    wisdom: {
+        score: null,
+        modifier: null,
+        temporaryScore: null,
+        temporaryModifier: null,
+    },
+    charisma: {
+        score: null,
+        modifier: null,
+        temporaryScore: null,
+        temporaryModifier: null,
+    },
+}
