@@ -1,6 +1,6 @@
 <app-configuration-badge
     title="HIT POINTS"
-    [value]="(hitPoints.currentHitPoints ?? 0) + ' / ' + hitPoints.totalHitPoints"
+    [value]="(hitPoints.currentHitPoints ?? 0) + ' / ' + (hitPoints.totalHitPoints ?? 0)"
     (onClick)="openHitPointsDialog()"
 />
 

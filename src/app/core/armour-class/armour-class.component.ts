@@ -1,7 +1,7 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core'
+import { Component, DestroyRef, TemplateRef, ViewChild } from '@angular/core'
 import { IArmourClass, IArmourClassForm, initialArmourClassState } from './interfaces/i-armour-class'
 import { Store } from '@ngrx/store'
-import { debounceTime, firstValueFrom, map, Observable } from 'rxjs'
+import { debounceTime, firstValueFrom, map, Observable, take } from 'rxjs'
 import { updateArmourClass } from './state/armour-class.actions'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfigurationBadgeComponent } from '../../fragments/configuration-badge/configuration-badge.component'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
     selector: 'app-armour-class',
@@ -20,18 +21,19 @@ import { ConfigurationBadgeComponent } from '../../fragments/configuration-badge
 export class ArmourClassComponent {
     @ViewChild('armourClassDialog') armourClassDialog!: TemplateRef<any>
 
+    armourClass$!: Observable<IArmourClass>
+
+    armourClassForm!: FormGroup<IArmourClassForm>
+
     get armourClass(): IArmourClass {
         return this.armourClassForm?.getRawValue() ?? initialArmourClassState
     }
 
     constructor(
         private store: Store<{ armourClass: IArmourClass; abilities: IAbilities }>,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private destroyRef: DestroyRef
     ) {}
-
-    armourClass$!: Observable<IArmourClass>
-
-    armourClassForm!: FormGroup<IArmourClassForm>
 
     ngOnInit() {
         this.armourClass$ = this.store.select((state: { armourClass: IArmourClass }) => state.armourClass)
@@ -41,6 +43,7 @@ export class ArmourClassComponent {
             this.armourClassForm = buildForm<IArmourClass>(armourClass)
             this.armourClassForm.valueChanges
                 .pipe(
+                    takeUntilDestroyed(this.destroyRef),
                     debounceTime(200),
                     map((value) => this.calculateArmourClass(value))
                 )

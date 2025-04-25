@@ -10,6 +10,7 @@ import { buildForm } from '../../utils/form'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { MatDialog } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
+import { updateHitPoints } from './state/hit-points.actions'
 
 @Component({
     selector: 'app-hit-points',
@@ -41,9 +42,10 @@ export class HitPointsComponent {
         firstValueFrom(this.hitPoints$).then((hitPoints: IHitPoints) => {
             this.hitPointsForm = buildForm<IHitPoints>(hitPoints)
             this.hitPointsForm.valueChanges
-                .pipe(debounceTime(200), takeUntilDestroyed(this.destroyRef))
+                .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
                 .subscribe((value: Partial<IHitPoints>) => {
-                    this.store.dispatch({ type: '[Hit Points] Update', hitPoints: value as IHitPoints })
+                    console.log('Hit Points Form Value Changed', value)
+                    this.store.dispatch(updateHitPoints({ value: value as IHitPoints }))
                 })
         })
 
