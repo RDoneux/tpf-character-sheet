@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store'
-import { updateHitPointsTotal } from './hit-points.actions'
+import { updateHitPoints } from './hit-points.actions'
 import { initialHitPointsState } from '../interfaces/i-hitpoints'
 
 export const hitPointsReducer = createReducer(
     initialHitPointsState,
-    on(updateHitPointsTotal, (state, value) => ({
+    on(updateHitPoints, (state, value) => ({
         ...state,
-        totalHitPoints: value.value,
+        ...value,
     }))
 )

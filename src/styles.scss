@@ -26,6 +26,8 @@ $custom-theme: mat.m2-define-dark-theme(
 :root {
     --background-dark: #{mat.get-theme-color($custom-theme, primary, 900)};
     --border-colour: #{mat.get-theme-color($custom-theme, primary, 800)};
+    --success: #38962f;
+    --danger: #{mat.get-theme-color($custom-theme, warn, 500)};
 }
 
 html,
@@ -56,6 +58,10 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+mat-form-field.no-bottom-margin .mat-mdc-form-field-subscript-wrapper {
+    display: none;
 }
 
 .grid-layout {

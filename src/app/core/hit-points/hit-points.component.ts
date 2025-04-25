@@ -1,23 +1,62 @@
-import { Component } from '@angular/core'
+import { Component, DestroyRef, signal, TemplateRef, ViewChild, WritableSignal } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { IHitPoints } from './interfaces/i-hitpoints'
-import { Observable } from 'rxjs'
-import { updateHitPointsTotal } from './state/hit-points.actions'
+import { IHitPoints, IHitPointsForm, initialHitPointsState } from './interfaces/i-hitpoints'
+import { debounceTime, firstValueFrom, Observable } from 'rxjs'
+import { ConfigurationBadgeComponent } from '../../fragments/configuration-badge/configuration-badge.component'
+import { FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { buildForm } from '../../utils/form'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { MatDialog } from '@angular/material/dialog'
+import { MatButtonModule } from '@angular/material/button'
 
 @Component({
     selector: 'app-hit-points',
-    imports: [],
+    imports: [ConfigurationBadgeComponent, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
     templateUrl: './hit-points.component.html',
     styleUrl: './hit-points.component.scss',
 })
 export class HitPointsComponent {
-    constructor(private store: Store<{ hitPoints: IHitPoints }>) {}
+    @ViewChild('hitPointsDialog') hitPointsDialog!: TemplateRef<any>
+
+    damageAmount: WritableSignal<number> = signal<number>(1)
 
     hitPoints$!: Observable<IHitPoints>
+    hitPointsForm!: FormGroup<IHitPointsForm>
+
+    get hitPoints(): IHitPoints {
+        return this.hitPointsForm?.getRawValue() ?? initialHitPointsState
+    }
+
+    constructor(
+        private store: Store<{ hitPoints: IHitPoints }>,
+        private dialog: MatDialog,
+        private destroyRef: DestroyRef
+    ) {}
 
     ngOnInit() {
         this.hitPoints$ = this.store.select((state: { hitPoints: IHitPoints }) => state.hitPoints)
 
-        this.store.dispatch(updateHitPointsTotal({ value: 10 }))
+        firstValueFrom(this.hitPoints$).then((hitPoints: IHitPoints) => {
+            this.hitPointsForm = buildForm<IHitPoints>(hitPoints)
+            this.hitPointsForm.valueChanges
+                .pipe(debounceTime(200), takeUntilDestroyed(this.destroyRef))
+                .subscribe((value: Partial<IHitPoints>) => {
+                    this.store.dispatch({ type: '[Hit Points] Update', hitPoints: value as IHitPoints })
+                })
+        })
+
+        this.hitPoints$.subscribe((value: IHitPoints) => {
+            this.hitPointsForm?.patchValue(value, { emitEvent: false })
+        })
     }
+
+    openHitPointsDialog() {
+        this.dialog.open(this.hitPointsDialog)
+    }
+
+    onDamageAmountChange(event: Event) {}
+    onHeal() {}
+    onDamage() {}
 }

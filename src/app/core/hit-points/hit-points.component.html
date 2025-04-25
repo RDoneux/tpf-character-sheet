@@ -1,1 +1,27 @@
-<p>hit-points works!</p>
+<app-configuration-badge
+    title="HIT POINTS"
+    [value]="(hitPoints.currentHitPoints ?? 0) + ' / ' + hitPoints.totalHitPoints"
+    (onClick)="openHitPointsDialog()"
+/>
+
+<ng-template #hitPointsDialog>
+    <div class="hitpoint-dialog">
+        <h1 mat-dialog-title>HP Management</h1>
+        <div class="content" mat-dialog-content [formGroup]="hitPointsForm">
+            <mat-form-field>
+                <mat-label>Current HP</mat-label>
+                <input matInput formControlName="currentHitPoints" type="number" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Max HP</mat-label>
+                <input matInput formControlName="totalHitPoints" type="number" />
+            </mat-form-field>
+            <button class="heal" mat-button (click)="onHeal()">HEAL</button>
+            <mat-form-field class="no-bottom-margin damage-output">
+                <mat-label>Damage Amount</mat-label>
+                <input matInput type="number" [value]="damageAmount()" (change)="onDamageAmountChange($event)" />
+            </mat-form-field>
+            <button class="damage" mat-button (click)="onDamage()">DAMAGE</button>
+        </div>
+    </div>
+</ng-template>

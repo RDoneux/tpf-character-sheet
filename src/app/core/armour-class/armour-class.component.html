@@ -1,7 +1,4 @@
-<div class="armour-class-container" (click)="openArmourClassDialog()">
-    <h4>ARMOUR CLASS</h4>
-    <small>{{ armourClass.total }}</small>
-</div>
+<app-configuration-badge title="ARMOUR CLASS" [value]="armourClass.total" (onClick)="openArmourClassDialog()" />
 
 <ng-template #armourClassDialog>
     <div class="armour-class-dialog">

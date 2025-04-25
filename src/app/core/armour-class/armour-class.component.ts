@@ -9,10 +9,11 @@ import { buildForm } from '../../utils/form'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog'
+import { ConfigurationBadgeComponent } from '../../fragments/configuration-badge/configuration-badge.component'
 
 @Component({
     selector: 'app-armour-class',
-    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, ConfigurationBadgeComponent],
     templateUrl: './armour-class.component.html',
     styleUrl: './armour-class.component.scss',
 })
