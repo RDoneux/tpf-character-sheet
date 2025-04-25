@@ -1,1 +1,53 @@
-<p>armour-class works!</p>
+<div class="armour-class-container" (click)="openArmourClassDialog()">
+    <h4>ARMOUR CLASS</h4>
+    <small>{{ armourClass.total }}</small>
+</div>
+
+<ng-template #armourClassDialog>
+    <div class="armour-class-dialog">
+        <h1 mat-dialog-title>Armour Class Management</h1>
+        <div mat-dialog-content class="grid-layout" [formGroup]="armourClassForm">
+            <p class="full-width">Total</p>
+            <mat-form-field class="no-bottom-margin full-width">
+                <input type="number" matInput formControlName="total" />
+            </mat-form-field>
+            <p class="full-width center">= 10 +</p>
+            <p>Armour Bonus</p>
+            <p>Shield Bonus</p>
+            <p>DEX Modifier</p>
+            <p>Size Modifier</p>
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="armourBonus" />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="shieldBonus" />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="dexterityModifier" />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="sizeModifier" />
+            </mat-form-field>
+            <p>Natural Armour</p>
+            <p>Deflection Modifier</p>
+            <p>Misc Modifier</p>
+            <p>Damage Reduction</p>
+
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="naturalArmour" />
+            </mat-form-field>
+
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="deflectionModifier" />
+            </mat-form-field>
+
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="miscModifier" />
+            </mat-form-field>
+
+            <mat-form-field class="no-bottom-margin">
+                <input type="number" matInput formControlName="damageReduction" />
+            </mat-form-field>
+        </div>
+    </div>
+</ng-template>

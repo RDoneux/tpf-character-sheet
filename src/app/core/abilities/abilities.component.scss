@@ -1,10 +1,10 @@
 .abilities {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    column-gap: 10px;
+    row-gap: 25px;
     width: 100%;
     margin-bottom: 20px;
-    padding: 20px;
 
     .abilities__ability-container {
         background: var(--background-dark);

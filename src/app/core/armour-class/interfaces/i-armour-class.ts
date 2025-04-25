@@ -1,14 +1,15 @@
 import { FormGroupType } from '../../../interfaces/form-group-type'
 
 export interface IArmourClass {
-    total: Number | null
-    armourBonus: Number | null
-    shieldBonus: Number | null
-    dexterityModifier: Number | null
-    sizeModifier: Number | null
-    naturalArmour: Number | null
-    deflectionBonus: Number | null
-    miscModifier: Number | null
+    total: number | null
+    armourBonus: number | null
+    shieldBonus: number | null
+    dexterityModifier: number | null
+    sizeModifier: number | null
+    naturalArmour: number | null
+    deflectionModifier: number | null
+    miscModifier: number | null
+    damageReduction: number | null
 }
 export interface IArmourClassForm extends FormGroupType<IArmourClass> {}
 
@@ -19,6 +20,7 @@ export const initialArmourClassState: IArmourClass = {
     dexterityModifier: null,
     sizeModifier: null,
     naturalArmour: null,
-    deflectionBonus: null,
+    deflectionModifier: null,
     miscModifier: null,
+    damageReduction: null,
 }

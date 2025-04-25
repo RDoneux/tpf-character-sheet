@@ -1,3 +1,9 @@
 import { createAction, props } from '@ngrx/store'
+import { IArmourClass } from '../interfaces/i-armour-class'
 
-export const updateArmourClassTotal = createAction('[Armour Class] Update Hit Point Total', props<{ total: Number }>())
+export const updateArmourClass = createAction(
+    '[Armour Class] Update Armour Class',
+    props<{
+        armourClass: IArmourClass
+    }>()
+)
