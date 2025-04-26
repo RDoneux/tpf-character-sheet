@@ -9,12 +9,14 @@ import { hitPointsReducer } from './core/hit-points/state/hit-points.reducer'
 import { storageMetaReducer, rehydrateState } from './utils/state'
 import { armourClassReducer } from './core/armour-class/state/armour-class.reducer'
 import { initiativeReducer } from './core/initiative/state/initiative.reducer'
+import { savingThrowsReducer } from './core/saving-throws/state/saving-throws.reducer'
 
 const appReducers = {
     abilities: abilitiesReducer,
     hitPoints: hitPointsReducer,
     armourClass: armourClassReducer,
     initiative: initiativeReducer,
+    savingThrows: savingThrowsReducer,
 }
 
 export const appConfig: ApplicationConfig = {

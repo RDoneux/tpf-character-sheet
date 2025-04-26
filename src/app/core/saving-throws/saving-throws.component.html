@@ -1,0 +1,12 @@
+<app-section-title title="SAVING THROWS" />
+@if (savingThrows) {
+    @for (key of savingThrowsKeys; track key) {
+        <div class="saving-throws__saving-throw-container" (click)="onOpenSavingThrowDialog(key)">
+            <span>
+                <h4>{{ key | uppercase }}</h4>
+                <small>({{ savingThrows[key]?.abilityName }})</small>
+            </span>
+            <h4>{{ savingThrows[key]?.total ?? 0 }}</h4>
+        </div>
+    }
+}

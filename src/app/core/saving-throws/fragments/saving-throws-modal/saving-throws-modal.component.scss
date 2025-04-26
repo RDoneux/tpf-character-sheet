@@ -1,0 +1,15 @@
+form {
+    padding: 10px 20px 0 20px;
+    .modal-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        h1 {
+            font-size: 20px;
+            margin: 5px;
+            text-align: center;
+        }
+    }
+}

@@ -4,7 +4,8 @@
     padding: 20px;
     gap: 10px;
 
-    app-abilities {
+    app-abilities,
+    app-saving-throws {
         grid-column: span 3;
     }
 }

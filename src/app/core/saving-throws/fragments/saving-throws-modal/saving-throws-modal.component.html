@@ -1,0 +1,34 @@
+@if (form()) {
+    <form [formGroup]="form()">
+        <div class="modal-title" mat-dialog-title>
+            <h1>Saving Throws Management</h1>
+            <small>({{ key() | uppercase }})</small>
+        </div>
+        <div mat-dialog-content class="grid-layout">
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Total</mat-label>
+                <input matInput type="number" formControlName="total" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Base Mod</mat-label>
+                <input matInput type="number" formControlName="base" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Ability Mod</mat-label>
+                <input matInput type="number" formControlName="ability" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Magic Mod</mat-label>
+                <input matInput type="number" formControlName="magic" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Misc Mod</mat-label>
+                <input matInput type="number" formControlName="misc" />
+            </mat-form-field>
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Temporary Mod</mat-label>
+                <input matInput type="number" formControlName="temporary" />
+            </mat-form-field>
+        </div>
+    </form>
+}

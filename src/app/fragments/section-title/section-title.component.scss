@@ -1,0 +1,11 @@
+span {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+
+    hr {
+        width: 100%;
+    }
+}
