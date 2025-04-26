@@ -1,0 +1,16 @@
+import { Routes } from '@angular/router'
+
+export const routes: Routes = [
+    { path: '', redirectTo: '/character/(character-page:overview)', pathMatch: 'full' }, // Correctly targets the named outlet
+    {
+        path: 'overview',
+        outlet: 'character-page',
+        loadComponent: () => import('./children/overview/overview.component').then((m) => m.OverviewComponent),
+    },
+    {
+        path: 'background',
+        outlet: 'character-page',
+        loadComponent: () =>
+            import('./children/background-page/background-page.component').then((m) => m.BackgroundPageComponent),
+    },
+]

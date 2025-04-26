@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router'
+import { CharacterComponent } from './pages/character/character.component'
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'overview', pathMatch: 'full' },
+    { path: '', redirectTo: 'character', pathMatch: 'full' },
     {
-        path: 'overview',
-        loadComponent: () => import('./pages/overview/overview.component').then((m) => m.OverviewComponent),
+        path: 'character',
+        component: CharacterComponent,
+        loadChildren: () => import('./pages/character/character.routes').then((m) => m.routes),
     },
 ]
