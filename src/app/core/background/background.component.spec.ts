@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { BackgroundComponent } from './background.component'
+import { mockStore } from '../../utils/mocks'
 
 describe('BackgroundComponent', () => {
     let component: BackgroundComponent
@@ -9,6 +10,7 @@ describe('BackgroundComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [BackgroundComponent],
+            providers: [mockStore],
         }).compileComponents()
 
         fixture = TestBed.createComponent(BackgroundComponent)

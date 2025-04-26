@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { BackgroundPageComponent } from './background-page.component'
+import { mockStore } from '../../../../utils/mocks'
 
 describe('BackgroundComponent', () => {
     let component: BackgroundPageComponent
@@ -8,6 +9,7 @@ describe('BackgroundComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [BackgroundPageComponent],
+            providers: [mockStore],
         }).compileComponents()
 
         fixture = TestBed.createComponent(BackgroundPageComponent)

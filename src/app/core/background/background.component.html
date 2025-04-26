@@ -1,1 +1,94 @@
-<p>background works!</p>
+@if (backgroundForm) {
+    <form class="grid-layout" [formGroup]="backgroundForm">
+        <mat-form-field class="three-quarter-width no-bottom-margin">
+            <mat-label>Character Name</mat-label>
+            <input matInput formControlName="character" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Level</mat-label>
+            <input matInput type="number" formControlName="level" />
+        </mat-form-field>
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Player Name</mat-label>
+            <input matInput formControlName="player" />
+        </mat-form-field>
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Description</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="description"
+            ></textarea>
+        </mat-form-field>
+        <div class="section-break">&#x2022;</div>
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Class</mat-label>
+            <mat-select formControlName="class">
+                @for (option of classOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Race</mat-label>
+            <mat-select formControlName="race">
+                @for (option of raceOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Alignment</mat-label>
+            <mat-select formControlName="alignment">
+                @for (option of alignmentOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Size</mat-label>
+            <mat-select formControlName="size">
+                @for (option of sizeOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Deity</mat-label>
+            <input matInput formControlName="deity" />
+        </mat-form-field>
+        <div class="section-break">&#x2022;</div>
+
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Age</mat-label>
+            <input matInput type="number" formControlName="age" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Gender</mat-label>
+            <input matInput formControlName="gender" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Height</mat-label>
+            <input matInput formControlName="height" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Weight</mat-label>
+            <input matInput formControlName="weight" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Eyes</mat-label>
+            <input matInput formControlName="eyes" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Hair</mat-label>
+            <input matInput formControlName="hair" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Skin</mat-label>
+            <input matInput formControlName="skin" />
+        </mat-form-field>
+        <!-- LANGUAGES -->
+    </form>
+}

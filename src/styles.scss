@@ -28,6 +28,7 @@ $custom-theme: mat.m2-define-dark-theme(
     --border-colour: #{mat.get-theme-color($custom-theme, primary, 800)};
     --success: #38962f;
     --danger: #{mat.get-theme-color($custom-theme, warn, 500)};
+    --text-colour: #{mat.get-theme-color($custom-theme, primary, 400)};
 }
 
 html,
