@@ -1,0 +1,7 @@
+encryptionsalt: v1:YyhEY+pv+Vs=:v1:p2uMFFhX7RtUgxvp:ssHz9arsA4z3ueh6QonO0Lvw2wjfqA==
+config:
+    aws:region: eu-west-2
+    tpf-infra:projectname: character-sheet
+    tpf-infra:servicename: web-dev
+    tpf-infra:hostedZone: doneuxservices.co.uk
+    tpf-infra:subDomain: character-sheet-dev.doneuxservices.co.uk
