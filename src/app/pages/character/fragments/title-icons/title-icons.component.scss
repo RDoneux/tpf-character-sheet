@@ -9,6 +9,12 @@ div {
         mat-icon {
             cursor: pointer;
         }
+
+        span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
     }
 }
 

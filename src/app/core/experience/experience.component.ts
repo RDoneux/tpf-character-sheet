@@ -1,7 +1,7 @@
 import { Component, DestroyRef, signal, TemplateRef, ViewChild, WritableSignal } from '@angular/core'
 import { IExperience, IExperienceForm } from './interfaces/i-experience'
 import { Store } from '@ngrx/store'
-import { firstValueFrom, lastValueFrom, Observable, take } from 'rxjs'
+import { debounceTime, firstValueFrom, Observable, take } from 'rxjs'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { buildForm } from '../../utils/form'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -49,7 +49,7 @@ export class ExperienceComponent {
         firstValueFrom(this.experience$).then((experience: IExperience) => {
             this.experienceForm = buildForm<IExperience>(experience)
             this.experienceForm.valueChanges
-                .pipe(takeUntilDestroyed(this.destroyRef))
+                .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
                 .subscribe((value: Partial<IExperience>) => {
                     this.store.dispatch(updateExperience({ experience: value as IExperience }))
                 })

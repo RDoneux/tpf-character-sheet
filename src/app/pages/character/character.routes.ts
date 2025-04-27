@@ -13,4 +13,9 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./children/background-page/background-page.component').then((m) => m.BackgroundPageComponent),
     },
+    {
+        path: 'gear',
+        outlet: 'character-page',
+        loadComponent: () => import('./children/gear-page/gear-page.component').then((m) => m.GearPageComponent),
+    },
 ]

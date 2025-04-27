@@ -1,0 +1,85 @@
+<div class="item grid-layout" (click)="openGearItemDialog()">
+    @if (item()?.name) {
+        <p class="full-width">{{ item()?.name }}</p>
+        <span>
+            <mat-icon>shield</mat-icon>
+            {{ item()?.armourClassBonus }}
+        </span>
+        <span class="half-width">
+            <mat-icon>balance</mat-icon>
+            {{ item()?.weight }}
+        </span>
+        @if (item()?.specialProperties) {
+            <mat-icon>workspace_premium</mat-icon>
+        }
+    } @else {
+        <p class="full-width empty">EMPTY</p>
+    }
+</div>
+
+<!-- GEAR ITEM MANAGEMENT POP -->
+<ng-template #gearItemDialog>
+    <div class="gear-item-dialog">
+        <h1 mat-dialog-title>Gear Management</h1>
+        <div mat-dialog-content class="grid-layout" [formGroup]="itemForm()">
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Item Name</mat-label>
+                <input matInput formControlName="name" maxlength="30" />
+            </mat-form-field>
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Description</mat-label>
+                <textarea
+                    matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    formControlName="description"
+                ></textarea>
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Armour Class Bonus</mat-label>
+                <input matInput type="number" formControlName="armourClassBonus" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Weight</mat-label>
+                <input matInput type="number" formControlName="weight" />
+                <span matSuffix>kg</span>
+            </mat-form-field>
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Special Properties</mat-label>
+                <input matInput formControlName="specialProperties" />
+            </mat-form-field>
+
+            <div class="section-break">&#x2022;</div>
+
+            <!-- DYNAMIC INPUTS -->
+            @if (hasCheckPenalty) {
+                <mat-form-field class="half-width no-bottom-margin">
+                    <mat-label>Check Penalty</mat-label>
+                    <input matInput type="number" formControlName="checkPenalty" />
+                </mat-form-field>
+            }
+
+            @if (hasSpellFailureChance) {
+                <mat-form-field class="half-width no-bottom-margin">
+                    <mat-label>Spell Failure Chance</mat-label>
+                    <input matInput formControlName="spellFailureChance" />
+                </mat-form-field>
+            }
+
+            @if (hasMaxDex) {
+                <mat-form-field class="half-width no-bottom-margin">
+                    <mat-label>Max Dex</mat-label>
+                    <input matInput type="number" formControlName="maxDex" />
+                </mat-form-field>
+            }
+
+            @if (hasSpeed) {
+                <mat-form-field class="half-width no-bottom-margin">
+                    <mat-label>Speed</mat-label>
+                    <input matInput formControlName="speed" />
+                </mat-form-field>
+            }
+        </div>
+    </div>
+</ng-template>

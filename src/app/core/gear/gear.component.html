@@ -1,0 +1,13 @@
+@if (gearForm) {
+    <div class="gear-container">
+        <app-body-outline />
+        <app-gear-item id="head" [item]="(gear$ | async)?.head" [itemForm]="headForm" />
+        <app-gear-item id="torso" [item]="(gear$ | async)?.torso" [itemForm]="torsoForm" />
+        <app-gear-item id="leftArm" [item]="(gear$ | async)?.leftArm" [itemForm]="leftArmForm" />
+        <app-gear-item id="rightArm" [item]="(gear$ | async)?.rightArm" [itemForm]="rightArmForm" />
+        <app-gear-item id="leftHand" [item]="(gear$ | async)?.leftHand" [itemForm]="leftHandForm" />
+        <app-gear-item id="rightHand" [item]="(gear$ | async)?.rightHand" [itemForm]="rightHandForm" />
+        <app-gear-item id="legs" [item]="(gear$ | async)?.legs" [itemForm]="legsForm" />
+        <app-gear-item id="feet" [item]="(gear$ | async)?.feet" [itemForm]="feetForm" />
+    </div>
+}

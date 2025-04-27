@@ -14,6 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { IBackground } from '../background/interfaces/i-background'
 import { SizeAmourClassMap } from '../../types/modifier-maps'
 import { CharacterSize } from '../../types/game'
+import { IGear } from '../gear/interfaces/i-gear'
 
 @Component({
     selector: 'app-armour-class',
@@ -32,7 +33,12 @@ export class ArmourClassComponent {
     }
 
     constructor(
-        private store: Store<{ armourClass: IArmourClass; abilities: IAbilities; background: IBackground }>,
+        private store: Store<{
+            armourClass: IArmourClass
+            abilities: IAbilities
+            background: IBackground
+            gear: IGear
+        }>,
         private dialog: MatDialog,
         private destroyRef: DestroyRef
     ) {}
@@ -64,6 +70,13 @@ export class ArmourClassComponent {
                 const { size } = value
                 this.armourClassForm.patchValue({
                     sizeModifier: SizeAmourClassMap[size ?? CharacterSize.MEDIUM],
+                })
+            })
+
+            const gear$ = this.store.select((state: { gear: IGear }) => state.gear)
+            gear$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IGear) => {
+                this.armourClassForm.patchValue({
+                    gearBonus: value.totalArmourClassBonus,
                 })
             })
         })

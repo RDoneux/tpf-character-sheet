@@ -11,6 +11,11 @@
                 routerLinkActive="active-link"
                 >local_library</mat-icon
             >
+            <mat-icon
+                [routerLink]="['/character', { outlets: { 'character-page': ['gear'] } }]"
+                routerLinkActive="active-link"
+                >checkroom</mat-icon
+            >
         </span>
     </div>
     <div>
