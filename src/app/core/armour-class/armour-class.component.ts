@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog'
 import { ConfigurationBadgeComponent } from '../../fragments/configuration-badge/configuration-badge.component'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { IBackground } from '../background/interfaces/i-background'
+import { SizeAmourClassMap } from '../../types/modifier-maps'
+import { CharacterSize } from '../../types/game'
 
 @Component({
     selector: 'app-armour-class',
@@ -22,7 +25,6 @@ export class ArmourClassComponent {
     @ViewChild('armourClassDialog') armourClassDialog!: TemplateRef<any>
 
     armourClass$!: Observable<IArmourClass>
-
     armourClassForm!: FormGroup<IArmourClassForm>
 
     get armourClass(): IArmourClass {
@@ -30,7 +32,7 @@ export class ArmourClassComponent {
     }
 
     constructor(
-        private store: Store<{ armourClass: IArmourClass; abilities: IAbilities }>,
+        private store: Store<{ armourClass: IArmourClass; abilities: IAbilities; background: IBackground }>,
         private dialog: MatDialog,
         private destroyRef: DestroyRef
     ) {}
@@ -54,7 +56,15 @@ export class ArmourClassComponent {
             abilities$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IAbilities) => {
                 this.armourClassForm.patchValue({
                     dexterityModifier: value.dexterity?.modifier,
-                } as Partial<IArmourClass>)
+                })
+            })
+
+            const background$ = this.store.select((state: { background: IBackground }) => state.background)
+            background$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IBackground) => {
+                const { size } = value
+                this.armourClassForm.patchValue({
+                    sizeModifier: SizeAmourClassMap[size ?? CharacterSize.MEDIUM],
+                })
             })
         })
 
