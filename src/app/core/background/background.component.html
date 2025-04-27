@@ -1,12 +1,8 @@
 @if (backgroundForm) {
     <form class="grid-layout" [formGroup]="backgroundForm">
-        <mat-form-field class="three-quarter-width no-bottom-margin">
+        <mat-form-field class="full-width no-bottom-margin">
             <mat-label>Character Name</mat-label>
             <input matInput formControlName="character" />
-        </mat-form-field>
-        <mat-form-field class="no-bottom-margin">
-            <mat-label>Level</mat-label>
-            <input matInput type="number" formControlName="level" />
         </mat-form-field>
         <mat-form-field class="full-width no-bottom-margin">
             <mat-label>Player Name</mat-label>

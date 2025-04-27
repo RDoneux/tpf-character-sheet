@@ -6,7 +6,6 @@ export interface IBackground {
     player: string | null
     description: string | null
     class: CharacterClass | null
-    level: number | null
     race: CharacterRace | null
     alignment: CharacterAlignment | null
     deity: string | null
@@ -27,7 +26,6 @@ export const initialBackgroundState: IBackground = {
     player: null,
     description: null,
     class: null,
-    level: null,
     race: null,
     alignment: null,
     deity: null,
