@@ -1,0 +1,56 @@
+@if (money$) {
+    <small class="display-label" (click)="openMoneyDialog()">
+        <span class="platinum">{{ (money$ | async)?.pp }}</span>
+        <span class="gold">{{ (money$ | async)?.gp }}</span>
+        <span class="silver">{{ (money$ | async)?.sp }}</span>
+        <span class="copper">{{ (money$ | async)?.cp }}</span>
+    </small>
+
+    <ng-template #moneyDialog>
+        <div class="money-dialog">
+            <h1 mat-dialog-title>Money Management</h1>
+            <div class="grid-layout" mat-dialog-content [formGroup]="moneyForm">
+                <small class="full-width">TOTAL</small>
+                <mat-form-field class="no-bottom-margin">
+                    <mat-label>Platinum</mat-label>
+                    <input matInput formControlName="pp" type="number" />
+                </mat-form-field>
+                <mat-form-field class="no-bottom-margin">
+                    <mat-label>Gold</mat-label>
+                    <input matInput formControlName="gp" type="number" />
+                </mat-form-field>
+                <mat-form-field class="no-bottom-margin">
+                    <mat-label>Silver</mat-label>
+                    <input matInput formControlName="sp" type="number" />
+                </mat-form-field>
+                <mat-form-field class="no-bottom-margin">
+                    <mat-label>Copper</mat-label>
+                    <input matInput formControlName="cp" type="number" />
+                </mat-form-field>
+
+                <div class="section-break">&#x2022;</div>
+                <small class="full-width">VALUE TO CHANGE</small>
+                <ng-container [formGroup]="moneyChangeForm">
+                    <mat-form-field class="no-bottom-margin">
+                        <mat-label>Platinum</mat-label>
+                        <input matInput formControlName="pp" type="number" />
+                    </mat-form-field>
+                    <mat-form-field class="no-bottom-margin">
+                        <mat-label>Gold</mat-label>
+                        <input matInput formControlName="gp" type="number" />
+                    </mat-form-field>
+                    <mat-form-field class="no-bottom-margin">
+                        <mat-label>Silver</mat-label>
+                        <input matInput formControlName="sp" type="number" />
+                    </mat-form-field>
+                    <mat-form-field class="no-bottom-margin">
+                        <mat-label>Copper</mat-label>
+                        <input matInput formControlName="cp" type="number" />
+                    </mat-form-field>
+                    <button (click)="onEarn()" class="earn half-width" mat-button>EARN</button>
+                    <button (click)="onPay()" class="pay half-width" mat-button>PAY</button>
+                </ng-container>
+            </div>
+        </div>
+    </ng-template>
+}

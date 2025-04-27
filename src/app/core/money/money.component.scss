@@ -1,0 +1,48 @@
+.display-label {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: 8px;
+        &.copper:before {
+            background: rgb(221, 123, 31);
+        }
+        &.silver:before {
+            background: rgb(223, 223, 223);
+        }
+        &.gold:before {
+            background: rgb(255, 215, 0);
+        }
+        &.platinum:before {
+            background: rgb(31, 179, 199);
+        }
+        &:before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            display: block;
+            border-radius: 50%;
+        }
+    }
+}
+
+.money-dialog {
+    padding: 10px;
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        grid-column: span 2;
+        &.earn {
+            background: var(--success);
+        }
+        &.pay {
+            background: var(--danger);
+        }
+    }
+}

@@ -13,6 +13,7 @@ import { savingThrowsReducer } from './core/saving-throws/state/saving-throws.re
 import { backgroundReducer } from './core/background/state/background.reducer'
 import { experienceReducer } from './core/experience/state/experience.reducer'
 import { gearReducer } from './core/gear/state/gear.reducer'
+import { moneyReducer } from './core/money/state/money.reducer'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -23,6 +24,7 @@ const appReducers = {
     background: backgroundReducer,
     experience: experienceReducer,
     gear: gearReducer,
+    money: moneyReducer,
 }
 
 export const appConfig: ApplicationConfig = {

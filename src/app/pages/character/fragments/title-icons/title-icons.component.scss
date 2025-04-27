@@ -16,6 +16,11 @@ div {
             gap: 5px;
         }
     }
+
+    .label-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .active-link {
