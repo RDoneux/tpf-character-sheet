@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { TitleIconsComponent } from './title-icons.component'
 import { ActivatedRoute } from '@angular/router'
+import { mockStore } from '../../../../utils/mocks'
 
 describe('TitleIconsComponent', () => {
     let component: TitleIconsComponent
@@ -11,6 +12,7 @@ describe('TitleIconsComponent', () => {
         await TestBed.configureTestingModule({
             imports: [TitleIconsComponent],
             providers: [
+                mockStore,
                 {
                     provide: ActivatedRoute,
                     useValue: {},

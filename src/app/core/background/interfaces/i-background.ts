@@ -18,7 +18,6 @@ export interface IBackground {
     eyes: string | null
     hair: string | null
     skin: string | null
-    languages: string | null
 }
 
 export interface IBackgroundForm extends FormGroupType<IBackground> {}
@@ -40,5 +39,4 @@ export const initialBackgroundState: IBackground = {
     eyes: null,
     hair: null,
     skin: null,
-    languages: null,
 }

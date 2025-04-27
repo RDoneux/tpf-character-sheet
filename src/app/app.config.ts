@@ -11,6 +11,7 @@ import { armourClassReducer } from './core/armour-class/state/armour-class.reduc
 import { initiativeReducer } from './core/initiative/state/initiative.reducer'
 import { savingThrowsReducer } from './core/saving-throws/state/saving-throws.reducer'
 import { backgroundReducer } from './core/background/state/background.reducer'
+import { experienceReducer } from './core/experience/state/experience.reducer'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -19,6 +20,7 @@ const appReducers = {
     initiative: initiativeReducer,
     savingThrows: savingThrowsReducer,
     background: backgroundReducer,
+    experience: experienceReducer,
 }
 
 export const appConfig: ApplicationConfig = {

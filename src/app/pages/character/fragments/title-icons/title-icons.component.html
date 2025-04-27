@@ -1,8 +1,13 @@
 <div>
-    <mat-icon [routerLink]="['/character/', { outlets: { 'character-page': ['overview'] } }]">home</mat-icon>
-    <span>
-        <mat-icon [routerLink]="['/character/', { outlets: { 'character-page': ['background'] } }]"
-            >local_library</mat-icon
-        >
-    </span>
+    <div class="icon-wrapper">
+        <mat-icon [routerLink]="['/character/', { outlets: { 'character-page': ['overview'] } }]">home</mat-icon>
+        <span>
+            <mat-icon [routerLink]="['/character/', { outlets: { 'character-page': ['background'] } }]"
+                >local_library</mat-icon
+            >
+        </span>
+    </div>
+    <div>
+        <app-experience />
+    </div>
 </div>

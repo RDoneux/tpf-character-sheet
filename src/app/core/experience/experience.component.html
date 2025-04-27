@@ -1,0 +1,32 @@
+@if (experienceForm) {
+    <small (click)="openExperienceDialog()"
+        >XP: {{ (experience$ | async)?.points ?? 0 }} / {{ (experience$ | async)?.currentLevelThreshold }} ( lvl:
+        {{ (experience$ | async)?.level ?? 0 }} )</small
+    >
+
+    <ng-template #experienceDialog>
+        <div class="experience-dialog">
+            <h1 mat-dialog-title>Experience Management</h1>
+            <div class="content" mat-dialog-content [formGroup]="experienceForm">
+                <mat-form-field>
+                    <mat-label>Experience Points</mat-label>
+                    <input matInput formControlName="points" type="number" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Level</mat-label>
+                    <input matInput formControlName="level" type="number" />
+                </mat-form-field>
+                <mat-form-field class="no-bottom-margin damage-output">
+                    <mat-label>Experience to add</mat-label>
+                    <input
+                        matInput
+                        type="number"
+                        [value]="addExperienceAmount()"
+                        (change)="onExperienceAmountChange($event)"
+                    />
+                </mat-form-field>
+                <button class="add-experience-button" mat-button (click)="onAddExperience()">Add Experience</button>
+            </div>
+        </div>
+    </ng-template>
+}
