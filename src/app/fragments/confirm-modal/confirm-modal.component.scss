@@ -1,0 +1,9 @@
+.dialog-container {
+    padding: 0 10px;
+    .cancel {
+        background-color: var(--success);
+    }
+    .confirm {
+        background-color: var(--danger);
+    }
+}

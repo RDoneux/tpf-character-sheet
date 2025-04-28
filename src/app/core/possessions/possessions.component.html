@@ -1,0 +1,45 @@
+<div class="possessions-table">
+    <mat-form-field class="no-bottom-margin">
+        <mat-label>Search</mat-label>
+        <input matInput type="search" (keyup)="applyFilter($event)" #input />
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <button mat-button (click)="openPossessionDialog()">New Possession</button>
+
+    <table mat-table matSort [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let possession">{{ possession.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+            <td mat-cell *matCellDef="let possession">{{ possession.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+            <td mat-cell *matCellDef="let possession">{{ possession.quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Weight</th>
+            <td mat-cell *matCellDef="let possession">{{ possession.weight }} kg</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th class="narrow" mat-header-cell *matHeaderCellDef></th>
+            <td class="center-text narrow" mat-cell *matCellDef="let possession">
+                <mat-icon (click)="onDeletePossession(possession); $event.stopPropagation()">delete</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td colspan="4">No Possessions</td>
+        </tr>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="openPossessionDialog(row)"></tr>
+    </table>
+</div>

@@ -18,4 +18,10 @@ export const routes: Routes = [
         outlet: 'character-page',
         loadComponent: () => import('./children/gear-page/gear-page.component').then((m) => m.GearPageComponent),
     },
+    {
+        path: 'possessions',
+        outlet: 'character-page',
+        loadComponent: () =>
+            import('./children/possessions-page/possessions-page.component').then((m) => m.PossessionsPageComponent),
+    },
 ]

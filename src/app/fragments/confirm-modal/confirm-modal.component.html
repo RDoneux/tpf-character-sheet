@@ -1,0 +1,10 @@
+<div class="dialog-container">
+    <h1 mat-dialog-title>Are you sure?</h1>
+    <div mat-dialog-content>
+        <p>{{ title() }}</p>
+    </div>
+    <div class="grid-layout" mat-dialog-actions>
+        <button class="cancel half-width" mat-button (click)="onChoice(false)">Cancel</button>
+        <button class="confirm half-width" mat-button (click)="onChoice(true)" cdkFocusInitial>Delete</button>
+    </div>
+</div>
