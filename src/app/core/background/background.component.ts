@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { IBackground, IBackgroundForm } from './interfaces/i-background'
 import { Store } from '@ngrx/store'
-import { debounceTime, firstValueFrom, Observable } from 'rxjs'
+import { combineLatest, debounceTime, firstValueFrom, Observable } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { updateBackground, updateBackgroundWeight } from './state/background.actions'
 import { buildForm } from '../../utils/form'
@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { CharacterAlignment, CharacterClass, CharacterRace, CharacterSize } from '../../types/game'
 import { CdkTextareaAutosize } from '@angular/cdk/text-field'
 import { IGear } from '../gear/interfaces/i-gear'
+import { IPossession } from '../possessions/interfaces/i-possessions'
 
 @Component({
     selector: 'app-background',
@@ -23,7 +24,7 @@ export class BackgroundComponent {
     private _injector = inject(Injector)
 
     constructor(
-        private store: Store<{ background: IBackground; gear: IGear }>,
+        private store: Store<{ background: IBackground; gear: IGear; possessions: IPossession[] }>,
         private destroyRef: DestroyRef
     ) {}
 
@@ -64,9 +65,18 @@ export class BackgroundComponent {
         })
 
         const gear$ = this.store.select((state: { gear: IGear }) => state.gear)
-        gear$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((gear: IGear) => {
-            this.store.dispatch(updateBackgroundWeight({ weight: gear.totalWeight }))
-        })
+        const possessions$ = this.store.select((state: { possessions: IPossession[] }) => state.possessions)
+
+        combineLatest([gear$, possessions$])
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(([gear, possessions]) => {
+                const gearWeight = gear.totalWeight
+                const possessionsWeight = possessions.reduce((total: number, item: { weight: number }) => {
+                    return total + item.weight
+                }, 0)
+                const totalWeight = gearWeight + possessionsWeight
+                this.store.dispatch(updateBackgroundWeight({ weight: totalWeight }))
+            })
     }
 
     triggerResize() {
