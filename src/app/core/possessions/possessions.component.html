@@ -35,8 +35,8 @@
             </td>
         </ng-container>
 
-        <tr class="mat-row" *matNoDataRow>
-            <td colspan="4">No Possessions</td>
+        <tr *matNoDataRow>
+            <td class="empty-mat-row" colspan="4">No Possessions</td>
         </tr>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
