@@ -1,6 +1,12 @@
 import { Skill } from '../core/skills/interfaces/i-skills'
-import { skillsReducer } from '../core/skills/state/skills.reducer'
-import { CharacterClass, CharacterSize } from './game'
+import {
+    CharacterClass,
+    CharacterSize,
+    CraftSpecialisation,
+    KnowledgeSpecialisation,
+    PerformSpecialisation,
+    ProfessionSpecialisation,
+} from './game'
 
 export const SizeAmourClassMap = {
     [CharacterSize.FINE]: 8,
@@ -84,4 +90,34 @@ export const ClassSkillsMap: { [key: CharacterClass]: Skill[] } = {
         Skill.USE_MAGIC_DEVICE,
     ],
     [CharacterClass.SORCER]: [Skill.CONCENTRATION, Skill.PROFESSION, Skill.SPELLCRAFT],
+}
+
+export const ClassSpecialisationMap: {
+    [key: CharacterClass]: (
+        | CraftSpecialisation
+        | KnowledgeSpecialisation
+        | PerformSpecialisation
+        | ProfessionSpecialisation
+    )[]
+} = {
+    [CharacterClass.BARD]: [
+        PerformSpecialisation.ACT,
+        PerformSpecialisation.COMEDY,
+        PerformSpecialisation.DANCE,
+        PerformSpecialisation.KEYBOARD_INSTRUMENTS,
+        PerformSpecialisation.ORATORY,
+        PerformSpecialisation.PERCUSSION_INSTRUMENTS,
+        PerformSpecialisation.STRING_INSTRUMENTS,
+        PerformSpecialisation.WIND_INSTRUMENTS,
+        PerformSpecialisation.SING,
+    ],
+    [CharacterClass.BARBARIAN]: [ProfessionSpecialisation.HUNTER, ProfessionSpecialisation.WOODCUTTER],
+    [CharacterClass.CLERIC]: [KnowledgeSpecialisation.RELIGION],
+    [CharacterClass.DRUID]: [KnowledgeSpecialisation.NATURE, ProfessionSpecialisation.HERBALIST],
+    [CharacterClass.FIGHTER]: [CraftSpecialisation.WEAPONSMITHING, CraftSpecialisation.ARMORSMITHING],
+    [CharacterClass.MONK]: [KnowledgeSpecialisation.RELIGION, KnowledgeSpecialisation.PHILOSOPHY],
+    [CharacterClass.PALADIN]: [KnowledgeSpecialisation.RELIGION],
+    [CharacterClass.RANGER]: [KnowledgeSpecialisation.NATURE, ProfessionSpecialisation.HUNTER],
+    [CharacterClass.ROGUE]: [CraftSpecialisation.TRAPMAKING, ProfessionSpecialisation.MERCHANT],
+    [CharacterClass.SORCER]: [KnowledgeSpecialisation.ARCANA],
 }

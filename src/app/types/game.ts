@@ -86,6 +86,7 @@ export const KnowledgeSpecialisation = {
     PSIONICS: 'Psionics',
     RELIGION: 'Religion',
     THE_PLANES: 'The Planes',
+    PHILOSOPHY: 'Philosophy',
 }
 export type KnowledgeSpecialisation = (typeof KnowledgeSpecialisation)[keyof typeof KnowledgeSpecialisation]
 
@@ -110,6 +111,7 @@ export const ProfessionSpecialisation = {
     FARMER: 'Farmer',
     FISHERMAN: 'Fisherman',
     HERBALIST: 'Herbalist',
+    HUNTER: 'Hunter',
     INNKEEPER: 'Innkeeper',
     LIBRARIAN: 'Librarian',
     MERCHANT: 'Merchant',
