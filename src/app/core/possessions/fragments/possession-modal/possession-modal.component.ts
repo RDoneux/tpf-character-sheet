@@ -29,15 +29,12 @@ export class PossessionModalComponent {
         this.form = buildForm<IPossession>(data.possession)
         this.possession = signal(data.possession)
         this.isNew.set(data.isNew)
-        console.log('isNew', this.isNew())
-        console.log(this.possession(), data.possession)
     }
 
     ngOnInit() {
         this.form.valueChanges
             .pipe(debounceTime(200), takeUntilDestroyed(this.destroyRef))
             .subscribe((value: Partial<IPossession>) => {
-                console.log('value', value.id)
                 this.store.dispatch(
                     this.isNew()
                         ? addPossession({ possession: value as IPossession })

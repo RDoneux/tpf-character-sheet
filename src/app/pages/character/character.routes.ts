@@ -24,4 +24,9 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./children/possessions-page/possessions-page.component').then((m) => m.PossessionsPageComponent),
     },
+    {
+        path: 'skills',
+        outlet: 'character-page',
+        loadComponent: () => import('./children/skills-page/skills-page.component').then((m) => m.SkillsPageComponent),
+    },
 ]

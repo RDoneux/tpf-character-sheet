@@ -15,6 +15,7 @@ import { experienceReducer } from './core/experience/state/experience.reducer'
 import { gearReducer } from './core/gear/state/gear.reducer'
 import { moneyReducer } from './core/money/state/money.reducer'
 import { posessionsReducer } from './core/possessions/state/possessions.reducer'
+import { skillsReducer } from './core/skills/state/skills.reducer'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -27,6 +28,7 @@ const appReducers = {
     gear: gearReducer,
     money: moneyReducer,
     possessions: posessionsReducer,
+    skills: skillsReducer,
 }
 
 export const appConfig: ApplicationConfig = {
