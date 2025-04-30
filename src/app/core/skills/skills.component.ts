@@ -1,6 +1,6 @@
 import { Component, DestroyRef, ViewChild } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { ISkill } from './interfaces/i-skills'
+import { initialSpecialisationState, ISkill } from './interfaces/i-skills'
 import { ReactiveFormsModule } from '@angular/forms'
 import { map, Observable } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -14,10 +14,11 @@ import { AbbreviateAbilityPipe } from '../../pipes/abbreviate-ability.pipe'
 import { MatDialog } from '@angular/material/dialog'
 import { SkillsModalComponent } from './fragments/skills-modal/skills-modal.component'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
-import { updateAllSkills } from './state/skills.actions'
+import { addSkill, deleteSkill, updateAllSkills } from './state/skills.actions'
 import { IBackground } from '../background/interfaces/i-background'
 import { ClassSkillsMap } from '../../types/modifier-maps'
 import { CharacterClass } from '../../types/game'
+import { v4 } from 'uuid'
 
 @Component({
     selector: 'app-skills',
@@ -53,7 +54,8 @@ export class SkillsComponent {
         this.skills$
             .pipe(
                 takeUntilDestroyed(this.destroyRef),
-                map((skill: ISkill[]) => this.calculateSkillModifier(skill))
+                map((skill: ISkill[]) => this.calculateSkillModifier(skill)),
+                map((skills: ISkill[]) => skills.sort((a, b) => a.name.localeCompare(b.name)))
             )
             .subscribe((value: Partial<ISkill>[]) => {
                 this.dataSource.data = value as ISkill[]
@@ -95,5 +97,16 @@ export class SkillsComponent {
 
     openSkillDialog(skill: ISkill) {
         this.dialog.open(SkillsModalComponent, { data: { skill } })
+    }
+
+    onAddSkill(skill: ISkill) {
+        this.store.dispatch(
+            addSkill({
+                skill: { ...skill, specialisation: { ...initialSpecialisationState, canDelete: true }, id: v4() },
+            })
+        )
+    }
+    onDeleteSkill(id: string) {
+        this.store.dispatch(deleteSkill({ id }))
     }
 }

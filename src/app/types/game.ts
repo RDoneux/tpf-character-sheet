@@ -53,3 +53,75 @@ export const CharacterSize = {
     COLOSSAL: 'Colossal',
 }
 export type CharacterSize = (typeof CharacterSize)[keyof typeof CharacterSize]
+
+export const CraftSpecialisation = {
+    ALCHEMY: 'Alchemy',
+    ARMORSMITHING: 'Armorsmithing',
+    BLACKSMITHING: 'Blacksmithing',
+    BOWMAKING: 'Bowmaking',
+    CARPENTRY: 'Carpentry',
+    COBBLING: 'Cobbling',
+    GEMCUTTING: 'Gemcutting',
+    LEATHERWORKING: 'Leatherworking',
+    PAINTING: 'Painting',
+    POTTERY: 'Pottery',
+    SCULPTING: 'Sculpting',
+    SHIPMAKING: 'Shipmaking',
+    STONEMASONING: 'Stonemasonry',
+    TRAPMAKING: 'Trapmaking',
+    WEAPONSMITHING: 'Weaponsmithing',
+    WOODWORKING: 'Woodworking',
+}
+export type CraftSpecialisation = (typeof CraftSpecialisation)[keyof typeof CraftSpecialisation]
+
+export const KnowledgeSpecialisation = {
+    ARCANA: 'Arcana',
+    ARCHITECTURE_AND_ENGINEERING: 'Architecture and Engineering',
+    DUNGEONEERING: 'Dungeoneering',
+    GEOGRAPHY: 'Geography',
+    HISTORY: 'History',
+    LOCAL: 'Local',
+    NATURE: 'Nature',
+    NOBILITY_AND_ROYALTY: 'Nobility and Royalty',
+    PSIONICS: 'Psionics',
+    RELIGION: 'Religion',
+    THE_PLANES: 'The Planes',
+}
+export type KnowledgeSpecialisation = (typeof KnowledgeSpecialisation)[keyof typeof KnowledgeSpecialisation]
+
+export const PerformSpecialisation = {
+    ACT: 'Act',
+    COMEDY: 'Comedy',
+    DANCE: 'Dance',
+    KEYBOARD_INSTRUMENTS: 'Keyboard Instruments',
+    ORATORY: 'Oratory',
+    PERCUSSION_INSTRUMENTS: 'Percussion Instruments',
+    STRING_INSTRUMENTS: 'String Instruments',
+    WIND_INSTRUMENTS: 'Wind Instruments',
+    SING: 'Sing',
+}
+export type PerformSpecialisation = (typeof PerformSpecialisation)[keyof typeof PerformSpecialisation]
+
+export const ProfessionSpecialisation = {
+    APOTHECARY: 'Apothecary',
+    BREWER: 'Brewer',
+    COOK: 'Cook',
+    DRIVER: 'Driver',
+    FARMER: 'Farmer',
+    FISHERMAN: 'Fisherman',
+    HERBALIST: 'Herbalist',
+    INNKEEPER: 'Innkeeper',
+    LIBRARIAN: 'Librarian',
+    MERCHANT: 'Merchant',
+    MIDWIFE: 'Midwife',
+    MILLER: 'Miller',
+    MINER: 'Miner',
+    PORTER: 'Porter',
+    SAILOR: 'Sailor',
+    SCRIBE: 'Scribe',
+    SHEPHERD: 'Shepherd',
+    TANNER: 'Tanner',
+    TEAMSTER: 'Teamster',
+    WOODCUTTER: 'Woodcutter',
+}
+export type ProfessionSpecialisation = (typeof ProfessionSpecialisation)[keyof typeof ProfessionSpecialisation]

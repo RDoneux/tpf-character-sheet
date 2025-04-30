@@ -1,8 +1,13 @@
 <form [formGroup]="form">
     <div class="modal-title" mat-dialog-title>
         <h1>
-            {{ skill().name }} <small>({{ skill().keyAbility | abbreviateAbility: true }})</small>
+            {{ skill().name }}
+            @if (skill().specialisation != null) {
+                <small class="specialisation">{{ skill().specialisation?.name }} </small>
+            }
+            <small>({{ skill().keyAbility | abbreviateAbility: true }})</small>
         </h1>
+
         @if (skill().isClassSkill) {
             <small class="icon-wrapper"><mat-icon>star</mat-icon>Class Skill</small>
         }
@@ -11,6 +16,25 @@
         }
     </div>
     <div mat-dialog-content class="grid-layout">
+        @if (skill().specialisation != null) {
+            <ng-container formGroupName="specialisation">
+                <mat-form-field class="full-width no-bottom-margin">
+                    <mat-label>Specialisation</mat-label>
+                    <input
+                        type="text"
+                        matInput
+                        (change)="onSpecialisationFilterChange($event)"
+                        [matAutocomplete]="auto"
+                        formControlName="name"
+                    />
+                    <mat-autocomplete #auto="matAutocomplete">
+                        @for (option of filteredSpecialisationOptions(); track option) {
+                            <mat-option [value]="option">{{ option }}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+            </ng-container>
+        }
         <mat-form-field class="half-width no-bottom-margin">
             <mat-label>Skill Modifier</mat-label>
             <input matInput type="number" formControlName="skillModifier" />
