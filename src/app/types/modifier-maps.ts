@@ -92,14 +92,33 @@ export const ClassSkillsMap: { [key: CharacterClass]: Skill[] } = {
     [CharacterClass.SORCER]: [Skill.CONCENTRATION, Skill.PROFESSION, Skill.SPELLCRAFT],
 }
 
-export const ClassSpecialisationMap: {
-    [key: CharacterClass]: (
-        | CraftSpecialisation
-        | KnowledgeSpecialisation
-        | PerformSpecialisation
-        | ProfessionSpecialisation
-    )[]
-} = {
+export const ClassCraftSpecialisationMap: { [key: CharacterClass]: CraftSpecialisation[] } = {
+    [CharacterClass.BARD]: [],
+    [CharacterClass.BARBARIAN]: [],
+    [CharacterClass.CLERIC]: [],
+    [CharacterClass.DRUID]: [],
+    [CharacterClass.FIGHTER]: [CraftSpecialisation.WEAPONSMITHING, CraftSpecialisation.ARMORSMITHING],
+    [CharacterClass.MONK]: [],
+    [CharacterClass.PALADIN]: [],
+    [CharacterClass.RANGER]: [],
+    [CharacterClass.ROGUE]: [CraftSpecialisation.TRAPMAKING],
+    [CharacterClass.SORCER]: [],
+}
+
+export const ClassKnowledgeSpecialisationMap: { [key: CharacterClass]: KnowledgeSpecialisation[] } = {
+    [CharacterClass.BARD]: [],
+    [CharacterClass.BARBARIAN]: [],
+    [CharacterClass.CLERIC]: [KnowledgeSpecialisation.RELIGION],
+    [CharacterClass.DRUID]: [KnowledgeSpecialisation.NATURE],
+    [CharacterClass.FIGHTER]: [],
+    [CharacterClass.MONK]: [KnowledgeSpecialisation.RELIGION, KnowledgeSpecialisation.PHILOSOPHY],
+    [CharacterClass.PALADIN]: [KnowledgeSpecialisation.RELIGION],
+    [CharacterClass.RANGER]: [KnowledgeSpecialisation.NATURE],
+    [CharacterClass.ROGUE]: [],
+    [CharacterClass.SORCER]: [KnowledgeSpecialisation.ARCANA],
+}
+
+export const ClassPerformSpecialisationMap: { [key: CharacterClass]: PerformSpecialisation[] } = {
     [CharacterClass.BARD]: [
         PerformSpecialisation.ACT,
         PerformSpecialisation.COMEDY,
@@ -111,13 +130,26 @@ export const ClassSpecialisationMap: {
         PerformSpecialisation.WIND_INSTRUMENTS,
         PerformSpecialisation.SING,
     ],
+    [CharacterClass.BARBARIAN]: [],
+    [CharacterClass.CLERIC]: [],
+    [CharacterClass.DRUID]: [],
+    [CharacterClass.FIGHTER]: [],
+    [CharacterClass.MONK]: [],
+    [CharacterClass.PALADIN]: [],
+    [CharacterClass.RANGER]: [],
+    [CharacterClass.ROGUE]: [],
+    [CharacterClass.SORCER]: [],
+}
+
+export const ClassProfessionSpecialisationMap: { [key: CharacterClass]: ProfessionSpecialisation[] } = {
+    [CharacterClass.BARD]: [],
     [CharacterClass.BARBARIAN]: [ProfessionSpecialisation.HUNTER, ProfessionSpecialisation.WOODCUTTER],
-    [CharacterClass.CLERIC]: [KnowledgeSpecialisation.RELIGION],
-    [CharacterClass.DRUID]: [KnowledgeSpecialisation.NATURE, ProfessionSpecialisation.HERBALIST],
-    [CharacterClass.FIGHTER]: [CraftSpecialisation.WEAPONSMITHING, CraftSpecialisation.ARMORSMITHING],
-    [CharacterClass.MONK]: [KnowledgeSpecialisation.RELIGION, KnowledgeSpecialisation.PHILOSOPHY],
-    [CharacterClass.PALADIN]: [KnowledgeSpecialisation.RELIGION],
-    [CharacterClass.RANGER]: [KnowledgeSpecialisation.NATURE, ProfessionSpecialisation.HUNTER],
-    [CharacterClass.ROGUE]: [CraftSpecialisation.TRAPMAKING, ProfessionSpecialisation.MERCHANT],
-    [CharacterClass.SORCER]: [KnowledgeSpecialisation.ARCANA],
+    [CharacterClass.CLERIC]: [],
+    [CharacterClass.DRUID]: [ProfessionSpecialisation.HERBALIST],
+    [CharacterClass.FIGHTER]: [],
+    [CharacterClass.MONK]: [],
+    [CharacterClass.PALADIN]: [],
+    [CharacterClass.RANGER]: [ProfessionSpecialisation.HUNTER],
+    [CharacterClass.ROGUE]: [ProfessionSpecialisation.MERCHANT],
+    [CharacterClass.SORCER]: [],
 }
