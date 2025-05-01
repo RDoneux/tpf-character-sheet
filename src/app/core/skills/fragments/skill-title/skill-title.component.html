@@ -1,0 +1,30 @@
+<div class="skill-title-wrapper">
+    <span>
+        {{ skill().name }}
+        @if (hasSpecialisation) {
+            <small class="specialisation">{{ skill().specialisation?.name }} </small>
+        }
+        <small>({{ skill().keyAbility | abbreviateAbility: true }})</small>
+    </span>
+    @if (hasSpecialisation) {
+        <span class="add-icon">
+            @if (canDelete) {
+                <mat-icon (click)="onDeleteSkill()">delete</mat-icon>
+            } @else {
+                <mat-icon (click)="onAddSkill()">add</mat-icon>
+            }
+        </span>
+    } @else {
+        <span></span>
+    }
+    @if (skill().isClassSkill || skill().isTrainedOnly) {
+        <div class="skill-icon-wrapper">
+            @if (skill().isTrainedOnly) {
+                <mat-icon>school</mat-icon>
+            }
+            @if (skill().isClassSkill) {
+                <mat-icon>star</mat-icon>
+            }
+        </div>
+    }
+</div>

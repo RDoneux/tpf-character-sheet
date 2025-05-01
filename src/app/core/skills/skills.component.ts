@@ -10,7 +10,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table'
 import { MatSort, MatSortModule } from '@angular/material/sort'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
-import { AbbreviateAbilityPipe } from '../../pipes/abbreviate-ability.pipe'
 import { MatDialog } from '@angular/material/dialog'
 import { SkillsModalComponent } from './fragments/skills-modal/skills-modal.component'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
@@ -19,6 +18,7 @@ import { IBackground } from '../background/interfaces/i-background'
 import { ClassSkillsMap } from '../../types/modifier-maps'
 import { CharacterClass } from '../../types/game'
 import { v4 } from 'uuid'
+import { SkillTitleComponent } from './fragments/skill-title/skill-title.component'
 
 @Component({
     selector: 'app-skills',
@@ -30,7 +30,7 @@ import { v4 } from 'uuid'
         MatSortModule,
         MatIconModule,
         MatButtonModule,
-        AbbreviateAbilityPipe,
+        SkillTitleComponent,
     ],
     templateUrl: './skills.component.html',
     styleUrl: './skills.component.scss',
