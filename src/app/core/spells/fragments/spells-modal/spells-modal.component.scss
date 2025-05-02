@@ -1,0 +1,25 @@
+div.dialog-container {
+    padding: 10px;
+    min-width: 80%;
+    h1 {
+        font-size: 20px;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    .add-spell-button {
+        background: var(--success);
+        margin-top: 10px;
+    }
+
+    .full-width {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 5px;
+        align-items: center;
+    }
+}

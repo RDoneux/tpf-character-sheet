@@ -1,0 +1,23 @@
+@if (form) {
+    <div class="dialog-container">
+        <h1 class="full-width" mat-dialog-title>{{ data.spellLevel | titleCase }}</h1>
+        <div mat-dialog-content class="grid-layout" [formGroup]="form">
+            <div class="full-width">
+                <small>Prepare</small>
+                <small>Spell Name</small>
+            </div>
+            @for (spell of spellKeys; track spell) {
+                <ng-container formGroupName="spells">
+                    <div class="full-width" [formGroupName]="$index">
+                        <mat-checkbox formControlName="isPrepared"></mat-checkbox>
+                        <mat-form-field class="no-bottom-margin">
+                            <input matInput formControlName="name" placeholder="Enter spell name" />
+                            <mat-icon (click)="onDeleteSpell($index)" matSuffix>delete</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+            }
+            <button class="add-spell-button full-width" mat-button (click)="onAddSpell()">Add Spell</button>
+        </div>
+    </div>
+}
