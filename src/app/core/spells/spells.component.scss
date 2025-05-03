@@ -14,15 +14,18 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-        h3 {
-            margin: 0 0 10px 0;
-        }
         .spell-item {
             display: flex;
 
             mat-icon {
                 font-size: 16px;
             }
+        }
+        .spell-level-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
         }
     }
 }

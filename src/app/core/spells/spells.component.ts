@@ -9,10 +9,11 @@ import { MatDialog } from '@angular/material/dialog'
 import { SpellsModalComponent } from './fragments/spells-modal/spells-modal.component'
 import { MatIconModule } from '@angular/material/icon'
 import { sortBy } from 'lodash-es'
+import { CastCounterComponent } from './fragments/cast-counter/cast-counter.component'
 
 @Component({
     selector: 'app-spells',
-    imports: [TitleCasePipe, MatIconModule],
+    imports: [TitleCasePipe, MatIconModule, CastCounterComponent],
     templateUrl: './spells.component.html',
     styleUrl: './spells.component.scss',
 })
@@ -57,13 +58,19 @@ export class SpellsComponent {
                 spellLevel,
                 spells: this.dataSource[spellLevel],
             },
+            minWidth: '300px',
         })
     }
 
     private sortSpellsByIsPrepared(spells: ISpells): ISpells {
         const sortedSpells: ISpells = {} as ISpells
         for (const level in spells) {
-            sortedSpells[level as keyof ISpells] = sortBy(spells[level as keyof ISpells], 'isPrepared').reverse()
+            if (spells.hasOwnProperty(level)) {
+                sortedSpells[level as keyof ISpells] = {
+                    ...spells[level as keyof ISpells],
+                    spells: sortBy(spells[level as keyof ISpells].spells, 'isPrepared').reverse(),
+                }
+            }
         }
         return sortedSpells
     }

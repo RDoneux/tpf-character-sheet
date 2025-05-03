@@ -1,6 +1,6 @@
 import { Component, DestroyRef, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { ISpell, ISpells } from '../../interfaces/i-spells'
+import { ISpell, ISpellLevel, ISpells } from '../../interfaces/i-spells'
 import { Store } from '@ngrx/store'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { buildForm } from '../../../../utils/form'
@@ -37,7 +37,7 @@ export class SpellsModalComponent {
     ) {}
 
     form!: FormGroup
-    spells$!: Observable<ISpell[]>
+    spells$!: Observable<ISpellLevel>
 
     get spellKeys() {
         return Object.keys((this.form.get('spells') as FormArray)?.controls)
@@ -51,19 +51,23 @@ export class SpellsModalComponent {
                 map((spells: ISpells) => spells[this.data.spellLevel])
             )
 
-        firstValueFrom(this.spells$).then((spells: ISpell[]) => {
-            const spellForms = spells.map((spell) => buildForm<ISpell>(spell))
-            this.form = new FormGroup({ spells: new FormArray(spellForms) })
+        firstValueFrom(this.spells$).then((spellLevel: ISpellLevel) => {
+            const spellForms = spellLevel.spells.map((spell) => buildForm<ISpell>(spell))
+            this.form = new FormGroup({
+                spells: new FormArray(spellForms),
+                totalCastsPerDay: new FormControl(spellLevel.totalCastsPerDay),
+            })
 
             this.form.valueChanges
                 .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
-                .subscribe((value: { spells: ISpell[] }) => {
-                    this.store.dispatch(updateSpellLevel({ spellLevel: this.data.spellLevel, spells: value.spells }))
+                .subscribe((value: ISpellLevel) => {
+                    this.store.dispatch(updateSpellLevel({ spellLevel: this.data.spellLevel, spells: value }))
                 })
         })
 
-        this.spells$.subscribe((spells: ISpell[]) => {
-            this.form?.patchValue({ spells }, { emitEvent: false })
+        this.spells$.subscribe((spellLevel: ISpellLevel) => {
+            const { totalCastsPerDay, spells } = spellLevel
+            this.form?.patchValue({ totalCastsPerDay, spells }, { emitEvent: false })
         })
     }
 

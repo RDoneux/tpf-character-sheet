@@ -92,3 +92,20 @@ mat-form-field.no-bottom-margin .mat-mdc-form-field-subscript-wrapper {
     line-height: 16px;
     color: var(--text-colour);
 }
+
+mat-checkbox.no-padding .mdc-checkbox {
+    padding: 0 2px !important;
+    .mat-mdc-checkbox-touch-target,
+    input {
+        width: 18px !important;
+        height: 18px !important;
+    }
+    .mdc-checkbox__background {
+        top: 0px !important;
+        left: 0px !important;
+    }
+    .mdc-checkbox__native-control {
+        height: 18px !important;
+        width: 18px !important;
+    }
+}

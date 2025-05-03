@@ -1,7 +1,13 @@
 @if (form) {
-    <div class="dialog-container">
-        <h1 class="full-width" mat-dialog-title>{{ data.spellLevel | titleCase }}</h1>
-        <div mat-dialog-content class="grid-layout" [formGroup]="form">
+    <div class="dialog-container" [formGroup]="form">
+        <div class="title" mat-dialog-title>
+            <h1>{{ data.spellLevel | titleCase }}</h1>
+            <span>
+                <label for="total-casts">Casts per day:</label>
+                <input id="total-casts" formControlName="totalCastsPerDay" type="number" />
+            </span>
+        </div>
+        <div mat-dialog-content class="grid-layout">
             <div class="full-width">
                 <small>Prepare</small>
                 <small>Spell Name</small>

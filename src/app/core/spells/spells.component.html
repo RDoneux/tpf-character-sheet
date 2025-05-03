@@ -1,8 +1,11 @@
 <div class="spells-wrapper">
     @for (key of spellLevelKeys; track key) {
         <div class="spell-card" (click)="openSpellDialog(key)">
-            <h3>{{ key | titleCase }}</h3>
-            @for (spell of dataSource[key]; track spell) {
+            <div class="spell-level-title">
+                <h3>{{ key | titleCase }}</h3>
+                <app-cast-counter [spellLevelTitle]="key" />
+            </div>
+            @for (spell of dataSource[key].spells; track spell) {
                 <div class="spell-item">
                     @if (spell.isPrepared) {
                         <mat-icon>whatshot</mat-icon>

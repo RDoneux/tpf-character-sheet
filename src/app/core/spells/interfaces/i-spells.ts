@@ -1,5 +1,6 @@
 import { v4 } from 'uuid'
 import { FormGroupType } from '../../../interfaces/form-group-type'
+import { initial } from 'lodash-es'
 
 export interface ISpell {
     name: string
@@ -8,57 +9,50 @@ export interface ISpell {
     isPrepared: boolean
 }
 
+export interface ISpellLevel {
+    casts: boolean[]
+    spells: ISpell[]
+    totalCastsPerDay: number
+}
+
 export interface ISpells {
-    cantrips: ISpell[]
-    firstLevel: ISpell[]
-    secondLevel: ISpell[]
-    thirdLevel: ISpell[]
-    fourthLevel: ISpell[]
-    fifthLevel: ISpell[]
-    sixthLevel: ISpell[]
-    seventhLevel: ISpell[]
-    eighthLevel: ISpell[]
-    ninthLevel: ISpell[]
+    cantrips: ISpellLevel
+    firstLevel: ISpellLevel
+    secondLevel: ISpellLevel
+    thirdLevel: ISpellLevel
+    fourthLevel: ISpellLevel
+    fifthLevel: ISpellLevel
+    sixthLevel: ISpellLevel
+    seventhLevel: ISpellLevel
+    eighthLevel: ISpellLevel
+    ninthLevel: ISpellLevel
 }
 
 export interface ISpellsForm extends FormGroupType<ISpells> {}
 export interface ISpellForm extends FormGroupType<ISpell[]> {}
-
-export const initialSpellsState: ISpells = {
-    cantrips: [
-        {
-            name: 'Magic Missile',
-            description: null,
-            id: v4(),
-            isPrepared: false,
-        },
-        {
-            name: 'Fireball',
-            description: null,
-            id: v4(),
-            isPrepared: false,
-        },
-        {
-            name: 'Lightning Bolt',
-            description: null,
-            id: v4(),
-            isPrepared: false,
-        },
-    ],
-    firstLevel: [],
-    secondLevel: [],
-    thirdLevel: [],
-    fourthLevel: [],
-    fifthLevel: [],
-    sixthLevel: [],
-    seventhLevel: [],
-    eighthLevel: [],
-    ninthLevel: [],
-}
 
 export const initialSpellState: ISpell = {
     name: '',
     description: null,
     id: v4(),
     isPrepared: false,
+}
+
+export const initialSpellLevelState: ISpellLevel = {
+    casts: [],
+    totalCastsPerDay: 0,
+    spells: [],
+}
+
+export const initialSpellsState: ISpells = {
+    cantrips: initialSpellLevelState,
+    firstLevel: initialSpellLevelState,
+    secondLevel: initialSpellLevelState,
+    thirdLevel: initialSpellLevelState,
+    fourthLevel: initialSpellLevelState,
+    fifthLevel: initialSpellLevelState,
+    sixthLevel: initialSpellLevelState,
+    seventhLevel: initialSpellLevelState,
+    eighthLevel: initialSpellLevelState,
+    ninthLevel: initialSpellLevelState,
 }

@@ -1,0 +1,6 @@
+<div class="cast-counter">
+    @for (cast of casts(); track $index) {
+        <mat-checkbox class="no-padding" [checked]="cast" (click)="onCheckboxChange($event, $index)"></mat-checkbox>
+    }
+    <mat-icon (click)="reset($event)">indeterminate_check_box</mat-icon>
+</div>

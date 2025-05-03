@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
 import { initialSpellsState } from '../interfaces/i-spells'
-import { addSpell, updateAllSpells, updateSpellLevel } from './spells.actions'
+import { addSpell, updateAllSpells, updateSpellLevel, updateSpellLevelCasts } from './spells.actions'
 
 export const spellsReducer = createReducer(
     initialSpellsState,
@@ -10,10 +10,14 @@ export const spellsReducer = createReducer(
     })),
     on(updateSpellLevel, (state, { spellLevel, spells }) => ({
         ...state,
-        [spellLevel]: spells,
+        [spellLevel]: { ...state[spellLevel], ...spells },
     })),
     on(addSpell, (state, { spellLevel, spell }) => ({
         ...state,
-        [spellLevel]: [...state[spellLevel], spell],
+        [spellLevel]: [...state[spellLevel].spells, spell],
+    })),
+    on(updateSpellLevelCasts, (state, { spellLevel, casts }) => ({
+        ...state,
+        [spellLevel]: { ...state[spellLevel], casts },
     }))
 )

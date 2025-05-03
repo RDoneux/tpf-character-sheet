@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { ISpell, ISpells } from '../interfaces/i-spells'
+import { ISpell, ISpellLevel, ISpells } from '../interfaces/i-spells'
 
 export const updateAllSpells = createAction('[Spells] Update All Spells', props<{ spells: ISpells }>())
 
@@ -7,7 +7,15 @@ export const updateSpellLevel = createAction(
     '[Spells] Update Spell Level',
     props<{
         spellLevel: keyof ISpells
-        spells: ISpell[]
+        spells: ISpellLevel
+    }>()
+)
+
+export const updateSpellLevelCasts = createAction(
+    '[Spells] Update Spell Level Casts',
+    props<{
+        spellLevel: keyof ISpells
+        casts: boolean[]
     }>()
 )
 
