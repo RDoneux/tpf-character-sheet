@@ -1,7 +1,7 @@
 import { Component, DestroyRef, TemplateRef, ViewChild } from '@angular/core'
 import { IArmourClass, IArmourClassForm, initialArmourClassState } from './interfaces/i-armour-class'
 import { Store } from '@ngrx/store'
-import { debounceTime, firstValueFrom, map, Observable, take, takeUntil } from 'rxjs'
+import { debounceTime, firstValueFrom, map, Observable } from 'rxjs'
 import { updateArmourClass } from './state/armour-class.actions'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
@@ -15,6 +15,7 @@ import { IBackground } from '../background/interfaces/i-background'
 import { SizeAmourClassMap } from '../../types/modifier-maps'
 import { CharacterSize } from '../../types/game'
 import { IGear } from '../gear/interfaces/i-gear'
+import { SettingsService } from '../../services/settings/settings.service'
 
 @Component({
     selector: 'app-armour-class',
@@ -40,7 +41,8 @@ export class ArmourClassComponent {
             gear: IGear
         }>,
         private dialog: MatDialog,
-        private destroyRef: DestroyRef
+        private destroyRef: DestroyRef,
+        private settingsService: SettingsService
     ) {}
 
     ngOnInit() {
@@ -57,6 +59,8 @@ export class ArmourClassComponent {
                 .subscribe((value: Partial<IArmourClass>) => {
                     this.store.dispatch(updateArmourClass({ armourClass: value as IArmourClass }))
                 })
+
+            if (!this.settingsService.settings().autoCalculateFields) return
 
             const abilities$ = this.store.select((state: { abilities: IAbilities }) => state.abilities)
             abilities$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IAbilities) => {
@@ -91,6 +95,8 @@ export class ArmourClassComponent {
     }
 
     private calculateArmourClass(value: Partial<IArmourClass>): IArmourClass {
+        if (!this.settingsService.settings().autoCalculateFields) return value as IArmourClass
+
         value.total = 0
         value.total = Object.values(value).reduce((acc, curr) => {
             return (acc ?? 0) + (curr ?? 0)

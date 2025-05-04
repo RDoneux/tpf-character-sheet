@@ -18,6 +18,7 @@ import { posessionsReducer } from './core/possessions/state/possessions.reducer'
 import { skillsReducer } from './core/skills/state/skills.reducer'
 import { spellsReducer } from './core/spells/state/spells.reducer'
 import { weaponsReducer } from './core/weapons/state/weapons.reducer'
+import { settingsReducer } from './services/settings/state/settings.reducer'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -33,6 +34,7 @@ const appReducers = {
     skills: skillsReducer,
     spells: spellsReducer,
     weapons: weaponsReducer,
+    settings: settingsReducer,
 }
 
 export const appConfig: ApplicationConfig = {

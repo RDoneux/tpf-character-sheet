@@ -54,7 +54,6 @@ export class HitPointsComponent {
             this.hitPointsForm.valueChanges
                 .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
                 .subscribe((value: Partial<IHitPoints>) => {
-                    console.log('Hit Points Form Value Changed', value)
                     this.store.dispatch(updateHitPoints({ value: value as IHitPoints }))
                 })
         })

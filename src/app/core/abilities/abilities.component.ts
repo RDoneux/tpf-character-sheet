@@ -7,6 +7,7 @@ import { buildForm } from '../../utils/form'
 import { UpperCasePipe } from '@angular/common'
 import { updateAllAbilities } from './state/abilities.actions'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { SettingsService } from '../../services/settings/settings.service'
 
 @Component({
     selector: 'app-abilities',
@@ -17,7 +18,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 export class AbilitiesComponent {
     constructor(
         private store: Store<{ abilities: IAbilities }>,
-        private destroyRef: DestroyRef
+        private destroyRef: DestroyRef,
+        private settingsService: SettingsService
     ) {}
 
     abilities$!: Observable<IAbilities>
@@ -47,6 +49,8 @@ export class AbilitiesComponent {
     }
 
     private mapModifiers(value: Partial<IAbilities>): IAbilities {
+        if (!this.settingsService.settings().autoCalculateFields) return value as IAbilities
+
         Object.keys(value).forEach((key: string) => {
             const abilityTarget = value[key as keyof IAbilities] as IAbilityDef
             abilityTarget.modifier = this.calculateModifier(abilityTarget.score)

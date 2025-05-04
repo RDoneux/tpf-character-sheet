@@ -16,6 +16,7 @@ import { SectionTitleComponent } from '../../fragments/section-title/section-tit
 import { MatDialog } from '@angular/material/dialog'
 import { SavingThrowsModalComponent } from './fragments/saving-throws-modal/saving-throws-modal.component'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
+import { SettingsService } from '../../services/settings/settings.service'
 
 @Component({
     selector: 'app-saving-throws',
@@ -36,7 +37,8 @@ export class SavingThrowsComponent {
     constructor(
         private store: Store<{ savingThrows: ISavingThrows; abilities: IAbilities }>,
         private destroyRef: DestroyRef,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private settingsService: SettingsService
     ) {}
 
     ngOnInit() {
@@ -83,6 +85,8 @@ export class SavingThrowsComponent {
     }
 
     private calculateTotal(savingThrow: Partial<ISavingThrows>): ISavingThrows {
+        if (this.settingsService.settings().autoCalculateFields) return savingThrow as ISavingThrows
+
         Object.keys(savingThrow).forEach((key) => {
             const targetSavingThrow = savingThrow[key as keyof ISavingThrows] as ISavingThrowsDef
             targetSavingThrow.total = 0

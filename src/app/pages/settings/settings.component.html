@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+    <h1>Settings</h1>
+    <div>
+        <mat-checkbox formControlName="autoCalculateFields">Auto Calculate Fields</mat-checkbox>
+        <small
+            >When enabled, the application will attempt to automatically calculate some fields which are sums of other
+            fields.</small
+        >
+    </div>
+    <button (click)="onDone()" mat-button>Done</button>
+</form>

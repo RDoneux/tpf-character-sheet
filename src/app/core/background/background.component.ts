@@ -13,6 +13,7 @@ import { CharacterAlignment, CharacterClass, CharacterRace, CharacterSize } from
 import { CdkTextareaAutosize } from '@angular/cdk/text-field'
 import { IGear } from '../gear/interfaces/i-gear'
 import { IPossession } from '../possessions/interfaces/i-possessions'
+import { SettingsService } from '../../services/settings/settings.service'
 
 @Component({
     selector: 'app-background',
@@ -25,7 +26,8 @@ export class BackgroundComponent {
 
     constructor(
         private store: Store<{ background: IBackground; gear: IGear; possessions: IPossession[] }>,
-        private destroyRef: DestroyRef
+        private destroyRef: DestroyRef,
+        private settingsService: SettingsService
     ) {}
 
     @ViewChild('autosize') autosize!: CdkTextareaAutosize
@@ -63,6 +65,8 @@ export class BackgroundComponent {
                 this.backgroundForm?.patchValue(value, { emitEvent: false })
             })
         })
+
+        if (!this.settingsService.settings().autoCalculateFields) return
 
         const gear$ = this.store.select((state: { gear: IGear }) => state.gear)
         const possessions$ = this.store.select((state: { possessions: IPossession[] }) => state.possessions)

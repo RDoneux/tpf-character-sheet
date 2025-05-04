@@ -10,6 +10,7 @@ import { BodyOutlineComponent } from './fragments/body-outline/body-outline.comp
 import { AsyncPipe } from '@angular/common'
 import { MatIconModule } from '@angular/material/icon'
 import { GearItemComponent } from './fragments/gear-item/gear-item.component'
+import { SettingsService } from '../../services/settings/settings.service'
 
 @Component({
     selector: 'app-gear',
@@ -20,7 +21,8 @@ import { GearItemComponent } from './fragments/gear-item/gear-item.component'
 export class GearComponent {
     constructor(
         private store: Store<{ gear: IGear }>,
-        private destroyRef: DestroyRef
+        private destroyRef: DestroyRef,
+        private settingsService: SettingsService
     ) {}
 
     gear$!: Observable<IGear>
@@ -81,6 +83,8 @@ export class GearComponent {
     }
 
     calculateTotalWeight(gear: Partial<IGear>): IGear {
+        if (!this.settingsService.settings().autoCalculateFields) return gear as IGear
+
         const totalWeight = Object.values(gear).reduce((acc, item) => {
             if (item && typeof item === 'object' && 'weight' in item) {
                 const itemWeight: number = item.weight ?? 0
@@ -92,6 +96,8 @@ export class GearComponent {
     }
 
     calculateTotalArmourClassBonus(gear: Partial<IGear>): IGear {
+        if (!this.settingsService.settings().autoCalculateFields) return gear as IGear
+
         const totalArmourClassBonus = Object.values(gear).reduce((acc, item) => {
             if (item && typeof item === 'object' && 'armourClassBonus' in item) {
                 const itemArmourClassBonus: number = item.armourClassBonus ?? 0

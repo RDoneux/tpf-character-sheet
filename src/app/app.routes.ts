@@ -8,4 +8,8 @@ export const routes: Routes = [
         component: CharacterComponent,
         loadChildren: () => import('./pages/character/character.routes').then((m) => m.routes),
     },
+    {
+        path: 'settings',
+        loadComponent: () => import('./pages/settings/settings.component').then((m) => m.SettingsComponent),
+    },
 ]

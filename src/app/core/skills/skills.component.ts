@@ -19,6 +19,7 @@ import { ClassSkillsMap } from '../../types/modifier-maps'
 import { CharacterClass } from '../../types/game'
 import { v4 } from 'uuid'
 import { SkillTitleComponent } from './fragments/skill-title/skill-title.component'
+import { SettingsService } from '../../services/settings/settings.service'
 
 @Component({
     selector: 'app-skills',
@@ -39,7 +40,8 @@ export class SkillsComponent {
     constructor(
         private store: Store<{ skills: ISkill[]; abilities: IAbilities; background: IBackground }>,
         private destroyRef: DestroyRef,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private settingsService: SettingsService
     ) {}
 
     @ViewChild(MatSort) sort!: MatSort
@@ -60,6 +62,8 @@ export class SkillsComponent {
             .subscribe((value: Partial<ISkill>[]) => {
                 this.dataSource.data = value as ISkill[]
             })
+
+        if (!this.settingsService.settings().autoCalculateFields) return
 
         const abilities$ = this.store.select((state: { abilities: IAbilities }) => state.abilities)
         abilities$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: Partial<IAbilities>) => {
@@ -82,6 +86,8 @@ export class SkillsComponent {
     }
 
     calculateSkillModifier(skill: ISkill[]): ISkill[] {
+        if (!this.settingsService.settings().autoCalculateFields) return skill
+
         return skill.map((skill: ISkill) => {
             const ranks = skill.ranks
             const abilityModifier = skill.abilityModifier

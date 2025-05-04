@@ -11,6 +11,7 @@ import { ConfigurationBadgeComponent } from '../../fragments/configuration-badge
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog'
+import { SettingsService } from '../../services/settings/settings.service'
 
 @Component({
     selector: 'app-initiative',
@@ -31,7 +32,8 @@ export class InitiativeComponent {
     constructor(
         private store: Store<{ initiative: IInitiative; abilities: IAbilities }>,
         private destroyRef: DestroyRef,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private settingsService: SettingsService
     ) {}
 
     ngOnInit() {
@@ -67,6 +69,8 @@ export class InitiativeComponent {
     }
 
     private calculateInitiative(value: Partial<IInitiative>): IInitiative {
+        if (this.settingsService.settings().autoCalculateFields) return value as IInitiative
+
         value.total = 0
         value.total = Object.values(value).reduce((acc, curr) => {
             if (typeof curr === 'number') {

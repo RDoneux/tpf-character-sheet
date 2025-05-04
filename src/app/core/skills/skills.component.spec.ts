@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SkillsComponent } from './skills.component'
 import { mockStore } from '../../utils/mocks'
+import { settingsServiceMock } from '../../mocks/settings-service.mocks'
 
 describe('SkillsComponent', () => {
     let component: SkillsComponent
@@ -10,7 +11,7 @@ describe('SkillsComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [SkillsComponent],
-            providers: [mockStore],
+            providers: [mockStore, settingsServiceMock],
         }).compileComponents()
 
         fixture = TestBed.createComponent(SkillsComponent)
