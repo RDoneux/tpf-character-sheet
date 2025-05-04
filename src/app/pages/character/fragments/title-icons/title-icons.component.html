@@ -31,6 +31,12 @@
                 routerLinkActive="active-link"
                 >auto_stories</mat-icon
             >
+            <mat-icon
+                [routerLink]="['/character', { outlets: { 'character-page': ['weapons'] } }]"
+                routerLinkActive="active-link"
+                fontSet="material-symbols-outlined"
+                >swords</mat-icon
+            >
             <!-- <mat-icon
                 [routerLink]="['/character', { outlets: { 'character-page': ['spells'] } }]"
                 routerLinkActive="active-link"

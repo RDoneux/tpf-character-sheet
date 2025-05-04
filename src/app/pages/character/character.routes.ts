@@ -34,4 +34,10 @@ export const routes: Routes = [
         outlet: 'character-page',
         loadComponent: () => import('./children/spells-page/spells-page.component').then((m) => m.SpellsPageComponent),
     },
+    {
+        path: 'weapons',
+        outlet: 'character-page',
+        loadComponent: () =>
+            import('./children/weapons-page/weapons-page.component').then((m) => m.WeaponsPageComponent),
+    },
 ]

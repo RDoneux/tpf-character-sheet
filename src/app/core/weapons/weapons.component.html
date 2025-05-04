@@ -1,0 +1,66 @@
+@if (weaponsForm) {
+    @for (form of weaponsForm.controls; track $index) {
+        <form [formGroup]="form" class="grid-layout">
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Weapon Name</mat-label>
+                <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Attack Bonus</mat-label>
+                <input matInput formControlName="attackBonus" type="number" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Damage</mat-label>
+                <input matInput formControlName="damage" type="number" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Critical</mat-label>
+                <input matInput formControlName="critical" type="number" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Range</mat-label>
+                <input matInput formControlName="range" type="number" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Type</mat-label>
+                <input matInput formControlName="attackBonus" type="number" />
+            </mat-form-field>
+            <mat-form-field class="half-width no-bottom-margin">
+                <mat-label>Ammo Type</mat-label>
+                <input matInput formControlName="ammunitionType" type="number" />
+            </mat-form-field>
+            <mat-slider
+                class="full-width"
+                [max]="form.get('ammunitionMaximum')?.value ?? 20"
+                [min]="0"
+                [step]="1"
+                [discrete]="true"
+                [showTickMarks]="true"
+            >
+                <mat-label class="ammo-label"
+                    ><small>Ammo Quantity</small>
+                    <small>
+                        {{ form.get('ammunitionQuantity')?.value }} / {{ form.get('ammunitionMaximum')?.value }}</small
+                    ></mat-label
+                >
+                <input matSliderThumb formControlName="ammunitionQuantity" #slider />
+            </mat-slider>
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Notes</mat-label>
+                <textarea
+                    matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    formControlName="notes"
+                ></textarea>
+            </mat-form-field>
+            <button class="full-width remove" mat-button (click)="removeWeapon(form.get('id')?.value)">Drop</button>
+        </form>
+
+        <mat-divider></mat-divider>
+    }
+    <div class="add-weapon-wrapper">
+        <button class="add" mat-button (click)="addWeapon()">Add Weapon</button>
+    </div>
+}

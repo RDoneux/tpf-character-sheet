@@ -1,0 +1,23 @@
+form {
+    padding: 10px;
+
+    .ammo-label {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+.add-weapon-wrapper {
+    padding: 10px;
+    width: 100%;
+}
+button {
+    cursor: pointer;
+    &.add {
+        background: var(--success);
+        width: 100%;
+    }
+    &.remove {
+        background: var(--danger);
+        margin-top: 10px;
+    }
+}
