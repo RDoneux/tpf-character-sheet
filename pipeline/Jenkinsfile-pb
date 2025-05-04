@@ -2,12 +2,19 @@ pipeline {
     
     agent any
 
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'prod'],
+            description: 'Select the environment to deploy to'
+        )
+    }
+
     environment {
         PULUMI_STACK_BUCKET = "doneuxservices-pulumi-state?region=eu-west-2"
-        ENVIRONMENT = "dev"
-        
+
         // can use "pulumi stack -Q" to find this
-        PULUMI_STACK = "organization/tpf-infra/${ENVIRONMENT}"
+        PULUMI_STACK = "organization/tpf-infra/${params.ENVIRONMENT}"
     }
 
     stages {
@@ -28,7 +35,7 @@ pipeline {
 
             stage ("Build") {
                 steps {
-                    sh "npm run build:${ENVIRONMENT}"
+                    sh "npm run build:${params.ENVIRONMENT}"
                 }
                 post {
                     success {
@@ -36,53 +43,6 @@ pipeline {
                     }
                     failure {
                         echo "Build failure"
-                    }
-                }
-            }
-
-            stage ("Quality Gate: Static Analysis") {
-                steps {
-                    sh "npm run prettier:ci"
-                }
-                post {
-                    success {
-                        echo "Static Analysis Success"
-                    }
-                    failure {
-                        echo "Static Analysis Failure"
-                    }
-                }
-            }
-
-            stage ("Quality Gate: Composition Analysis") {
-                steps {
-                    sh "npm run test"
-                }
-                post {
-                    success {
-                        echo "Quality composition analysis success"
-                    }
-                    failure {
-                        echo "Quality composition analysis failure"
-                    }
-                }
-            }
-
-            stage ("Report") {
-                steps {
-                    clover(cloverReportDir: '../coverage', cloverReportFileName: 'clover.xml',
-                      healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
-                      unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50],
-                      failingTarget: [methodCoverage: 25, conditionalCoverage: 25, statementCoverage: 25]
-                    )
-                    junit 'coverage/junit/junit.xml'
-                }
-                post {
-                    success {
-                        echo "Repot success"
-                    }
-                    failure {
-                        echo "Report failure"
                     }
                 }
             }

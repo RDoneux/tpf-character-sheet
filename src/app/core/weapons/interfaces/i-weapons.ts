@@ -31,4 +31,4 @@ export const emptyWeaponState: IWeapon = {
     ammunitionMaximum: 20,
 }
 
-export const initialWeaponState: IWeapon[] = [emptyWeaponState]
+export const initialWeaponState: IWeapon[] = []

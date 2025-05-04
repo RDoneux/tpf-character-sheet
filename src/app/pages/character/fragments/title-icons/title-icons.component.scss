@@ -13,13 +13,18 @@ div {
         span {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 7px;
         }
     }
 
     .label-wrapper {
         display: flex;
         justify-content: space-between;
+    }
+
+    .settings {
+        padding-left: 5px;
+        border-left: 1px solid var(--border-colour);
     }
 }
 

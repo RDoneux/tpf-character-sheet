@@ -37,7 +37,9 @@
                 fontSet="material-symbols-outlined"
                 >swords</mat-icon
             >
-            <mat-icon [routerLink]="['/settings']" routerLinkActive="active-link">settings</mat-icon>
+            <span class="settings">
+                <mat-icon [routerLink]="['/settings']" routerLinkActive="active-link">settings</mat-icon>
+            </span>
             <!-- <mat-icon
                 [routerLink]="['/character', { outlets: { 'character-page': ['spells'] } }]"
                 routerLinkActive="active-link"
