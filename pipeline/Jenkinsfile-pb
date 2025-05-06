@@ -8,6 +8,11 @@ pipeline {
             choices: ['dev', 'prod'],
             description: 'Select the environment to deploy to'
         )
+        choice(
+            name: 'DEPLOYMENT_TYPE',
+            choices: ['up', 'down'],
+            description: 'Bring the stack down or up'
+        )
     }
 
     environment {
@@ -48,13 +53,6 @@ pipeline {
             }
 
             stage ("Deploy") {
-
-                when {
-                    anyOf {
-                        branch 'master';
-                    }
-                }
-
                 steps {
                     sh "curl -fsSL https://get.pulumi.com | sh"
                     sh "$HOME/.pulumi/bin/pulumi version"
@@ -66,7 +64,7 @@ pipeline {
                                 sh "npm i"
                                 sh "pulumi stack select ${PULUMI_STACK}"
                                 withCredentials([string(credentialsId: 'PULUMI_ENCRYPTION_KEY', variable: "PULUMI_CONFIG_PASSPHRASE")]) {
-                                    sh "pulumi up --yes"
+                                    sh "pulumi ${params.DEPLOYMENT_TYPE} --yes"
                                 }
                             }  
                         }
