@@ -24,7 +24,8 @@
             <mat-icon
                 [routerLink]="['/character', { outlets: { 'character-page': ['skills'] } }]"
                 routerLinkActive="active-link"
-                >person</mat-icon
+                fontSet="material-symbols-outlined"
+                >military_tech</mat-icon
             >
             <mat-icon
                 [routerLink]="['/character', { outlets: { 'character-page': ['spells'] } }]"
@@ -36,6 +37,12 @@
                 routerLinkActive="active-link"
                 fontSet="material-symbols-outlined"
                 >swords</mat-icon
+            >
+            <mat-icon
+                [routerLink]="['/character', { outlets: { 'character-page': ['camp'] } }]"
+                routerLinkActive="active-link"
+                fontSet="material-symbols-outlined"
+                >camping</mat-icon
             >
             <span class="settings">
                 <mat-icon [routerLink]="['/settings']" routerLinkActive="active-link">settings</mat-icon>
