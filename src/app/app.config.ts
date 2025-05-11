@@ -19,6 +19,8 @@ import { skillsReducer } from './core/skills/state/skills.reducer'
 import { spellsReducer } from './core/spells/state/spells.reducer'
 import { weaponsReducer } from './core/weapons/state/weapons.reducer'
 import { settingsReducer } from './services/settings/state/settings.reducer'
+import { campReducer } from './pages/character/children/camp-page/state/camp.reducer'
+import { provideHttpClient } from '@angular/common/http'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -35,12 +37,14 @@ const appReducers = {
     spells: spellsReducer,
     weapons: weaponsReducer,
     settings: settingsReducer,
+    camp: campReducer,
 }
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes),
+        provideHttpClient(),
         provideStore(appReducers, {
             metaReducers: [storageMetaReducer],
             initialState: rehydrateState(),

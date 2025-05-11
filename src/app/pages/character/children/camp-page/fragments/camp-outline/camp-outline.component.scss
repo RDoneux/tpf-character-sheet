@@ -1,18 +1,15 @@
 :host {
     display: block;
     height: 100%;
-    // width: 100%;
 }
 
 svg {
     width: 100%;
-    // height: calc(100% - 73px);
     top: 0;
 
     position: fixed;
     z-index: -1;
-}
-
-g {
-    transform: translate(0, 400px) scale(0.1, -0.1);
+    g {
+        transform: translate(0, 400px) scale(0.1, -0.1);
+    }
 }

@@ -1,0 +1,53 @@
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.create {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    grid-row: 2;
+
+    h2 {
+        align-self: center;
+        text-align: center;
+        color: var(--text-colour);
+    }
+
+    span {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        position: relative;
+        top: 100px;
+        button {
+            background: var(--success);
+            padding: 15px 30px;
+        }
+        small {
+            // width: 60%;
+            margin-top: 5px;
+            text-align: center;
+            color: var(--text-colour);
+        }
+    }
+}
+
+form {
+    padding: 10px;
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        background: var(--success);
+        width: 100%;
+    }
+}

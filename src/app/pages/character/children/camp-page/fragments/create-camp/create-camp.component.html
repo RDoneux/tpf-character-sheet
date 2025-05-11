@@ -1,0 +1,31 @@
+<div class="create">
+    <!-- <h2>You're not part of a camp</h2> -->
+    <span class="option-wrapper">
+        <app-join-camp />
+        <button mat-button variant="outlined" (click)="openCreateCampDialog()">Create a Camp</button>
+        <small>Create a camp to share resources between party members</small>
+    </span>
+</div>
+
+<ng-template #campDialog>
+    <form [formGroup]="createCampForm">
+        <h1 mat-dialog-title>Create a Camp</h1>
+        <div class="grid-layout" mat-dialog-content>
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Camp Name</mat-label>
+                <input matInput formControlName="name" type="text" />
+            </mat-form-field>
+            <mat-form-field class="full-width no-bottom-margin">
+                <mat-label>Camp Description</mat-label>
+                <textarea
+                    matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    formControlName="description"
+                ></textarea>
+            </mat-form-field>
+            <button class="full-width" mat-button (click)="onCreateCamp()">Create</button>
+        </div>
+    </form>
+</ng-template>

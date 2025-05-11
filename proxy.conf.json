@@ -1,0 +1,8 @@
+{
+    "/api": {
+        "target": "http://192.168.0.86.:9000/2015-03-31/functions/function/invocations",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

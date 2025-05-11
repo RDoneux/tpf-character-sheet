@@ -1,0 +1,12 @@
+<button mat-button (click)="openJoinCampDialog()">Join Camp</button>
+
+<ng-template #joinCampDialog>
+    <form [formGroup]="joinCampForm">
+        <mat-form-field>
+            <mat-label>Camp Code</mat-label>
+            <input #campCode matInput maxLength="6" formControlName="campCode" />
+            <mat-hint align="start">{{ campCode.value.length }} / 6</mat-hint>
+        </mat-form-field>
+        <button class="final-join" mat-button (click)="onJoinCamp()">Join</button>
+    </form>
+</ng-template>

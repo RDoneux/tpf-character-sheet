@@ -1,5 +1,30 @@
-:host {
-    display: block;
+:host,
+div {
+    display: flex;
+
     height: 100%;
     width: 100%;
+}
+
+.camp {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 0.3fr auto 1fr;
+
+    h1,
+    small {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        color: var(--text-colour);
+    }
+
+    .camp-title {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        grid-row: 2;
+    }
 }

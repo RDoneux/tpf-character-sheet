@@ -1,21 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
-import { CampPageComponent } from './camp-page.component'
-import { mockStore } from '../../../../utils/mocks'
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing'
+import { CreateCampComponent } from './create-camp.component'
 import { provideHttpClient } from '@angular/common/http'
-import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { mockStore } from '../../../../../../utils/mocks'
 
-describe('CampPageComponent', () => {
-    let component: CampPageComponent
-    let fixture: ComponentFixture<CampPageComponent>
+describe('CreateCampComponent', () => {
+    let component: CreateCampComponent
+    let fixture: ComponentFixture<CreateCampComponent>
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CampPageComponent],
+            imports: [CreateCampComponent],
             providers: [provideHttpClient(), provideHttpClientTesting(), mockStore],
         }).compileComponents()
 
-        fixture = TestBed.createComponent(CampPageComponent)
+        fixture = TestBed.createComponent(CreateCampComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
     })
