@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { MatButtonModule } from '@angular/material/button'
+import { convertToCopper, convertFromCopper } from '../../utils/game'
 
 @Component({
     selector: 'app-money',
@@ -64,11 +65,11 @@ export class MoneyComponent {
     onEarn() {
         this.money$.pipe(take(1)).subscribe((money: IMoney) => {
             const changeValue = this.moneyChangeForm.getRawValue() as IMoney
-            const changeValueCopper = this.convertToCopper(changeValue)
+            const changeValueCopper = convertToCopper(changeValue)
 
-            const currentValueCopper = this.convertToCopper(money)
+            const currentValueCopper = convertToCopper(money)
             const newValueCopper = currentValueCopper + changeValueCopper
-            const newValue = this.convertFromCopper(newValueCopper)
+            const newValue = convertFromCopper(newValueCopper)
 
             this.store.dispatch(updateMoney({ money: newValue }))
         })
@@ -77,26 +78,13 @@ export class MoneyComponent {
     onPay() {
         this.money$.pipe(take(1)).subscribe((money: IMoney) => {
             const changeValue = this.moneyChangeForm.getRawValue() as IMoney
-            const changeValueCopper = this.convertToCopper(changeValue)
+            const changeValueCopper = convertToCopper(changeValue)
 
-            const currentValueCopper = this.convertToCopper(money)
+            const currentValueCopper = convertToCopper(money)
             const newValueCopper = currentValueCopper - changeValueCopper
-            const newValue = this.convertFromCopper(newValueCopper)
+            const newValue = convertFromCopper(newValueCopper)
 
             this.store.dispatch(updateMoney({ money: newValue }))
         })
-    }
-
-    private convertToCopper(money: IMoney): number {
-        return money.cp + money.sp * 10 + money.gp * 100 + money.pp * 1000
-    }
-
-    private convertFromCopper(copper: number): IMoney {
-        return {
-            cp: copper % 10,
-            sp: Math.floor((copper / 10) % 10),
-            gp: Math.floor((copper / 100) % 10),
-            pp: Math.floor(copper / 1000),
-        }
     }
 }

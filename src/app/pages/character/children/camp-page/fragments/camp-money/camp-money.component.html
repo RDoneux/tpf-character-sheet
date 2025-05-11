@@ -1,0 +1,55 @@
+<ul>
+    <li><mat-icon class="pp" fontSet="material-symbols-outlined">money_bag</mat-icon>{{ campMoney().pp }}</li>
+    <li><mat-icon class="gp" fontSet="material-symbols-outlined">money_bag</mat-icon>{{ campMoney().gp }}</li>
+    <li><mat-icon class="sp" fontSet="material-symbols-outlined">money_bag</mat-icon>{{ campMoney().sp }}</li>
+    <li><mat-icon class="cp" fontSet="material-symbols-outlined">money_bag</mat-icon>{{ campMoney().cp }}</li>
+</ul>
+<button mat-flat-button (click)="onOpenMoneyDialog()">Manage Camp Money</button>
+
+<ng-template #campMoneyDialog>
+    <form mat-dialog-content class="grid-layout" [formGroup]="campMoneyForm">
+        <h1 class="full-width" mat-dialog-title>Manage Camp Money</h1>
+        <div class="full-width transaction-row">
+            <small></small>
+            <p class="half-width">Yours'</p>
+            <mat-icon fontSet="material-symbols-outlined" (click)="onReverseTransactionDirection()"
+                >swap_horiz</mat-icon
+            >
+            <p class="half-width">Camp's</p>
+        </div>
+        <div class="full-width transaction-row">
+            <small>Platinum</small>
+            <p>{{ playerMoney().pp }}</p>
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <input formControlName="pp" />
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <p>{{ campMoney().pp }}</p>
+        </div>
+        <div class="full-width transaction-row">
+            <small>Gold</small>
+            <p>{{ playerMoney().gp }}</p>
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <input formControlName="gp" />
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <p>{{ campMoney().gp }}</p>
+        </div>
+        <div class="full-width transaction-row">
+            <small>Silver</small>
+            <p>{{ playerMoney().sp }}</p>
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <input formControlName="sp" />
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <p>{{ campMoney().sp }}</p>
+        </div>
+        <div class="full-width transaction-row">
+            <small>Copper</small>
+            <p>{{ playerMoney().cp }}</p>
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <input formControlName="cp" />
+            <mat-icon fontSet="material-symbols-outlined">{{ transactionDirection }}</mat-icon>
+            <p>{{ campMoney().cp }}</p>
+        </div>
+
+        <button class="full-width" mat-button (click)="onSend()">Send</button>
+    </form>
+</ng-template>

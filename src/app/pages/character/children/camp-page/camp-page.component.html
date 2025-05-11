@@ -8,9 +8,10 @@
                 <h1>{{ campDetails()?.name }}</h1>
                 <small>{{ campCode() }}</small>
             </span>
-            <p>{{ campDetails()?.description }}</p>
-            <p>{{ campDetails()?.copper }}</p>
-            <app-leave-camp />
+            <app-camp-money [campCopper]="campDetails()?.copper ?? 0" [partyId]="campDetails()?.id ?? ''" />
+            <div class="button-container">
+                <app-leave-camp />
+            </div>
         </div>
     }
 </div>

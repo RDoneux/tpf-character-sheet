@@ -1,0 +1,77 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+}
+
+ul {
+    text-decoration: none;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 220px;
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        mat-icon {
+            &.cp {
+                color: rgb(221, 123, 31);
+            }
+            &.sp {
+                color: rgb(223, 223, 223);
+            }
+            &.gp {
+                color: rgb(255, 215, 0);
+            }
+            &.pp {
+                color: rgb(31, 179, 199);
+            }
+        }
+    }
+}
+
+button {
+    width: 220px;
+}
+
+form {
+    padding: 10px;
+    h1 {
+        font-size: 20px;
+    }
+    button {
+        background-color: var(--success);
+    }
+    .transaction-row {
+        grid-column: span 4;
+        display: grid;
+        align-items: center;
+        gap: 10px;
+        grid-template-columns: 0.5fr auto 40px auto 0.5fr;
+        grid-template-rows: auto 30px;
+
+        p,
+        mat-icon {
+            justify-self: center;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        small {
+            grid-column: span 5;
+            text-align: center;
+        }
+    }
+}

@@ -9,10 +9,11 @@ import { environment } from '../../../../../environments/environment'
 import { updateCampCode } from './state/camp.actions'
 import { LeaveCampComponent } from './fragments/leave-camp/leave-camp.component'
 import { JoinCampComponent } from './fragments/join-camp/join-camp.component'
+import { CampMoneyComponent } from './fragments/camp-money/camp-money.component'
 
 @Component({
     selector: 'app-camp-page',
-    imports: [CampOutlineComponent, CreateCampComponent, LeaveCampComponent],
+    imports: [CampOutlineComponent, CreateCampComponent, LeaveCampComponent, CampMoneyComponent],
     templateUrl: './camp-page.component.html',
     styleUrl: './camp-page.component.scss',
 })
