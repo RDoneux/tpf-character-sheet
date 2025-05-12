@@ -85,7 +85,7 @@ export class SavingThrowsComponent {
     }
 
     private calculateTotal(savingThrow: Partial<ISavingThrows>): ISavingThrows {
-        if (this.settingsService.settings().autoCalculateFields) return savingThrow as ISavingThrows
+        if (!this.settingsService.settings().autoCalculateFields) return savingThrow as ISavingThrows
 
         Object.keys(savingThrow).forEach((key) => {
             const targetSavingThrow = savingThrow[key as keyof ISavingThrows] as ISavingThrowsDef
