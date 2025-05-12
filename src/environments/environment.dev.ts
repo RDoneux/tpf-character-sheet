@@ -3,5 +3,5 @@ import { IEnvironment } from './i-environment'
 export const environment: IEnvironment = {
     production: false,
     versionSuffix: '-dev',
-    apiUrl: 'http://localhost:3000/dev',
+    apiUrl: 'https://fju4rlw3lmzihn5cvdkdx3rvda0byaki.lambda-url.eu-west-2.on.aws/',
 }

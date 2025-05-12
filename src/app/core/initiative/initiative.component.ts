@@ -69,7 +69,7 @@ export class InitiativeComponent {
     }
 
     private calculateInitiative(value: Partial<IInitiative>): IInitiative {
-        if (this.settingsService.settings().autoCalculateFields) return value as IInitiative
+        if (!this.settingsService.settings().autoCalculateFields) return value as IInitiative
 
         value.total = 0
         value.total = Object.values(value).reduce((acc, curr) => {
