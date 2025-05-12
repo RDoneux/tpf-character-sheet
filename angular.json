@@ -55,8 +55,8 @@
                             "outputHashing": "all"
                         },
                         "development": {
-                            "optimization": false,
-                            "extractLicenses": false,
+                            "optimization": true,
+                            "extractLicenses": true,
                             "sourceMap": true,
                             "fileReplacements": [
                                 {
@@ -64,6 +64,11 @@
                                     "with": "src/environments/environment.dev.ts"
                                 }
                             ]
+                        },
+                        "local": {
+                            "optimization": false,
+                            "extractLicenses": true,
+                            "sourceMap": true
                         }
                     },
                     "defaultConfiguration": "production"
@@ -76,9 +81,12 @@
                         },
                         "development": {
                             "buildTarget": "tpf-character-sheet:build:development"
+                        },
+                        "local": {
+                            "buildTarget": "tpf-character-sheet:build:local"
                         }
                     },
-                    "defaultConfiguration": "development"
+                    "defaultConfiguration": "local"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n"

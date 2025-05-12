@@ -2,6 +2,6 @@ import { IEnvironment } from './i-environment'
 
 export const environment: IEnvironment = {
     production: false,
-    versionSuffix: '',
-    apiUrl: 'http://',
+    versionSuffix: '-local',
+    apiUrl: 'http://localhost:3000/dev',
 }
