@@ -1,1 +1,8 @@
-<app-background />
+<app-page-divide-menu [dividers]="pageDividers" (pageSelected)="onPageSelected($event)" />
+
+@if (selectedPage() === pageDividersType.DETAILS) {
+    <app-background />
+}
+@if (selectedPage() === pageDividersType.FEATS) {
+    <app-feats />
+}

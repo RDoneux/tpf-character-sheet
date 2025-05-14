@@ -22,6 +22,7 @@ import { settingsReducer } from './services/settings/state/settings.reducer'
 import { campReducer } from './pages/character/children/camp-page/state/camp.reducer'
 import { provideHttpClient } from '@angular/common/http'
 import { combatMiscReducer } from './core/combat-misc/state/combat-misc.reducer'
+import { featsReducer } from './core/feats/state/feats.reducer'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -40,6 +41,7 @@ const appReducers = {
     settings: settingsReducer,
     camp: campReducer,
     combatMisc: combatMiscReducer,
+    feats: featsReducer,
 }
 
 export const appConfig: ApplicationConfig = {

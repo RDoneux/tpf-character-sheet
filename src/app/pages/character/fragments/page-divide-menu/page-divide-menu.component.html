@@ -1,0 +1,7 @@
+<ul>
+    @for (divider of dividers(); track divider) {
+        <li [class.selected]="currentPage() === divider" (click)="onPageSelected(divider)">
+            {{ divider | uppercase }}
+        </li>
+    }
+</ul>
