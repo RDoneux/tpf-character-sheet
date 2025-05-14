@@ -28,11 +28,4 @@ div.dialog-container {
         background: var(--success);
         margin-top: 10px;
     }
-
-    .name-wrapper {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 5px;
-        align-items: center;
-    }
 }

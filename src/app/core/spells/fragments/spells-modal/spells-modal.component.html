@@ -15,7 +15,7 @@
             @for (spell of spellKeys; track spell) {
                 <ng-container formGroupName="spells">
                     <ng-container [formGroupName]="$index">
-                        <div class="full-width name-wrapper">
+                        <div class="full-width">
                             <mat-form-field class="no-bottom-margin">
                                 <mat-checkbox matPrefix formControlName="isPrepared"></mat-checkbox>
                                 <input matInput formControlName="name" placeholder="Enter spell name" />
