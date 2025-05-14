@@ -26,6 +26,19 @@ export class CastCounterComponent {
                     if (!value.casts.length) {
                         return { ...value, casts: Array.from({ length: value.totalCastsPerDay }, () => false) }
                     }
+                    const castDifference = value.totalCastsPerDay - value.casts.length
+                    if (castDifference > 0) {
+                        return {
+                            ...value,
+                            casts: [...value.casts, ...Array.from({ length: castDifference }, () => false)],
+                        }
+                    }
+                    if (castDifference < 0) {
+                        return {
+                            ...value,
+                            casts: value.casts.slice(0, value.totalCastsPerDay),
+                        }
+                    }
                     return value
                 })
             )

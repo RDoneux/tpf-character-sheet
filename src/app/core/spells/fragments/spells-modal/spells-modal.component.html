@@ -14,14 +14,27 @@
             </div>
             @for (spell of spellKeys; track spell) {
                 <ng-container formGroupName="spells">
-                    <div class="full-width" [formGroupName]="$index">
-                        <mat-checkbox formControlName="isPrepared"></mat-checkbox>
-                        <mat-form-field class="no-bottom-margin">
-                            <input matInput formControlName="name" placeholder="Enter spell name" />
-                            <mat-icon (click)="onDeleteSpell($index)" matSuffix>delete</mat-icon>
+                    <ng-container [formGroupName]="$index">
+                        <div class="full-width name-wrapper">
+                            <mat-form-field class="no-bottom-margin">
+                                <mat-checkbox matPrefix formControlName="isPrepared"></mat-checkbox>
+                                <input matInput formControlName="name" placeholder="Enter spell name" />
+                                <mat-icon (click)="onDeleteSpell($index)" matSuffix>delete</mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <mat-form-field class="full-width">
+                            <mat-label>Description</mat-label>
+                            <textarea
+                                matInput
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="1"
+                                formControlName="description"
+                            ></textarea>
                         </mat-form-field>
-                    </div>
+                    </ng-container>
                 </ng-container>
+                <div class="section-break">&#x2022;</div>
             }
             <button class="add-spell-button full-width" mat-button (click)="onAddSpell()">Add Spell</button>
         </div>

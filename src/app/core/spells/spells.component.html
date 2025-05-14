@@ -5,14 +5,18 @@
                 <h3>{{ key | titleCase }}</h3>
                 <app-cast-counter [spellLevelTitle]="key" />
             </div>
-            @for (spell of dataSource[key].spells; track spell) {
-                <div class="spell-item">
+            <div class="grid-layout">
+                @for (spell of dataSource[key].spells; track spell) {
                     @if (spell.isPrepared) {
                         <mat-icon>whatshot</mat-icon>
+                    } @else {
+                        <span></span>
                     }
-                    <small>{{ spell.name }}</small>
-                </div>
-            }
+                    <small class="bold">{{ spell.name }}</small>
+                    <small>{{ spell.description }}</small>
+                    <hr class="three-quarter-width" />
+                }
+            </div>
         </div>
     }
 </div>
