@@ -23,6 +23,7 @@ import { campReducer } from './pages/character/children/camp-page/state/camp.red
 import { provideHttpClient } from '@angular/common/http'
 import { combatMiscReducer } from './core/combat-misc/state/combat-misc.reducer'
 import { featsReducer } from './core/feats/state/feats.reducer'
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -54,5 +55,12 @@ export const appConfig: ApplicationConfig = {
             initialState: rehydrateState(),
         }),
         provideStoreDevtools(),
+        {
+            provide: MAT_DIALOG_DEFAULT_OPTIONS,
+            useValue: {
+                maxHeight: '90vh',
+                width: '90vw',
+            },
+        },
     ],
 }
