@@ -11,6 +11,17 @@ import { updateSomeSettings } from './state/settings.actions'
 export class SettingsService {
     public settings: WritableSignal<ISettings> = signal(initialSettingsState)
 
+    get autoCalculateFields(): boolean {
+        return this.settings().autoCalculateFields
+    }
+
+    get autoCalculateFields$(): Observable<boolean> {
+        return this.getSettings$(['autoCalculateFields']).pipe(
+            takeUntilDestroyed(this.destroyRef),
+            map((settings: Partial<ISettings>) => settings.autoCalculateFields as boolean)
+        )
+    }
+
     constructor(
         private store: Store<{ settings: ISettings }>,
         private destroyRef: DestroyRef

@@ -12,10 +12,17 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog'
 import { SettingsService } from '../../services/settings/settings.service'
+import { AutoCalculatedInputDirective } from '../../directives/auto-calculated-input.directive'
 
 @Component({
     selector: 'app-initiative',
-    imports: [ConfigurationBadgeComponent, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+    imports: [
+        ConfigurationBadgeComponent,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoCalculatedInputDirective,
+    ],
     templateUrl: './initiative.component.html',
     styleUrl: './initiative.component.scss',
 })

@@ -14,10 +14,11 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field'
 import { IGear } from '../gear/interfaces/i-gear'
 import { IPossession } from '../possessions/interfaces/i-possessions'
 import { SettingsService } from '../../services/settings/settings.service'
+import { AutoCalculatedInputDirective } from '../../directives/auto-calculated-input.directive'
 
 @Component({
     selector: 'app-background',
-    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule],
+    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, AutoCalculatedInputDirective],
     templateUrl: './background.component.html',
     styleUrl: './background.component.scss',
 })

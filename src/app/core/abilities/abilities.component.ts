@@ -1,17 +1,18 @@
 import { Component, DestroyRef } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { IAbilities, IAbilitiesForm, IAbilityDef, initialAbilityState } from './interfaces/i-abilities'
-import { debounceTime, firstValueFrom, map, Observable, takeUntil } from 'rxjs'
+import { debounceTime, firstValueFrom, map, Observable } from 'rxjs'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { buildForm } from '../../utils/form'
 import { UpperCasePipe } from '@angular/common'
 import { updateAllAbilities } from './state/abilities.actions'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { SettingsService } from '../../services/settings/settings.service'
+import { AutoCalculatedInputDirective } from '../../directives/auto-calculated-input.directive'
 
 @Component({
     selector: 'app-abilities',
-    imports: [ReactiveFormsModule, UpperCasePipe],
+    imports: [ReactiveFormsModule, UpperCasePipe, AutoCalculatedInputDirective],
     templateUrl: './abilities.component.html',
     styleUrl: './abilities.component.scss',
 })
@@ -49,7 +50,7 @@ export class AbilitiesComponent {
     }
 
     private mapModifiers(value: Partial<IAbilities>): IAbilities {
-        if (!this.settingsService.settings().autoCalculateFields) return value as IAbilities
+        if (!this.settingsService.autoCalculateFields) return value as IAbilities
 
         Object.keys(value).forEach((key: string) => {
             const abilityTarget = value[key as keyof IAbilities] as IAbilityDef

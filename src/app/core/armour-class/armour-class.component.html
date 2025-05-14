@@ -6,7 +6,7 @@
         <div mat-dialog-content class="grid-layout" [formGroup]="armourClassForm">
             <p class="full-width">Total</p>
             <mat-form-field class="no-bottom-margin full-width">
-                <input type="number" matInput formControlName="total" />
+                <input type="number" matInput formControlName="total" autoCalculatedInput />
             </mat-form-field>
             <p class="full-width center">= 10 +</p>
             <p>Gear Bonus</p>
@@ -14,13 +14,13 @@
             <p>Size Modifier</p>
             <p>Natural Armour</p>
             <mat-form-field class="no-bottom-margin">
-                <input type="number" matInput formControlName="gearBonus" />
+                <input type="number" matInput formControlName="gearBonus" autoCalculatedInput />
             </mat-form-field>
             <mat-form-field class="no-bottom-margin">
-                <input type="number" matInput formControlName="dexterityModifier" />
+                <input type="number" matInput formControlName="dexterityModifier" autoCalculatedInput />
             </mat-form-field>
             <mat-form-field class="no-bottom-margin">
-                <input type="number" matInput formControlName="sizeModifier" />
+                <input type="number" matInput formControlName="sizeModifier" autoCalculatedInput />
             </mat-form-field>
             <mat-form-field class="no-bottom-margin">
                 <input type="number" matInput formControlName="naturalArmour" />

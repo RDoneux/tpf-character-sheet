@@ -20,6 +20,7 @@ import {
 } from '../../../../types/game'
 import { MatSelectModule } from '@angular/material/select'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { AutoCalculatedInputDirective } from '../../../../directives/auto-calculated-input.directive'
 
 @Component({
     selector: 'app-skills-modal',
@@ -31,6 +32,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
         AbbreviateAbilityPipe,
         MatIconModule,
         MatAutocompleteModule,
+        AutoCalculatedInputDirective,
     ],
     templateUrl: './skills-modal.component.html',
     styleUrl: './skills-modal.component.scss',

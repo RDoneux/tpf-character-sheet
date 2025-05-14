@@ -5,10 +5,11 @@ import { ISavingThrows, ISavingThrowsDefForm } from '../../interfaces/i-saving-t
 import { UpperCasePipe } from '@angular/common'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { AutoCalculatedInputDirective } from '../../../../directives/auto-calculated-input.directive'
 
 @Component({
     selector: 'app-saving-throws-modal',
-    imports: [ReactiveFormsModule, UpperCasePipe, MatInputModule, MatFormFieldModule],
+    imports: [ReactiveFormsModule, UpperCasePipe, MatInputModule, MatFormFieldModule, AutoCalculatedInputDirective],
     templateUrl: './saving-throws-modal.component.html',
     styleUrl: './saving-throws-modal.component.scss',
 })

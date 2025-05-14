@@ -16,10 +16,17 @@ import { SizeAmourClassMap } from '../../types/modifier-maps'
 import { CharacterSize } from '../../types/game'
 import { IGear } from '../gear/interfaces/i-gear'
 import { SettingsService } from '../../services/settings/settings.service'
+import { AutoCalculatedInputDirective } from '../../directives/auto-calculated-input.directive'
 
 @Component({
     selector: 'app-armour-class',
-    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, ConfigurationBadgeComponent],
+    imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ConfigurationBadgeComponent,
+        AutoCalculatedInputDirective,
+    ],
     templateUrl: './armour-class.component.html',
     styleUrl: './armour-class.component.scss',
 })
