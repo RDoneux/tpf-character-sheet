@@ -9,7 +9,7 @@ import { Component, input, InputSignal, output } from '@angular/core'
 })
 export class ConfigurationBadgeComponent {
     title: InputSignal<string> = input.required<string>()
-    value: InputSignal<string | number | null> = input.required<string | number | null>()
+    value: InputSignal<string | number | null> = input<string | number | null>(null)
 
     onClick = output<void>()
 

@@ -1,12 +1,26 @@
-<app-configuration-badge title="ARMOUR CLASS" [value]="armourClass.total" (onClick)="openArmourClassDialog()" />
+<app-configuration-badge title="ARMOUR CLASS" (onClick)="openArmourClassDialog()">
+    <div>
+        {{ armourClass.total }}
+        <small class="extra-small">({{ armourClass.touch }} / </small>
+        <small class="extra-small">{{ armourClass.flatFooted }})</small>
+    </div>
+</app-configuration-badge>
 
 <ng-template #armourClassDialog>
     <div class="armour-class-dialog">
         <h1 mat-dialog-title>Armour Class Management</h1>
         <div mat-dialog-content class="grid-layout" [formGroup]="armourClassForm">
-            <p class="full-width">Total</p>
-            <mat-form-field class="no-bottom-margin full-width">
+            <p class="half-width">Total</p>
+            <p class="quarter-width">Touch</p>
+            <p class="quarter-width">Flat Footed</p>
+            <mat-form-field class="no-bottom-margin half-width">
                 <input type="number" matInput formControlName="total" autoCalculatedInput />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin quarter-width">
+                <input type="number" matInput formControlName="touch" autoCalculatedInput />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin quarter-width">
+                <input type="number" matInput formControlName="flatFooted" autoCalculatedInput />
             </mat-form-field>
             <p class="full-width center">= 10 +</p>
             <p>Gear Bonus</p>

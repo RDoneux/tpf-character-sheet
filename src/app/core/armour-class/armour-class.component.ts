@@ -61,7 +61,7 @@ export class ArmourClassComponent {
                 .pipe(
                     takeUntilDestroyed(this.destroyRef),
                     debounceTime(200),
-                    map((value) => this.calculateArmourClass(value))
+                    map(() => this.calculateArmourClass())
                 )
                 .subscribe((value: Partial<IArmourClass>) => {
                     this.store.dispatch(updateArmourClass({ armourClass: value as IArmourClass }))
@@ -101,13 +101,41 @@ export class ArmourClassComponent {
         this.dialog.open(this.armourClassDialog)
     }
 
-    private calculateArmourClass(value: Partial<IArmourClass>): IArmourClass {
-        if (!this.settingsService.settings().autoCalculateFields) return value as IArmourClass
+    private calculateArmourClass(): IArmourClass {
+        const actualValue: Partial<IArmourClass> = { ...this.armourClass }
+        if (!this.settingsService.settings().autoCalculateFields) return actualValue as IArmourClass
 
-        value.total = 0
-        value.total = Object.values(value).reduce((acc, curr) => {
+        actualValue.total = 0
+        actualValue.touch = 0
+        actualValue.flatFooted = 0
+
+        // calculate total armour class
+        const valueToCalculateTotal = { ...actualValue }
+        delete valueToCalculateTotal.touch
+        delete valueToCalculateTotal.flatFooted
+        actualValue.total = Object.values(valueToCalculateTotal).reduce((acc, curr) => {
             return (acc ?? 0) + (curr ?? 0)
         }, 10)
-        return value as IArmourClass
+
+        // calculate touch armour class
+        const valueToCalculateTouch = { ...actualValue }
+        delete valueToCalculateTouch.naturalArmour
+        delete valueToCalculateTouch.gearBonus
+        delete valueToCalculateTouch.total
+        delete valueToCalculateTouch.flatFooted
+        actualValue.touch = Object.values(valueToCalculateTouch).reduce((acc, curr) => {
+            return (acc ?? 0) + (curr ?? 0)
+        }, 10)
+
+        // calculate flat footed armour class
+        const valueToCalculateFlatFooted = { ...actualValue }
+        delete valueToCalculateFlatFooted.dexterityModifier
+        delete valueToCalculateFlatFooted.touch
+        delete valueToCalculateFlatFooted.total
+        actualValue.flatFooted = Object.values(valueToCalculateFlatFooted).reduce((acc, curr) => {
+            return (acc ?? 0) + (curr ?? 0)
+        }, 10)
+
+        return actualValue as IArmourClass
     }
 }

@@ -1,7 +1,8 @@
 import { ActionReducer } from '@ngrx/store'
 import { camelCase } from 'lodash-es'
+import { applyDataMigrations } from './data-integrity'
 
-const STORAGE_KEY = 'TPF-STATE:'
+export const STORAGE_KEY = 'TPF-STATE:'
 
 export function storageMetaReducer<T>(reducer: ActionReducer<T>): ActionReducer<T> {
     return (state, action) => {
@@ -16,12 +17,13 @@ export function storageMetaReducer<T>(reducer: ActionReducer<T>): ActionReducer<
                 localStorage.setItem(`${STORAGE_KEY}${sliceName}`, JSON.stringify(sliceState))
             }
         }
-
         return nextState
     }
 }
 
 export function rehydrateState<T>(): T | undefined {
+    applyDataMigrations()
+
     const initialState: Partial<T> = {}
 
     // Iterate over localStorage keys to rehydrate slices dynamically

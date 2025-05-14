@@ -16,7 +16,6 @@ describe('CastCounterComponent', () => {
         fixture = TestBed.createComponent(CastCounterComponent)
         component = fixture.componentInstance
         const componentRef = fixture.componentRef
-        componentRef.setInput('casts', [])
         fixture.detectChanges()
     })
 

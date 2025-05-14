@@ -9,6 +9,8 @@ export interface IArmourClass {
     deflectionModifier: number | null
     miscModifier: number | null
     damageReduction: number | null
+    touch: number | null
+    flatFooted: number | null
 }
 export interface IArmourClassForm extends FormGroupType<IArmourClass> {}
 
@@ -21,4 +23,6 @@ export const initialArmourClassState: IArmourClass = {
     deflectionModifier: null,
     miscModifier: null,
     damageReduction: null,
+    touch: null,
+    flatFooted: null,
 }
