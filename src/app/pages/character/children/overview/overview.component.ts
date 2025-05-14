@@ -4,10 +4,18 @@ import { HitPointsComponent } from '../../../../core/hit-points/hit-points.compo
 import { ArmourClassComponent } from '../../../../core/armour-class/armour-class.component'
 import { InitiativeComponent } from '../../../../core/initiative/initiative.component'
 import { SavingThrowsComponent } from '../../../../core/saving-throws/saving-throws.component'
+import { CombatMiscComponent } from '../../../../core/combat-misc/combat-misc.component'
 
 @Component({
     selector: 'app-overview',
-    imports: [AbilitiesComponent, HitPointsComponent, ArmourClassComponent, InitiativeComponent, SavingThrowsComponent],
+    imports: [
+        AbilitiesComponent,
+        HitPointsComponent,
+        ArmourClassComponent,
+        InitiativeComponent,
+        SavingThrowsComponent,
+        CombatMiscComponent,
+    ],
     templateUrl: './overview.component.html',
     styleUrl: './overview.component.scss',
 })

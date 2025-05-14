@@ -1,0 +1,40 @@
+.combat-misc__combat-misc-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--background-dark);
+
+    border: 1px solid var(--border-colour);
+    padding: 3px 15px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+    h4 {
+        margin: 5px 0;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+form {
+    padding: 10px;
+    h1 {
+        font-size: 18px;
+    }
+
+    button {
+        grid-column: span 2;
+        &.earn {
+            background: var(--success);
+        }
+        &.pay {
+            background: var(--danger);
+        }
+    }
+}

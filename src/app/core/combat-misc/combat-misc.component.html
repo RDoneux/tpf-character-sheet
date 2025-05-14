@@ -1,0 +1,61 @@
+<app-section-title title="COMBAT OVERVIEW" />
+<div class="grid-layout" (click)="openCombatMiscDialog()">
+    <div class="full-width combat-misc__combat-misc-container">
+        <span>
+            <h4>BASE ATTACK BONUS</h4>
+        </span>
+        <h4>{{ (combatMisc$ | async)?.baseAttackBonus }}</h4>
+    </div>
+    <div class="half-width combat-misc__combat-misc-container">
+        <span>
+            <h4>SPELL RESISTANCE</h4>
+        </span>
+        <h4>{{ (combatMisc$ | async)?.spellResistance }}</h4>
+    </div>
+    <div class="half-width combat-misc__combat-misc-container">
+        <span>
+            <h4>GRAPPLE</h4>
+        </span>
+        <h4>{{ (combatMisc$ | async)?.grappleTotal }}</h4>
+    </div>
+</div>
+
+<ng-template #combatMiscDialog>
+    <form [formGroup]="combatMiscForm" class="grid-layout">
+        <h1 class="full-width">Combat Overview Management</h1>
+        <mat-form-field class="half-width">
+            <mat-label>Base Attack Bonus</mat-label>
+            <input matInput formControlName="baseAttackBonus" type="number" />
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+            <mat-label>Spell Resistance</mat-label>
+            <input matInput formControlName="spellResistance" type="number" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Grapple Modifier</mat-label>
+            <input matInput formControlName="grappleTotal" type="number" autoCalculatedInput />
+        </mat-form-field>
+
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Strength Modifier</mat-label>
+            <input matInput formControlName="strengthModifier" type="number" autoCalculatedInput />
+        </mat-form-field>
+
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Size Modifier</mat-label>
+            <input matInput formControlName="sizeModifier" type="number" autoCalculatedInput />
+        </mat-form-field>
+
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Misc Modifier</mat-label>
+            <input matInput formControlName="miscModifier" type="number" />
+        </mat-form-field>
+
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Temporary Modifier</mat-label>
+            <input matInput formControlName="temporaryModifier" type="number" />
+        </mat-form-field>
+    </form>
+</ng-template>

@@ -39,8 +39,8 @@ export class AbilitiesComponent {
                     debounceTime(200),
                     map((value) => this.mapModifiers(value))
                 )
-                .subscribe((value: IAbilities) => {
-                    this.store.dispatch(updateAllAbilities({ abilities: value as IAbilities }))
+                .subscribe((abilities: IAbilities) => {
+                    this.store.dispatch(updateAllAbilities({ abilities }))
                 })
         })
 
