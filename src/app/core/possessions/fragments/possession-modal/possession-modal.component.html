@@ -7,7 +7,13 @@
         </mat-form-field>
         <mat-form-field class="full-width no-bottom-margin">
             <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description"></textarea>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="description"
+            ></textarea>
         </mat-form-field>
         <mat-form-field class="half-width no-bottom-margin">
             <mat-label>Quantity</mat-label>
