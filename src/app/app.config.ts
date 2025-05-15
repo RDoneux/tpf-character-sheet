@@ -24,6 +24,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { combatMiscReducer } from './core/combat-misc/state/combat-misc.reducer'
 import { featsReducer } from './core/feats/state/feats.reducer'
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
+import { backstoryReducer } from './core/backstory/state/backstory.reducer'
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -43,6 +44,7 @@ const appReducers = {
     camp: campReducer,
     combatMisc: combatMiscReducer,
     feats: featsReducer,
+    backstory: backstoryReducer,
 }
 
 export const appConfig: ApplicationConfig = {

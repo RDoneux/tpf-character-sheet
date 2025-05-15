@@ -1,0 +1,88 @@
+@if (backstoryForm) {
+    <form class="grid-layout" [formGroup]="backstoryForm">
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Birthplace</mat-label>
+            <input matInput formControlName="birthplace" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Social Class</mat-label>
+            <input matInput formControlName="socialClass" />
+        </mat-form-field>
+
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Childhood</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="childhood"
+            ></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Family</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="family"
+            ></textarea>
+        </mat-form-field>
+
+        <div class="section-break">&#x2022;</div>
+
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Secrets</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="secrets"
+            ></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Aspirations</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="aspirations"
+            ></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>Other Details</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="otherDetails"
+            ></textarea>
+        </mat-form-field>
+
+        <div class="section-break">&#x2022;</div>
+
+        <ng-container formArrayName="significantEvents">
+            @for (event of significantEvents; track event) {
+                <mat-form-field class="full-width no-bottom-margin">
+                    <mat-label>Significant Event</mat-label>
+                    <textarea
+                        matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        [formControlName]="$index"
+                    ></textarea>
+                </mat-form-field>
+            }
+            <button class="full-width" mat-button (click)="addSignificantEvent()">Add Significant Event</button>
+        </ng-container>
+    </form>
+}
