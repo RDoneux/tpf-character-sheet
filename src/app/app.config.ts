@@ -2,7 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core'
 import { provideRouter } from '@angular/router'
 
 import { routes } from './app.routes'
-import { provideStore } from '@ngrx/store'
+import { Action, ActionReducer, createAction, createReducer, on, props, provideStore } from '@ngrx/store'
 import { abilitiesReducer } from './core/abilities/state/abilities.reducer'
 import { provideStoreDevtools } from '@ngrx/store-devtools'
 import { hitPointsReducer } from './core/hit-points/state/hit-points.reducer'
@@ -25,6 +25,20 @@ import { combatMiscReducer } from './core/combat-misc/state/combat-misc.reducer'
 import { featsReducer } from './core/feats/state/feats.reducer'
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
 import { backstoryReducer } from './core/backstory/state/backstory.reducer'
+
+export const selectAppState = (state: any) => state
+
+export const importAppState = createAction('[App] Import App State', props<{ state: any }>())
+
+export function importAppStateMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+    return (state, action: Action) => {
+        if (action.type === importAppState.type) {
+            // Replace the state with the imported state
+            return (action as any).state
+        }
+        return reducer(state, action)
+    }
+}
 
 const appReducers = {
     abilities: abilitiesReducer,
@@ -53,7 +67,7 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         provideHttpClient(),
         provideStore(appReducers, {
-            metaReducers: [storageMetaReducer],
+            metaReducers: [storageMetaReducer, importAppStateMetaReducer],
             initialState: rehydrateState(),
         }),
         provideStoreDevtools(),

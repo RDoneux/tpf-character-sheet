@@ -7,5 +7,17 @@
             fields.</small
         >
     </div>
+    <div>
+        <input type="file" id="file-upload" (change)="onFileSelected($event)" style="display: none" />
+        <label for="file-upload" class="file-upload-label" mat-button> Import Character </label>
+        <small
+            >Import a character from a JSON file. This will overwrite the current character. Make sure to backup your
+            character before importing.</small
+        >
+    </div>
+    <div>
+        <button mat-button (click)="onExport()">Export Character</button>
+        <small>Export the character to a JSON file. This can be used as a backup</small>
+    </div>
     <button (click)="onDone()" mat-button>Done</button>
 </form>

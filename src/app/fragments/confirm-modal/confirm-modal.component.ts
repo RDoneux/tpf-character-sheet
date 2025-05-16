@@ -10,12 +10,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 })
 export class ConfirmModalComponent {
     title: WritableSignal<string> = signal('')
+    confirmText: WritableSignal<string> = signal('')
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data: { title: string },
+        @Inject(MAT_DIALOG_DATA) public data: { title: string; confirmText?: string },
         private dialogRef: MatDialogRef<ConfirmModalComponent>
     ) {
         this.title.set(data.title)
+        this.confirmText.set(data.confirmText ?? 'Delete')
     }
 
     onChoice(choice: boolean) {

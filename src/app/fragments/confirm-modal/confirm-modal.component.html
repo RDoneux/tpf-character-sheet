@@ -5,6 +5,8 @@
     </div>
     <div class="grid-layout" mat-dialog-actions>
         <button class="cancel half-width" mat-button (click)="onChoice(false)">Cancel</button>
-        <button class="confirm half-width" mat-button (click)="onChoice(true)" cdkFocusInitial>Delete</button>
+        <button class="confirm half-width" mat-button (click)="onChoice(true)" cdkFocusInitial>
+            {{ confirmText() }}
+        </button>
     </div>
 </div>
