@@ -113,3 +113,19 @@ mat-checkbox.no-padding .mdc-checkbox {
 .bold {
     font-weight: 700;
 }
+
+.snackbar-success > div {
+    background: var(--success) !important;
+    color: #fff !important;
+    button {
+        color: #fff !important;
+    }
+}
+
+.snackbar-error > div {
+    background: var(--danger) !important;
+    color: #fff !important;
+    button {
+        color: #fff !important;
+    }
+}

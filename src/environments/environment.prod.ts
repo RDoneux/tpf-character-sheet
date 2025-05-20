@@ -4,4 +4,5 @@ export const environment: IEnvironment = {
     production: false,
     versionSuffix: '-prod',
     apiUrl: 'http://',
+    saveCharacterUrl: 'https://',
 }

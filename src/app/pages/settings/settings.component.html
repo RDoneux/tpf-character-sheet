@@ -8,8 +8,9 @@
         >
     </div>
     <div>
-        <input type="file" id="file-upload" (change)="onFileSelected($event)" style="display: none" />
-        <label for="file-upload" class="file-upload-label" mat-button> Import Character </label>
+        <!-- <input type="file" id="file-upload" (change)="onFileSelected($event)" style="display: none" /> -->
+        <!-- <label for="file-upload" class="file-upload-label" mat-button> Import Character </label> -->
+        <button class="upload" mat-button (click)="onImport()">Import Character</button>
         <small
             >Import a character from a JSON file. This will overwrite the current character. Make sure to backup your
             character before importing.</small

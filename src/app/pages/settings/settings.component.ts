@@ -36,15 +36,10 @@ export class SettingsComponent {
         })
     }
 
-    onFileSelected(event: Event) {
-        const input = event.target as HTMLInputElement
-        if (!input.files || input.files.length === 0) return
-
-        const file = input.files[0]
-
+    onImport() {
         const dialogRef = this.dialog.open(ConfirmModalComponent, {
             data: {
-                title: `Are you sure you want to import the character from ${file.name}? Doing so will override the current character`,
+                title: `Are you sure you want to import the character? Doing so will override the current character`,
                 confirmText: 'Import',
             },
         })
@@ -54,7 +49,7 @@ export class SettingsComponent {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((result) => {
                 if (result) {
-                    this.exportService.importCharacterFromJSON(file)
+                    this.exportService.importCharacterFromJSON()
                 }
             })
     }

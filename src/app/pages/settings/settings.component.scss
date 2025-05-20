@@ -19,19 +19,8 @@ form {
         cursor: pointer;
     }
 
-    .file-upload-label {
+    .upload {
         cursor: pointer;
-        color: #fff;
         background: var(--border-colour);
-        padding: 8px 16px;
-        border-radius: 4px;
-        width: 100%;
-        text-align: center;
-        display: inline-block;
-        font-weight: 500;
-        transition: background 0.2s;
-        &:hover {
-            background: #ffa726;
-        }
     }
 }
