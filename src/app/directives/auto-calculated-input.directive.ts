@@ -1,4 +1,4 @@
-import { Directive, inject, Optional, Self } from '@angular/core'
+import { Directive, ElementRef, HostListener, inject, Optional, Renderer2, Self } from '@angular/core'
 import { SettingsService } from '../services/settings/settings.service'
 import { NgControl } from '@angular/forms'
 
@@ -8,16 +8,30 @@ import { NgControl } from '@angular/forms'
 })
 export class AutoCalculatedInputDirective {
     private settingsService = inject(SettingsService)
+    private isReadonly = false
 
-    constructor(@Optional() @Self() private ngControl: NgControl) {}
+    constructor(
+        private elementRef: ElementRef<HTMLInputElement>,
+        private renderer: Renderer2,
+        @Optional() @Self() private ngControl: NgControl
+    ) {}
 
     ngOnInit() {
         this.settingsService.autoCalculateFields$.subscribe((autoCalculateFields: boolean) => {
-            if (this.ngControl?.control) {
-                autoCalculateFields
-                    ? this.ngControl.control.disable({ emitEvent: false })
-                    : this.ngControl.control.enable({ emitEvent: false })
+            this.isReadonly = autoCalculateFields
+            if (autoCalculateFields) {
+                this.renderer.addClass(this.elementRef.nativeElement, 'auto-calculated-readonly')
+            } else {
+                this.renderer.removeClass(this.elementRef.nativeElement, 'auto-calculated-readonly')
             }
         })
+    }
+
+    @HostListener('keydown', ['$event'])
+    @HostListener('paste', ['$event'])
+    preventEdit(event: Event) {
+        if (this.isReadonly) {
+            event.preventDefault()
+        }
     }
 }
