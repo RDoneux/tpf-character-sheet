@@ -38,13 +38,12 @@ export class ExportService {
                 next: () => {
                     this.snackBar.open('Character saved successfully:', 'Close', {
                         panelClass: 'snackbar-success',
-                        // duration: 5000,
+                        duration: 5000,
                     })
                 },
                 error: (error) => {
                     this.snackBar.open(`Error saving character: ${error.message}`, 'Close', {
                         panelClass: 'snackbar-error',
-                        duration: 5000,
                     })
                 },
             })
@@ -66,13 +65,12 @@ export class ExportService {
                     this.store.dispatch(importAppState({ state }))
                     this.snackBar.open('Character imported successfully:', 'Close', {
                         panelClass: 'snackbar-success',
-                        // duration: 5000,
+                        duration: 5000,
                     })
                 },
                 error: (error) => {
                     this.snackBar.open(`Error importing character: ${error.message}`, 'Close', {
                         panelClass: 'snackbar-error',
-                        duration: 5000,
                     })
                 },
             })

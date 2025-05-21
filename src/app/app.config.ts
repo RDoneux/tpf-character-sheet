@@ -6,7 +6,7 @@ import { Action, ActionReducer, createAction, createReducer, on, props, provideS
 import { abilitiesReducer } from './core/abilities/state/abilities.reducer'
 import { provideStoreDevtools } from '@ngrx/store-devtools'
 import { hitPointsReducer } from './core/hit-points/state/hit-points.reducer'
-import { storageMetaReducer, rehydrateState } from './utils/state'
+import { storageMetaReducer, rehydrateState, STORAGE_KEY } from './utils/state'
 import { armourClassReducer } from './core/armour-class/state/armour-class.reducer'
 import { initiativeReducer } from './core/initiative/state/initiative.reducer'
 import { savingThrowsReducer } from './core/saving-throws/state/saving-throws.reducer'
@@ -30,11 +30,21 @@ export const selectAppState = (state: any) => state
 
 export const importAppState = createAction('[App] Import App State', props<{ state: any }>())
 
+export function syncStateToLocalStorage<T>(state: T): void {
+    for (const sliceName in state) {
+        if (Object.prototype.hasOwnProperty.call(state, sliceName)) {
+            localStorage.setItem(`${STORAGE_KEY}${sliceName}`, JSON.stringify(state[sliceName]))
+        }
+    }
+}
+
 export function importAppStateMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
     return (state, action: Action) => {
         if (action.type === importAppState.type) {
             // Replace the state with the imported state
-            return (action as any).state
+            const newState = (action as any).state
+            syncStateToLocalStorage(newState)
+            return newState
         }
         return reducer(state, action)
     }
