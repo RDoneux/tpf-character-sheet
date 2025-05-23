@@ -3,42 +3,60 @@
     display: flex;
     flex-direction: column;
 
-    gap: 10px;
-    .spell-card {
-        background: var(--border-colour);
-        border-bottom: 1px solid var(--accent-colour);
-        border-radius: 3px;
-        padding: 10px;
-        cursor: pointer;
+    gap: 20px;
 
+    .spell-level-title {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+            margin: 10px 0;
+        }
+    }
+    .spell-card-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 5px;
-        .grid-layout {
-            grid-template-columns: auto minmax(auto, 80px) 1fr;
-            align-items: center;
-            mat-icon {
-                font-size: 18px;
-            }
-            small {
-                white-space: pre-wrap;
-            }
-            hr {
-                width: 100%;
-                color: #555555;
-                &:last-child {
-                    display: none;
+
+        .spell-card,
+        .spell-card-prepared {
+            mat-card-header {
+                padding: 10px;
+                mat-card-title {
+                    display: grid;
+                    grid-template-columns: auto 1fr;
+                    gap: 5px;
+                    line-height: 24px;
+
+                    .title {
+                        margin: 0;
+                        font-size: 16px;
+                    }
                 }
             }
-            .bold {
-                align-self: flex-start;
+            mat-card-content {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                align-items: flex-start;
+                column-gap: 5px;
+                row-gap: 5px;
+                padding: 10px;
+                mat-icon {
+                    font-size: 18px;
+                }
             }
         }
-        .spell-level-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px;
+
+        .spell-card {
+            color: #888;
+            background: #333;
+        }
+        .spell-card-prepared {
+            border-bottom: 1px solid var(--accent-colour);
+        }
+        button {
+            background: var(--border-colour);
+            grid-column: span 2;
         }
     }
 }

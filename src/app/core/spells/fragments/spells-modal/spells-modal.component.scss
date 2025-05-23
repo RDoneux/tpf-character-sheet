@@ -1,6 +1,9 @@
 div.dialog-container {
     padding: 10px;
     min-width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
     .title {
         display: flex;
@@ -24,8 +27,24 @@ div.dialog-container {
         width: 100%;
     }
 
+    h3 {
+        margin: 10px 0 5px 0;
+    }
+    h4 {
+        margin: 5px 0 0 0;
+    }
+    section {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .add-spell-button {
         background: var(--success);
         margin-top: 10px;
+    }
+
+    button {
+        background: var(--danger);
+        width: 100%;
     }
 }

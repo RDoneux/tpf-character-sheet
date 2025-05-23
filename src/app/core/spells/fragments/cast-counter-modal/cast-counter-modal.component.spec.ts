@@ -1,34 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SpellsModalComponent } from './spells-modal.component'
-import { mockStore } from '../../../../utils/mocks'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
+import { CastCounterModalComponent } from './cast-counter-modal.component'
+import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { initialSpellState } from '../../interfaces/i-spells'
+import { mockStore } from '../../../../utils/mocks'
 
-describe('SpellsModalComponent', () => {
-    let component: SpellsModalComponent
-    let fixture: ComponentFixture<SpellsModalComponent>
+describe('CastCounterModalComponent', () => {
+    let component: CastCounterModalComponent
+    let fixture: ComponentFixture<CastCounterModalComponent>
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SpellsModalComponent],
+            imports: [CastCounterModalComponent],
             providers: [
                 mockStore,
                 {
                     provide: MAT_DIALOG_DATA,
                     useValue: {
-                        spell: initialSpellState,
+                        initialSpellState,
                         spellLevel: 'cantrips',
                     },
-                },
-                {
-                    provide: MatDialogRef,
-                    useValue: {},
                 },
             ],
         }).compileComponents()
 
-        fixture = TestBed.createComponent(SpellsModalComponent)
+        fixture = TestBed.createComponent(CastCounterModalComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
     })

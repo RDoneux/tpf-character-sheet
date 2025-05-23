@@ -1,12 +1,24 @@
 import { v4 } from 'uuid'
 import { FormGroupType } from '../../../interfaces/form-group-type'
-import { initial } from 'lodash-es'
 
 export interface ISpell {
-    name: string
-    description: string | null
     id: string
+    name: string
     isPrepared: boolean
+    castingTime: string
+    range: string
+    components: ISpellComponents
+    damage: string
+    duration: string
+    description: string | null
+}
+
+export interface ISpellComponents {
+    verbal: boolean
+    somatic: boolean
+    material: boolean
+    focus: boolean
+    divineFocus: boolean
 }
 
 export interface ISpellLevel {
@@ -32,10 +44,21 @@ export interface ISpellsForm extends FormGroupType<ISpells> {}
 export interface ISpellForm extends FormGroupType<ISpell[]> {}
 
 export const initialSpellState: ISpell = {
-    name: '',
-    description: null,
     id: v4(),
+    name: '',
     isPrepared: false,
+    castingTime: '',
+    range: '',
+    components: {
+        verbal: false,
+        somatic: false,
+        material: false,
+        focus: false,
+        divineFocus: false,
+    },
+    damage: '',
+    duration: '',
+    description: '',
 }
 
 export const initialSpellLevelState: ISpellLevel = {

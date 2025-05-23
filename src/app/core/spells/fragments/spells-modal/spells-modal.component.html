@@ -1,42 +1,51 @@
 @if (form) {
     <div class="dialog-container" [formGroup]="form">
-        <div class="title" mat-dialog-title>
-            <h1>{{ data.spellLevel | titleCase }}</h1>
-            <span>
-                <label for="total-casts">Casts per day:</label>
-                <input id="total-casts" formControlName="totalCastsPerDay" type="number" />
-            </span>
-        </div>
-        <div mat-dialog-content class="grid-layout">
-            <div class="full-width">
-                <small>Prepare</small>
-                <small>Spell Name</small>
-            </div>
-            @for (spell of spellKeys; track spell) {
-                <ng-container formGroupName="spells">
-                    <ng-container [formGroupName]="$index">
-                        <div class="full-width">
-                            <mat-form-field class="no-bottom-margin">
-                                <mat-checkbox matPrefix formControlName="isPrepared"></mat-checkbox>
-                                <input matInput formControlName="name" placeholder="Enter spell name" />
-                                <mat-icon (click)="onDeleteSpell($index)" matSuffix>delete</mat-icon>
-                            </mat-form-field>
-                        </div>
-                        <mat-form-field class="full-width">
-                            <mat-label>Description</mat-label>
-                            <textarea
-                                matInput
-                                cdkTextareaAutosize
-                                #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="1"
-                                formControlName="description"
-                            ></textarea>
-                        </mat-form-field>
-                    </ng-container>
-                </ng-container>
-                <div class="section-break">&#x2022;</div>
-            }
-            <button class="add-spell-button full-width" mat-button (click)="onAddSpell()">Add Spell</button>
+        <h3>{{ (spell$ | async)?.name ?? '' | titleCase }}</h3>
+        <mat-checkbox formControlName="isPrepared">Prepared</mat-checkbox>
+
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Spell Name</mat-label>
+            <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Casting Time</mat-label>
+            <input matInput formControlName="castingTime" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Range</mat-label>
+            <input matInput formControlName="range" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Duration</mat-label>
+            <input matInput formControlName="duration" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Target</mat-label>
+            <input matInput formControlName="damage" />
+        </mat-form-field>
+        <h4>Components</h4>
+        <section formGroupName="components">
+            <mat-checkbox formControlName="verbal">Verbal</mat-checkbox>
+            <mat-checkbox formControlName="somatic">Somatic</mat-checkbox>
+            <mat-checkbox formControlName="material">Material</mat-checkbox>
+            <mat-checkbox formControlName="focus">Focus</mat-checkbox>
+            <mat-checkbox formControlName="divineFocus">Divine Focus</mat-checkbox>
+        </section>
+        <div class="section-break">&#x2022;</div>
+
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="description"
+            ></textarea>
+        </mat-form-field>
+
+        <div>
+            <button mat-button (click)="onDeleteSpell()">Remove Spell</button>
         </div>
     </div>
 }

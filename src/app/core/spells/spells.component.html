@@ -1,22 +1,68 @@
 <div class="spells-wrapper">
     @for (key of spellLevelKeys; track key) {
-        <div class="spell-card" (click)="openSpellDialog(key)">
+        <div>
             <div class="spell-level-title">
-                <h3>{{ key | titleCase }}</h3>
+                <h3 (click)="openCastCounterModal(key)">{{ key | titleCase }}</h3>
                 <app-cast-counter [spellLevelTitle]="key" />
             </div>
-            <div class="grid-layout">
+            <div class="spell-card-wrapper">
                 @for (spell of dataSource[key].spells; track spell) {
-                    @if (spell.isPrepared) {
-                        <mat-icon>whatshot</mat-icon>
-                    } @else {
-                        <span></span>
-                    }
-                    <small class="bold">{{ spell.name }}</small>
-                    <small>{{ spell.description }}</small>
-                    <hr class="three-quarter-width" />
+                    <mat-card
+                        [class]="spell.isPrepared ? 'spell-card-prepared' : 'spell-card'"
+                        (click)="openSpellDialog(spell, key)"
+                    >
+                        <mat-card-header>
+                            <mat-card-title>
+                                <p class="title">{{ spell.name }}</p>
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            @if (spell.castingTime) {
+                                <mat-icon>timer</mat-icon><small>{{ spell.castingTime }}</small>
+                            }
+                            @if (spell.range) {
+                                <mat-icon fontSet="material-symbols-outlined">distance</mat-icon>
+                                <small>{{ spell.range }}</small>
+                            }
+                            @if (spell.duration) {
+                                <mat-icon>hourglass_empty</mat-icon><small>{{ spell.duration }}</small>
+                            }
+                            @if (
+                                spell.components.verbal ||
+                                spell.components.divineFocus ||
+                                spell.components.focus ||
+                                spell.components.material ||
+                                spell.components.somatic
+                            ) {
+                                <mat-icon fontSet="material-symbols-outlined">target</mat-icon>
+                                <span>
+                                    @if (spell.components.verbal) {
+                                        <small>V </small>
+                                    }
+                                    @if (spell.components.somatic) {
+                                        <small>S </small>
+                                    }
+                                    @if (spell.components.material) {
+                                        <small>M </small>
+                                    }
+                                    @if (spell.components.focus) {
+                                        <small>F </small>
+                                    }
+                                    @if (spell.components.divineFocus) {
+                                        <small>DF </small>
+                                    }
+                                </span>
+                            }
+                            @if (spell.damage) {
+                                <mat-icon fontSet="material-symbols-outlined">destruction</mat-icon>
+                                <small>{{ spell.damage }}</small>
+                            }
+                        </mat-card-content>
+                    </mat-card>
                 }
+                <button mat-button (click)="onAddSpell(key)">Add {{ key | titleCase }} Spell</button>
             </div>
         </div>
+        <div class="section-break">&#x2022;</div>
     }
 </div>

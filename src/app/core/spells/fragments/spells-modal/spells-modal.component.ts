@@ -1,19 +1,20 @@
 import { Component, DestroyRef, Inject } from '@angular/core'
-import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { ISpell, ISpellLevel, ISpells } from '../../interfaces/i-spells'
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import { ISpell, ISpells } from '../../interfaces/i-spells'
 import { Store } from '@ngrx/store'
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { buildForm } from '../../../../utils/form'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import { updateSpellLevel } from '../../state/spells.actions'
+import { deleteSpell, updateSpell } from '../../state/spells.actions'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { debounceTime, firstValueFrom, map, Observable } from 'rxjs'
+import { debounceTime, Observable } from 'rxjs'
 import { TitleCasePipe } from '../../../../pipes/title-case.pipe'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
-import { v4 } from 'uuid'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { AsyncPipe } from '@angular/common'
+import { ConfirmModalComponent } from '../../../../fragments/confirm-modal/confirm-modal.component'
 
 @Component({
     selector: 'app-spells-modal',
@@ -25,68 +26,52 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
         MatButtonModule,
         MatIconModule,
         MatCheckboxModule,
+        AsyncPipe,
     ],
     templateUrl: './spells-modal.component.html',
     styleUrl: './spells-modal.component.scss',
 })
 export class SpellsModalComponent {
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data: { spells: ISpell[]; spellLevel: keyof ISpells },
+        @Inject(MAT_DIALOG_DATA) public data: { spell: ISpell; spellLevel: keyof ISpells },
+        @Inject(MatDialogRef) private dialogRef: MatDialogRef<SpellsModalComponent>,
+        private dialog: MatDialog,
         private store: Store<{ spells: ISpells }>,
         private destroyRef: DestroyRef
     ) {}
 
     form!: FormGroup
-    spells$!: Observable<ISpellLevel>
+    spellLevel!: keyof ISpells
+    spell$!: Observable<ISpell>
 
     get spellKeys() {
         return Object.keys((this.form.get('spells') as FormArray)?.controls)
     }
 
     ngOnInit() {
-        this.spells$ = this.store
-            .select((state: { spells: ISpells }) => state.spells)
-            .pipe(
-                takeUntilDestroyed(this.destroyRef),
-                map((spells: ISpells) => spells[this.data.spellLevel])
-            )
-
-        firstValueFrom(this.spells$).then((spellLevel: ISpellLevel) => {
-            const spellForms = spellLevel.spells.map((spell) => buildForm<ISpell>(spell))
-            this.form = new FormGroup({
-                spells: new FormArray(spellForms),
-                totalCastsPerDay: new FormControl(spellLevel.totalCastsPerDay),
+        this.form = buildForm<ISpell>(this.data.spell)
+        this.form.valueChanges
+            .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
+            .subscribe((spell: ISpell) => {
+                if (this.data.spellLevel) this.store.dispatch(updateSpell({ spell, spellLevel: this.data.spellLevel }))
             })
-
-            this.form.valueChanges
-                .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
-                .subscribe((value: ISpellLevel) => {
-                    this.store.dispatch(updateSpellLevel({ spellLevel: this.data.spellLevel, spells: value }))
-                })
-        })
-
-        this.spells$.subscribe((spellLevel: ISpellLevel) => {
-            const { totalCastsPerDay, spells } = spellLevel
-            this.form?.patchValue({ totalCastsPerDay, spells }, { emitEvent: false })
-        })
     }
 
-    onAddSpell() {
-        ;(this.form.get('spells') as FormArray)?.push(
-            new FormGroup({
-                name: new FormControl(''),
-                description: new FormControl(''),
-                id: new FormControl(v4()),
-                isPrepared: new FormControl(false),
+    onDeleteSpell() {
+        const dialogRef = this.dialog.open(ConfirmModalComponent, {
+            data: { title: `Are you sure you want to remove the spell?` },
+        })
+
+        dialogRef
+            .afterClosed()
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((result) => {
+                result && this.deleteSpell()
             })
-        )
     }
 
-    onDeleteSpell(index: number) {
-        const spells = this.form.get('spells') as FormArray
-        if (spells) {
-            spells.removeAt(index)
-            this.form.setControl('spells', spells)
-        }
+    private deleteSpell() {
+        this.store.dispatch(deleteSpell({ spellLevel: this.data.spellLevel, spellId: this.data.spell.id }))
+        this.dialogRef.close()
     }
 }

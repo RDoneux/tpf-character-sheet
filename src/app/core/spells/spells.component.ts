@@ -1,5 +1,5 @@
 import { Component, DestroyRef, signal, WritableSignal } from '@angular/core'
-import { ISpells } from './interfaces/i-spells'
+import { initialSpellState, ISpell, ISpells } from './interfaces/i-spells'
 import { Store } from '@ngrx/store'
 import { map, Observable } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -10,10 +10,15 @@ import { SpellsModalComponent } from './fragments/spells-modal/spells-modal.comp
 import { MatIconModule } from '@angular/material/icon'
 import { sortBy } from 'lodash-es'
 import { CastCounterComponent } from './fragments/cast-counter/cast-counter.component'
+import { MatCardModule } from '@angular/material/card'
+import { MatButtonModule } from '@angular/material/button'
+import { addSpell } from './state/spells.actions'
+import { v4 } from 'uuid'
+import { CastCounterModalComponent } from './fragments/cast-counter-modal/cast-counter-modal.component'
 
 @Component({
     selector: 'app-spells',
-    imports: [TitleCasePipe, MatIconModule, CastCounterComponent],
+    imports: [TitleCasePipe, MatIconModule, CastCounterComponent, MatCardModule, MatButtonModule],
     templateUrl: './spells.component.html',
     styleUrl: './spells.component.scss',
 })
@@ -37,6 +42,7 @@ export class SpellsComponent {
 
     ngOnInit() {
         this.spells$ = this.store.select((state: { spells: ISpells }) => state.spells)
+
         this.spells$
             .pipe(
                 takeUntilDestroyed(this.destroyRef),
@@ -52,13 +58,34 @@ export class SpellsComponent {
         })
     }
 
-    openSpellDialog(spellLevel: keyof ISpells) {
+    openSpellDialog(spell: ISpell, spellLevel: keyof ISpells) {
         this.dialog.open(SpellsModalComponent, {
             data: {
+                spell,
                 spellLevel,
-                spells: this.dataSource[spellLevel],
             },
-            minWidth: '300px',
+            width: '90vw',
+        })
+    }
+
+    onAddSpell(spellLevel: keyof ISpells) {
+        const spell = { ...initialSpellState, id: v4() }
+        this.store.dispatch(addSpell({ spellLevel, spell }))
+        this.dialog.open(SpellsModalComponent, {
+            data: {
+                spell,
+                spellLevel,
+            },
+            width: '90vw',
+        })
+    }
+
+    openCastCounterModal(spellLevel: keyof ISpells) {
+        this.dialog.open(CastCounterModalComponent, {
+            data: {
+                spellLevel,
+            },
+            width: 'fit-content',
         })
     }
 

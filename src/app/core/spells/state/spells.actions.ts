@@ -11,6 +11,14 @@ export const updateSpellLevel = createAction(
     }>()
 )
 
+export const updateSpell = createAction(
+    '[Spells] Update Spell',
+    props<{
+        spellLevel: keyof ISpells
+        spell: ISpell
+    }>()
+)
+
 export const updateSpellLevelCasts = createAction(
     '[Spells] Update Spell Level Casts',
     props<{
@@ -24,5 +32,13 @@ export const addSpell = createAction(
     props<{
         spellLevel: keyof ISpells
         spell: ISpell
+    }>()
+)
+
+export const deleteSpell = createAction(
+    '[Spells] Delete Spell',
+    props<{
+        spellLevel: keyof ISpells
+        spellId: string
     }>()
 )
