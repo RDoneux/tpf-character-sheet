@@ -7,6 +7,14 @@
             <mat-label>Spell Name</mat-label>
             <input matInput formControlName="name" />
         </mat-form-field>
+        <mat-form-field class="half-width no-bottom-margin">
+            <mat-label>Spell School</mat-label>
+            <mat-select formControlName="school">
+                @for (option of spellSchoolOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
         <mat-form-field class="no-bottom-margin">
             <mat-label>Casting Time</mat-label>
             <input matInput formControlName="castingTime" />

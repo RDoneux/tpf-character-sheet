@@ -15,10 +15,11 @@ import { MatButtonModule } from '@angular/material/button'
 import { addSpell } from './state/spells.actions'
 import { v4 } from 'uuid'
 import { CastCounterModalComponent } from './fragments/cast-counter-modal/cast-counter-modal.component'
+import { DiviniationComponent } from './fragments/diviniation/diviniation.component'
 
 @Component({
     selector: 'app-spells',
-    imports: [TitleCasePipe, MatIconModule, CastCounterComponent, MatCardModule, MatButtonModule],
+    imports: [TitleCasePipe, MatIconModule, CastCounterComponent, MatCardModule, MatButtonModule, DiviniationComponent],
     templateUrl: './spells.component.html',
     styleUrl: './spells.component.scss',
 })

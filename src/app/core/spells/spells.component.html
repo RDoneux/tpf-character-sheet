@@ -58,6 +58,7 @@
                                 <small>{{ spell.damage }}</small>
                             }
                         </mat-card-content>
+                        <app-diviniation [prepared]="spell.isPrepared" [school]="spell.school" />
                     </mat-card>
                 }
                 <button mat-button (click)="onAddSpell(key)">Add {{ key | titleCase }} Spell</button>

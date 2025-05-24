@@ -1,6 +1,6 @@
 import { Component, DestroyRef, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
-import { ISpell, ISpells } from '../../interfaces/i-spells'
+import { ISpell, ISpells, SpellSchool } from '../../interfaces/i-spells'
 import { Store } from '@ngrx/store'
 import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { buildForm } from '../../../../utils/form'
@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { AsyncPipe } from '@angular/common'
 import { ConfirmModalComponent } from '../../../../fragments/confirm-modal/confirm-modal.component'
+import { MatSelectModule } from '@angular/material/select'
 
 @Component({
     selector: 'app-spells-modal',
@@ -27,6 +28,7 @@ import { ConfirmModalComponent } from '../../../../fragments/confirm-modal/confi
         MatIconModule,
         MatCheckboxModule,
         AsyncPipe,
+        MatSelectModule,
     ],
     templateUrl: './spells-modal.component.html',
     styleUrl: './spells-modal.component.scss',
@@ -46,6 +48,10 @@ export class SpellsModalComponent {
 
     get spellKeys() {
         return Object.keys((this.form.get('spells') as FormArray)?.controls)
+    }
+
+    get spellSchoolOptions() {
+        return Object.values(SpellSchool)
     }
 
     ngOnInit() {

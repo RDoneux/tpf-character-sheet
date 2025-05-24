@@ -1,6 +1,18 @@
 import { v4 } from 'uuid'
 import { FormGroupType } from '../../../interfaces/form-group-type'
 
+export const SpellSchool = {
+    Abjuration: 'Abjuration',
+    Conjuration: 'Conjuration',
+    Divination: 'Divination',
+    Enchantment: 'Enchantment',
+    Evocation: 'Evocation',
+    Illusion: 'Illusion',
+    Necromancy: 'Necromancy',
+    Transmutation: 'Transmutation',
+} as const
+export type SpellSchool = (typeof SpellSchool)[keyof typeof SpellSchool]
+
 export interface ISpell {
     id: string
     name: string
@@ -10,6 +22,7 @@ export interface ISpell {
     components: ISpellComponents
     damage: string
     duration: string
+    school: SpellSchool
     description: string | null
 }
 
@@ -59,6 +72,7 @@ export const initialSpellState: ISpell = {
     damage: '',
     duration: '',
     description: '',
+    school: SpellSchool.Divination,
 }
 
 export const initialSpellLevelState: ISpellLevel = {
