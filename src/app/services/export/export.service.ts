@@ -30,7 +30,6 @@ export class ExportService {
 
         this.http
             .post(environment.saveCharacterUrl, {
-                bucket: 'character-sheet-lambda-backup-9975be8',
                 key: `character-sheets/${characterName}.json`,
                 body: json,
             })
@@ -54,25 +53,21 @@ export class ExportService {
             (await firstValueFrom(this.store.select((state: { background: IBackground }) => state.background)))
                 .character ?? ExportService.DOWNLOAD_NAME
 
-        this.http
-            .get(
-                `${environment.saveCharacterUrl}?bucket=character-sheet-lambda-backup-9975be8&key=character-sheets/${characterName}.json`
-            )
-            .subscribe({
-                next: (value: any) => {
-                    const json = JSON.stringify(value, null, 2)
-                    const state = JSON.parse(json as string)
-                    this.store.dispatch(importAppState({ state }))
-                    this.snackBar.open('Character imported successfully:', 'Close', {
-                        panelClass: 'snackbar-success',
-                        duration: 5000,
-                    })
-                },
-                error: (error) => {
-                    this.snackBar.open(`Error importing character: ${error.message}`, 'Close', {
-                        panelClass: 'snackbar-error',
-                    })
-                },
-            })
+        this.http.get(`${environment.saveCharacterUrl}?key=character-sheets/${characterName}.json`).subscribe({
+            next: (value: any) => {
+                const json = JSON.stringify(value, null, 2)
+                const state = JSON.parse(json as string)
+                this.store.dispatch(importAppState({ state }))
+                this.snackBar.open('Character imported successfully:', 'Close', {
+                    panelClass: 'snackbar-success',
+                    duration: 5000,
+                })
+            },
+            error: (error) => {
+                this.snackBar.open(`Error importing character: ${error.message}`, 'Close', {
+                    panelClass: 'snackbar-error',
+                })
+            },
+        })
     }
 }
