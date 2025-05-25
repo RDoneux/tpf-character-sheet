@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { ConfirmModalComponent } from '../../../../fragments/confirm-modal/confirm-modal.component'
 import { MatSelectModule } from '@angular/material/select'
-import { SchoolImageComponent } from '../school-image/school-image.component'
+import { SpellSearchModalComponent } from '../spell-search-modal/spell-search-modal.component'
 
 @Component({
     selector: 'app-spells-modal',
@@ -28,7 +28,6 @@ import { SchoolImageComponent } from '../school-image/school-image.component'
         MatIconModule,
         MatCheckboxModule,
         MatSelectModule,
-        SchoolImageComponent,
     ],
     templateUrl: './spells-modal.component.html',
     styleUrl: './spells-modal.component.scss',
@@ -68,6 +67,17 @@ export class SpellsModalComponent {
             .subscribe((spell: ISpell) => {
                 if (this.data.spellLevel) this.store.dispatch(updateSpell({ spell, spellLevel: this.data.spellLevel }))
             })
+    }
+
+    openSpellSearchModal() {
+        const dialogRef = this.dialog.open(SpellSearchModalComponent, {
+            data: { spell: this.data.spell },
+        })
+
+        dialogRef
+            .afterClosed()
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((selectedSpell: ISpell) => this.form.patchValue(selectedSpell))
     }
 
     onDeleteSpell() {

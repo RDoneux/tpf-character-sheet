@@ -3,4 +3,5 @@ export interface IEnvironment {
     versionSuffix: string
     apiUrl: string
     saveCharacterUrl: string
+    spellSearchUrl: string
 }

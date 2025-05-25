@@ -1,8 +1,10 @@
 @if (form) {
     <div class="dialog-container" [formGroup]="form">
-        <h3>{{ spellName | titleCase }}</h3>
+        <div class="title-wrapper">
+            <h3>{{ spellName | titleCase }}</h3>
+            <mat-icon (click)="openSpellSearchModal()">search</mat-icon>
+        </div>
         <mat-checkbox formControlName="isPrepared">Prepared</mat-checkbox>
-        <app-school-image [prepared]="false" [school]="spellSchool" [fit]="'contain'" />
         <mat-form-field class="no-bottom-margin">
             <mat-label>Spell Name</mat-label>
             <input matInput formControlName="name" />
@@ -41,6 +43,23 @@
             <mat-checkbox formControlName="focus">Focus</mat-checkbox>
             <mat-checkbox formControlName="divineFocus">Divine Focus</mat-checkbox>
         </section>
+
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Material</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                formControlName="material"
+            ></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Page</mat-label>
+            <input type="text" matInput formControlName="page" />
+        </mat-form-field>
+
         <div class="section-break">&#x2022;</div>
 
         <mat-form-field>

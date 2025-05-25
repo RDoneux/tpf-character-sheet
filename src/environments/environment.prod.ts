@@ -5,4 +5,5 @@ export const environment: IEnvironment = {
     versionSuffix: '-prod',
     apiUrl: 'http://',
     saveCharacterUrl: 'https://',
+    spellSearchUrl: 'https://',
 }

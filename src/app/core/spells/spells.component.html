@@ -54,6 +54,10 @@
                                 <mat-icon fontSet="material-symbols-outlined">destruction</mat-icon>
                                 <small>{{ spell.damage }}</small>
                             }
+                            @if (spell.page) {
+                                <mat-icon>book</mat-icon>
+                                <small>{{ spell.page }}</small>
+                            }
                         </mat-card-content>
                         <app-school-image [prepared]="spell.isPrepared" [school]="spell.school" />
                     </mat-card>

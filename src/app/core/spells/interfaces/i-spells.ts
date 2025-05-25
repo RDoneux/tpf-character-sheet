@@ -23,6 +23,8 @@ export interface ISpell {
     damage: string
     duration: string
     school: SpellSchool
+    page: string
+    material: string
     description: string | null
 }
 
@@ -72,6 +74,8 @@ export const initialSpellState: ISpell = {
     damage: '',
     duration: '',
     description: '',
+    page: '',
+    material: '',
     school: SpellSchool.Divination,
 }
 
