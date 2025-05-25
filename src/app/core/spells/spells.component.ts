@@ -9,17 +9,16 @@ import { MatDialog } from '@angular/material/dialog'
 import { SpellsModalComponent } from './fragments/spells-modal/spells-modal.component'
 import { MatIconModule } from '@angular/material/icon'
 import { sortBy } from 'lodash-es'
-import { CastCounterComponent } from './fragments/cast-counter/cast-counter.component'
 import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
 import { addSpell } from './state/spells.actions'
 import { v4 } from 'uuid'
 import { CastCounterModalComponent } from './fragments/cast-counter-modal/cast-counter-modal.component'
-import { DiviniationComponent } from './fragments/diviniation/diviniation.component'
+import { SchoolImageComponent } from './fragments/school-image/school-image.component'
 
 @Component({
     selector: 'app-spells',
-    imports: [TitleCasePipe, MatIconModule, CastCounterComponent, MatCardModule, MatButtonModule, DiviniationComponent],
+    imports: [TitleCasePipe, MatIconModule, MatCardModule, MatButtonModule, SchoolImageComponent],
     templateUrl: './spells.component.html',
     styleUrl: './spells.component.scss',
 })

@@ -8,14 +8,14 @@ import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { deleteSpell, updateSpell } from '../../state/spells.actions'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { debounceTime, Observable } from 'rxjs'
+import { debounceTime } from 'rxjs'
 import { TitleCasePipe } from '../../../../pipes/title-case.pipe'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import { AsyncPipe } from '@angular/common'
 import { ConfirmModalComponent } from '../../../../fragments/confirm-modal/confirm-modal.component'
 import { MatSelectModule } from '@angular/material/select'
+import { SchoolImageComponent } from '../school-image/school-image.component'
 
 @Component({
     selector: 'app-spells-modal',
@@ -27,8 +27,8 @@ import { MatSelectModule } from '@angular/material/select'
         MatButtonModule,
         MatIconModule,
         MatCheckboxModule,
-        AsyncPipe,
         MatSelectModule,
+        SchoolImageComponent,
     ],
     templateUrl: './spells-modal.component.html',
     styleUrl: './spells-modal.component.scss',
@@ -44,7 +44,6 @@ export class SpellsModalComponent {
 
     form!: FormGroup
     spellLevel!: keyof ISpells
-    spell$!: Observable<ISpell>
 
     get spellKeys() {
         return Object.keys((this.form.get('spells') as FormArray)?.controls)
@@ -52,6 +51,14 @@ export class SpellsModalComponent {
 
     get spellSchoolOptions() {
         return Object.values(SpellSchool)
+    }
+
+    get spellName(): string {
+        return this.data.spell.name
+    }
+
+    get spellSchool(): SpellSchool {
+        return this.form.get('school')?.getRawValue()
     }
 
     ngOnInit() {

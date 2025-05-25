@@ -1,8 +1,8 @@
 @if (form) {
     <div class="dialog-container" [formGroup]="form">
-        <h3>{{ (spell$ | async)?.name ?? '' | titleCase }}</h3>
+        <h3>{{ spellName | titleCase }}</h3>
         <mat-checkbox formControlName="isPrepared">Prepared</mat-checkbox>
-
+        <app-school-image [prepared]="false" [school]="spellSchool" [fit]="'contain'" />
         <mat-form-field class="no-bottom-margin">
             <mat-label>Spell Name</mat-label>
             <input matInput formControlName="name" />
@@ -11,7 +11,9 @@
             <mat-label>Spell School</mat-label>
             <mat-select formControlName="school">
                 @for (option of spellSchoolOptions; track option) {
-                    <mat-option [value]="option">{{ option }}</mat-option>
+                    <mat-option [value]="option">
+                        {{ option }}
+                    </mat-option>
                 }
             </mat-select>
         </mat-form-field>

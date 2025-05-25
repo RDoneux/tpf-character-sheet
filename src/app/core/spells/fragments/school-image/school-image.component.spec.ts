@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { DiviniationComponent } from './diviniation.component'
+import { SchoolImageComponent } from './school-image.component'
 
 describe('DiviniationComponent', () => {
-    let component: DiviniationComponent
-    let fixture: ComponentFixture<DiviniationComponent>
+    let component: SchoolImageComponent
+    let fixture: ComponentFixture<SchoolImageComponent>
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [DiviniationComponent],
+            imports: [SchoolImageComponent],
         }).compileComponents()
 
-        fixture = TestBed.createComponent(DiviniationComponent)
+        fixture = TestBed.createComponent(SchoolImageComponent)
         component = fixture.componentInstance
         const componentRef = fixture.componentRef
         componentRef.setInput('prepared', true)

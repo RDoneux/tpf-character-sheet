@@ -1,10 +1,7 @@
 <div class="spells-wrapper">
     @for (key of spellLevelKeys; track key) {
         <div>
-            <div class="spell-level-title">
-                <h3 (click)="openCastCounterModal(key)">{{ key | titleCase }}</h3>
-                <app-cast-counter [spellLevelTitle]="key" />
-            </div>
+            <h3 (click)="openCastCounterModal(key)">{{ key | titleCase }}</h3>
             <div class="spell-card-wrapper">
                 @for (spell of dataSource[key].spells; track spell) {
                     <mat-card
@@ -58,7 +55,7 @@
                                 <small>{{ spell.damage }}</small>
                             }
                         </mat-card-content>
-                        <app-diviniation [prepared]="spell.isPrepared" [school]="spell.school" />
+                        <app-school-image [prepared]="spell.isPrepared" [school]="spell.school" />
                     </mat-card>
                 }
                 <button mat-button (click)="onAddSpell(key)">Add {{ key | titleCase }} Spell</button>
