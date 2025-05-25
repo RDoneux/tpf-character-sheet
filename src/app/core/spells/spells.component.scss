@@ -21,6 +21,7 @@
         .spell-card,
         .spell-card-prepared {
             overflow: hidden;
+            min-height: 160px;
             mat-card-header {
                 padding: 10px;
                 mat-card-title {
