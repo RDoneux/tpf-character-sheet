@@ -11,6 +11,7 @@ import { ExportService } from '../../services/export/export.service'
 import { MatDialog } from '@angular/material/dialog'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { ConfirmModalComponent } from '../../fragments/confirm-modal/confirm-modal.component'
+import { LoadingService } from '../../services/loading/loading.service'
 
 @Component({
     selector: 'app-settings',

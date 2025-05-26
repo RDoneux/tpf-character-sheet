@@ -2,19 +2,30 @@ import { Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { FooterComponent } from './fragments/footer/footer.component'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { LoadingService } from './services/loading/loading.service'
+import { Observable } from 'rxjs'
+import { AsyncPipe } from '@angular/common'
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, FooterComponent],
+    imports: [RouterOutlet, FooterComponent, MatProgressSpinnerModule, AsyncPipe],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })
 export class AppComponent {
     title = 'tpf-character-sheet'
 
-    constructor(private snackBar: MatSnackBar) {}
+    constructor(
+        private snackBar: MatSnackBar,
+        private loadingService: LoadingService
+    ) {}
+
+    isLoading$!: Observable<boolean>
 
     async ngOnInit() {
+        this.isLoading$ = this.loadingService.loadingState$
+
         if ('wakeLock' in navigator) {
             try {
                 await (navigator as any).wakeLock.request('screen')

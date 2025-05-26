@@ -6,6 +6,7 @@ import { IBackground } from '../../core/background/interfaces/i-background'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { LoadingService } from '../loading/loading.service'
 
 @Injectable({
     providedIn: 'root',
@@ -16,10 +17,13 @@ export class ExportService {
 
     constructor(
         private store: Store<{ background: IBackground }>,
-        private http: HttpClient
+        private http: HttpClient,
+        private loadingService: LoadingService
     ) {}
 
     public async exportCharacterToJSON(): Promise<void> {
+        this.loadingService.setLoading(true)
+
         const state = await firstValueFrom(this.store.select(selectAppState))
 
         const characterName: string =
@@ -39,16 +43,19 @@ export class ExportService {
                         panelClass: 'snackbar-success',
                         duration: 5000,
                     })
+                    this.loadingService.setLoading(false)
                 },
                 error: (error) => {
                     this.snackBar.open(`Error saving character: ${error.message}`, 'Close', {
                         panelClass: 'snackbar-error',
                     })
+                    this.loadingService.setLoading(false)
                 },
             })
     }
 
     public async importCharacterFromJSON(): Promise<void> {
+        this.loadingService.setLoading(true)
         const characterName: string =
             (await firstValueFrom(this.store.select((state: { background: IBackground }) => state.background)))
                 .character ?? ExportService.DOWNLOAD_NAME
@@ -62,11 +69,13 @@ export class ExportService {
                     panelClass: 'snackbar-success',
                     duration: 5000,
                 })
+                this.loadingService.setLoading(false)
             },
             error: (error) => {
                 this.snackBar.open(`Error importing character: ${error.message}`, 'Close', {
                     panelClass: 'snackbar-error',
                 })
+                this.loadingService.setLoading(false)
             },
         })
     }

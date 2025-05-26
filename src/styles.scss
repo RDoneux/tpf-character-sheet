@@ -31,6 +31,12 @@ $custom-theme: mat.m2-define-dark-theme(
     --text-colour: #{mat.get-theme-color($custom-theme, primary, 400)};
 
     --accent-colour: #{mat.get-theme-color($custom-theme, accent, 500)};
+
+    // @include mat.progress-spinner-overrides(
+    //     (
+    //         active-indicator-color: var(--accent-colour),
+    //     )
+    // );
 }
 
 html,

@@ -1,4 +1,5 @@
 <div class="app-container">
+    <mat-spinner [class.hidden]="!(isLoading$ | async)" [diameter]="30"></mat-spinner>
     <div class="app-content-wrapper"><router-outlet /></div>
     <app-footer />
 </div>
