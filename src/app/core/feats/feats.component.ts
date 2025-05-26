@@ -12,11 +12,12 @@ import { v4 } from 'uuid'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { MatIconModule } from '@angular/material/icon'
 import { ConfirmModalComponent } from '../../fragments/confirm-modal/confirm-modal.component'
-import { removeFeat } from './state/feats.actions'
+import { removeFeat, updateAllFeats } from './state/feats.actions'
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop'
 
 @Component({
     selector: 'app-feats',
-    imports: [CommonModule, MatTableModule, MatSortModule, MatButtonModule, MatIconModule],
+    imports: [CommonModule, MatTableModule, MatSortModule, MatButtonModule, MatIconModule, DragDropModule],
     templateUrl: './feats.component.html',
     styleUrl: './feats.component.scss',
 })
@@ -59,5 +60,12 @@ export class FeatsComponent {
             .subscribe((result) => {
                 result && this.store.dispatch(removeFeat({ featId: feat.id }))
             })
+    }
+
+    onDrop(event: CdkDragDrop<IFeat[]>) {
+        const data = [...this.dataSource.data]
+        moveItemInArray(data, event.previousIndex, event.currentIndex)
+        this.dataSource.data = data
+        this.store.dispatch(updateAllFeats({ feats: data }))
     }
 }

@@ -15,6 +15,9 @@ import { MatButtonModule } from '@angular/material/button'
 import { deletePossession } from './state/possessions.actions'
 import { ConfirmModalComponent } from '../../fragments/confirm-modal/confirm-modal.component'
 import { v4 } from 'uuid'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import { DragDropModule } from '@angular/cdk/drag-drop'
+import { updateAllPossessions } from './state/possessions.actions'
 
 @Component({
     selector: 'app-possessions',
@@ -26,6 +29,7 @@ import { v4 } from 'uuid'
         MatSortModule,
         MatIconModule,
         MatButtonModule,
+        DragDropModule,
     ],
     templateUrl: './possessions.component.html',
     styleUrl: './possessions.component.scss',
@@ -77,5 +81,12 @@ export class PossessionsComponent implements AfterViewInit {
             .subscribe((result) => {
                 result && this.store.dispatch(deletePossession({ possessionId: possession.id }))
             })
+    }
+
+    onDrop(event: CdkDragDrop<IPossession[]>) {
+        const data = [...this.dataSource.data]
+        moveItemInArray(data, event.previousIndex, event.currentIndex)
+        this.dataSource.data = data
+        this.store.dispatch(updateAllPossessions({ possessions: data }))
     }
 }
