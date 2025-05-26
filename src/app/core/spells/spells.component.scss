@@ -23,10 +23,9 @@
             overflow: hidden;
             min-height: 160px;
             mat-card-header {
+                z-index: 100;
                 padding: 10px;
                 mat-card-title {
-                    z-index: 100;
-
                     display: grid;
                     grid-template-columns: auto 1fr;
                     gap: 5px;
