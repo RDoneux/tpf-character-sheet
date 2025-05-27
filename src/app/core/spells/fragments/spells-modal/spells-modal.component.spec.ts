@@ -4,6 +4,8 @@ import { SpellsModalComponent } from './spells-modal.component'
 import { mockStore } from '../../../../utils/mocks'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { initialSpellState } from '../../interfaces/i-spells'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 
 describe('SpellsModalComponent', () => {
     let component: SpellsModalComponent
@@ -14,6 +16,8 @@ describe('SpellsModalComponent', () => {
             imports: [SpellsModalComponent],
             providers: [
                 mockStore,
+                provideHttpClient(),
+                provideHttpClientTesting(),
                 {
                     provide: MAT_DIALOG_DATA,
                     useValue: {

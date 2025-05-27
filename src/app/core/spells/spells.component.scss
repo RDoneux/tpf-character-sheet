@@ -49,6 +49,12 @@
                 mat-icon {
                     font-size: 18px;
                 }
+                a {
+                    font-size: 12px;
+                    text-decoration: none;
+                    color: var(--text-colour);
+                    line-height: 18px;
+                }
             }
         }
 

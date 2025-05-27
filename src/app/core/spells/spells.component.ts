@@ -15,10 +15,11 @@ import { addSpell } from './state/spells.actions'
 import { v4 } from 'uuid'
 import { CastCounterModalComponent } from './fragments/cast-counter-modal/cast-counter-modal.component'
 import { SchoolImageComponent } from './fragments/school-image/school-image.component'
+import { CastCounterComponent } from './fragments/cast-counter/cast-counter.component'
 
 @Component({
     selector: 'app-spells',
-    imports: [TitleCasePipe, MatIconModule, MatCardModule, MatButtonModule, SchoolImageComponent],
+    imports: [TitleCasePipe, MatIconModule, MatCardModule, MatButtonModule, SchoolImageComponent, CastCounterComponent],
     templateUrl: './spells.component.html',
     styleUrl: './spells.component.scss',
 })

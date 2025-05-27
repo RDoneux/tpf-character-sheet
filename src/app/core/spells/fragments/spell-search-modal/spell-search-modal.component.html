@@ -2,7 +2,11 @@
     <mat-form-field class="no-bottom-margin">
         <mat-label>Search Spells</mat-label>
         <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="search" />
-        <mat-autocomplete #autoGroup="matAutocomplete" (optionSelected)="onSelection($event.option.value)">
+        <mat-autocomplete
+            #autoGroup="matAutocomplete"
+            [displayWith]="displaySpell"
+            (optionSelected)="onSelection($event.option.value)"
+        >
             @for (spell of spellOptions$ | async; track spell) {
                 <mat-option [value]="spell">{{ spell.name }}</mat-option>
             }

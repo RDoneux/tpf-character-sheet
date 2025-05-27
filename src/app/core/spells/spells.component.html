@@ -1,7 +1,10 @@
 <div class="spells-wrapper">
     @for (key of spellLevelKeys; track key) {
         <div>
-            <h3 (click)="openCastCounterModal(key)">{{ key | titleCase }}</h3>
+            <div class="spell-level-title">
+                <h3 (click)="openCastCounterModal(key)">{{ key | titleCase }}</h3>
+                <app-cast-counter [spellLevelTitle]="key" />
+            </div>
             <div class="spell-card-wrapper">
                 @for (spell of dataSource[key].spells; track spell) {
                     <mat-card
@@ -54,9 +57,19 @@
                                 <mat-icon fontSet="material-symbols-outlined">destruction</mat-icon>
                                 <small>{{ spell.damage }}</small>
                             }
+                            @if (spell.material) {
+                                <mat-icon fontSet="material-symbols-outlined">inventory</mat-icon>
+                                <small>{{ spell.material }}</small>
+                            }
+                            @if (spell.effect) {
+                                <mat-icon fontSet="material-symbols-outlined">my_location</mat-icon>
+                                <small>{{ spell.effect }}</small>
+                            }
                             @if (spell.page) {
                                 <mat-icon>book</mat-icon>
-                                <small>{{ spell.page }}</small>
+                                <a [href]="spell.page" target="_blank" (click)="$event.stopPropagation()"
+                                    >{{ spell.name }} Ref</a
+                                >
                             }
                         </mat-card-content>
                         <app-school-image [prepared]="spell.isPrepared" [school]="spell.school" />

@@ -2,8 +2,8 @@
     <div class="dialog-container" [formGroup]="form">
         <div class="title-wrapper">
             <h3>{{ spellName | titleCase }}</h3>
-            <mat-icon (click)="openSpellSearchModal()">search</mat-icon>
         </div>
+        <app-spell-search-modal (spellSelected)="onSpellSelected($event)"></app-spell-search-modal>
         <mat-checkbox formControlName="isPrepared">Prepared</mat-checkbox>
         <mat-form-field class="no-bottom-margin">
             <mat-label>Spell Name</mat-label>

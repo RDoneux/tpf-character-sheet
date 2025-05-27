@@ -28,6 +28,7 @@ import { SpellSearchModalComponent } from '../spell-search-modal/spell-search-mo
         MatIconModule,
         MatCheckboxModule,
         MatSelectModule,
+        SpellSearchModalComponent,
     ],
     templateUrl: './spells-modal.component.html',
     styleUrl: './spells-modal.component.scss',
@@ -69,15 +70,8 @@ export class SpellsModalComponent {
             })
     }
 
-    openSpellSearchModal() {
-        const dialogRef = this.dialog.open(SpellSearchModalComponent, {
-            data: { spell: this.data.spell },
-        })
-
-        dialogRef
-            .afterClosed()
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((selectedSpell: ISpell) => this.form.patchValue(selectedSpell))
+    onSpellSelected(spell: ISpell) {
+        this.form.patchValue(spell)
     }
 
     onDeleteSpell() {

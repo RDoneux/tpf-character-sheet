@@ -8,6 +8,7 @@
     div {
         width: 180%;
         height: 180%;
+        background-repeat: no-repeat;
         filter: brightness(0) saturate(100%) invert(27%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(55%)
             contrast(100%) opacity(1);
 

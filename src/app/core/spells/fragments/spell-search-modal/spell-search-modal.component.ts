@@ -1,4 +1,4 @@
-import { Component, DestroyRef, Inject } from '@angular/core'
+import { Component, DestroyRef, output } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -9,7 +9,6 @@ import { debounceTime, map, Observable, startWith } from 'rxjs'
 import { AsyncPipe } from '@angular/common'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { MatDialogRef } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
 
 @Component({
@@ -26,12 +25,13 @@ import { MatSelectModule } from '@angular/material/select'
     styleUrl: './spell-search-modal.component.scss',
 })
 export class SpellSearchModalComponent {
+    spellSelected = output<ISpell>()
+
     constructor(
         private spellService: SpellService,
         private formBuilder: FormBuilder,
         private destroyRef: DestroyRef,
-        private matSnackBar: MatSnackBar,
-        @Inject(MatDialogRef) private dialogRef: MatDialogRef<SpellSearchModalComponent>
+        private matSnackBar: MatSnackBar
     ) {}
 
     spells!: ISpell[]
@@ -74,14 +74,19 @@ export class SpellSearchModalComponent {
         )
     }
 
+    displaySpell(spell: ISpell): string {
+        return spell ? spell.name : ''
+    }
+
     onSelection(spell: ISpell) {
-        this.dialogRef.close(spell)
+        this.spellSelected.emit(spell)
     }
 
     private filterSpells(): ISpell[] {
         if (!this.spells) return []
+        if (typeof this.nameSearchValue !== 'string') return this.spells
         return this.spells
-            .filter((spell: ISpell) => spell.name.toLowerCase().includes(this.nameSearchValue.toLowerCase()))
-            .filter((spell: ISpell) => spell.school.toLowerCase().includes(this.schoolSearchValue.toLowerCase()))
+            .filter((spell: ISpell) => spell.name?.toLowerCase()?.includes(this.nameSearchValue?.toLowerCase()))
+            .filter((spell: ISpell) => spell.school?.toLowerCase()?.includes(this.schoolSearchValue?.toLowerCase()))
     }
 }
