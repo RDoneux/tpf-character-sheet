@@ -1,12 +1,29 @@
-import { afterNextRender, Component, DestroyRef, inject, Injector, ViewChild } from '@angular/core'
-import { FormGroup, ReactiveFormsModule } from '@angular/forms'
+import {
+    afterNextRender,
+    Component,
+    computed,
+    DestroyRef,
+    inject,
+    Injector,
+    model,
+    ModelSignal,
+    Signal,
+    ViewChild,
+} from '@angular/core'
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
-import { IBackground, IBackgroundForm } from './interfaces/i-background'
+import { CharacterClassLevel, IBackground, IBackgroundForm } from './interfaces/i-background'
 import { Store } from '@ngrx/store'
 import { combineLatest, debounceTime, firstValueFrom, Observable } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { updateBackground, updateBackgroundWeight } from './state/background.actions'
+import {
+    addClass,
+    removeClass,
+    updateBackground,
+    updateBackgroundWeight,
+    updateClasses,
+} from './state/background.actions'
 import { buildForm } from '../../utils/form'
 import { MatSelectModule } from '@angular/material/select'
 import { CharacterAlignment, CharacterClass, CharacterRace, CharacterSize } from '../../types/game'
@@ -15,15 +32,32 @@ import { IGear } from '../gear/interfaces/i-gear'
 import { IPossession } from '../possessions/interfaces/i-possessions'
 import { SettingsService } from '../../services/settings/settings.service'
 import { AutoCalculatedInputDirective } from '../../directives/auto-calculated-input.directive'
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips'
+import { AsyncPipe } from '@angular/common'
+import { MatIconModule } from '@angular/material/icon'
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
+import { COMMA, ENTER } from '@angular/cdk/keycodes'
 
 @Component({
     selector: 'app-background',
-    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, AutoCalculatedInputDirective],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        AutoCalculatedInputDirective,
+        MatChipsModule,
+        AsyncPipe,
+        MatIconModule,
+        MatAutocompleteModule,
+    ],
     templateUrl: './background.component.html',
     styleUrl: './background.component.scss',
 })
 export class BackgroundComponent {
     private _injector = inject(Injector)
+    readonly separatorKeysCodes: number[] = [ENTER, COMMA]
 
     constructor(
         private store: Store<{ background: IBackground; gear: IGear; possessions: IPossession[] }>,
@@ -35,6 +69,12 @@ export class BackgroundComponent {
 
     background$!: Observable<IBackground>
     backgroundForm!: FormGroup<IBackgroundForm>
+
+    classFilter: ModelSignal<string> = model<string>('')
+    filteredClasses: Signal<string[]> = computed(() => {
+        const filterValue = this.classFilter().toLowerCase()
+        return this.classOptions.filter((option: string) => option.toLowerCase().includes(filterValue))
+    })
 
     get classOptions(): string[] {
         return Object.values(CharacterClass)
@@ -94,5 +134,25 @@ export class BackgroundComponent {
                 injector: this._injector,
             }
         )
+    }
+
+    onRemoveClass(characterClassLevel: CharacterClassLevel) {
+        this.store.dispatch(removeClass({ characterClassLevel }))
+    }
+
+    onAddClass(event: MatChipInputEvent) {
+        const clazz = { class: event.value.trim(), level: 0 }
+        this.store.dispatch(addClass({ characterClassLevel: clazz }))
+        event.chipInput.clear()
+    }
+
+    classSelected(event: MatAutocompleteSelectedEvent) {
+        const clazz = { class: event.option.viewValue.trim(), level: 0 }
+        if (clazz) {
+            this.store.dispatch(addClass({ characterClassLevel: clazz }))
+        }
+        event.source.closed.emit()
+        event.option.deselect()
+        this.classFilter.set('')
     }
 }

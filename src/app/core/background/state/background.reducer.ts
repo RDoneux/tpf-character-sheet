@@ -1,6 +1,13 @@
 import { createReducer, on } from '@ngrx/store'
 import { initialBackgroundState } from '../interfaces/i-background'
-import { updateBackground, updateBackgroundWeight } from './background.actions'
+import {
+    addClass,
+    removeClass,
+    updateBackground,
+    updateBackgroundWeight,
+    updateClass,
+    updateClasses,
+} from './background.actions'
 
 export const backgroundReducer = createReducer(
     initialBackgroundState,
@@ -11,5 +18,23 @@ export const backgroundReducer = createReducer(
     on(updateBackgroundWeight, (state, { weight }) => ({
         ...state,
         weight,
+    })),
+    on(updateClasses, (state, { classes }) => ({
+        ...state,
+        class: classes,
+    })),
+    on(addClass, (state, { characterClassLevel }) => ({
+        ...state,
+        classes: [...(state.classes || []), characterClassLevel],
+    })),
+    on(removeClass, (state, { characterClassLevel }) => ({
+        ...state,
+        classes: (state.classes || []).filter((c) => c.class !== characterClassLevel.class),
+    })),
+    on(updateClass, (state, { characterClassLevel }) => ({
+        ...state,
+        classes: (state.classes || []).map((c) =>
+            c.class === characterClassLevel.class ? { ...c, ...characterClassLevel } : c
+        ),
     }))
 )

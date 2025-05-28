@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { SkillsModalComponent } from './fragments/skills-modal/skills-modal.component'
 import { IAbilities } from '../abilities/interfaces/i-abilities'
 import { addSkill, deleteSkill, updateAllSkills } from './state/skills.actions'
-import { IBackground } from '../background/interfaces/i-background'
+import { CharacterClassLevel, IBackground } from '../background/interfaces/i-background'
 import { ClassSkillsMap } from '../../types/modifier-maps'
 import { CharacterClass } from '../../types/game'
 import { v4 } from 'uuid'
@@ -76,10 +76,13 @@ export class SkillsComponent {
 
         const background$ = this.store.select((state: { background: IBackground }) => state.background)
         background$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: Partial<IBackground>) => {
-            if (!value.class) return
+            if (!value.classes) return
             const skillsWithBackground: ISkill[] = this.dataSource.data.map((skill: ISkill) => ({
                 ...skill,
-                isClassSkill: ClassSkillsMap[value.class ?? CharacterClass.BARBARIAN].includes(skill.name),
+                isClassSkill:
+                    value.classes?.some((clazz: CharacterClassLevel) =>
+                        ClassSkillsMap[clazz.class].includes(skill.name)
+                    ) ?? false,
             }))
             this.store.dispatch(updateAllSkills({ skills: skillsWithBackground }))
         })

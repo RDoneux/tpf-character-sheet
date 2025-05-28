@@ -20,6 +20,37 @@ p {
         gap: 10px;
     }
 
+    table {
+        grid-column: span 2;
+        table-layout: fixed;
+
+        text-align: center;
+
+        td:first-child {
+            width: 100%;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        th:last-child {
+            min-width: 80px;
+        }
+
+        td {
+            line-height: 11px;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 3px;
+            justify-content: flex-end;
+            mat-icon {
+                font-size: 16px;
+                line-height: 25px;
+            }
+        }
+    }
+
     .damage-output {
         grid-column: span 2;
     }

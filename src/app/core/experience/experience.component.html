@@ -8,6 +8,32 @@
         <div class="experience-dialog">
             <h1 mat-dialog-title>Experience Management</h1>
             <div class="content" mat-dialog-content [formGroup]="experienceForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (class of (background$ | async)?.classes ?? []; track class) {
+                            <tr>
+                                <td>
+                                    <small>{{ class.class }}</small>
+                                </td>
+                                <td>
+                                    <small>{{ class.level }}</small>
+                                </td>
+                                <td class="action-icons">
+                                    <small><mat-icon (click)="onDecreaseSubLevel(class)">remove</mat-icon></small>
+                                    <small><mat-icon (click)="onIncreaseSubLevel(class)">add</mat-icon></small>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
                 <mat-form-field>
                     <mat-label>Experience Points</mat-label>
                     <input matInput formControlName="points" type="number" />
@@ -16,6 +42,7 @@
                     <mat-label>Level</mat-label>
                     <input matInput formControlName="level" type="number" />
                 </mat-form-field>
+
                 <mat-form-field class="no-bottom-margin damage-output">
                     <mat-label>Experience to add</mat-label>
                     <input

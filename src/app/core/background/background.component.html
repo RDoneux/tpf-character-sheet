@@ -19,13 +19,33 @@
             ></textarea>
         </mat-form-field>
         <div class="section-break">&#x2022;</div>
-        <mat-form-field class="half-width no-bottom-margin">
+        <mat-form-field class="full-width no-bottom-margin">
             <mat-label>Class</mat-label>
-            <mat-select formControlName="class">
-                @for (option of classOptions; track option) {
-                    <mat-option [value]="option">{{ option }}</mat-option>
+            <mat-chip-grid #chipGrid>
+                @for (clazz of (background$ | async)?.classes; track clazz) {
+                    <mat-chip-row (removed)="onRemoveClass(clazz)">
+                        {{ clazz.class }}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
                 }
-            </mat-select>
+            </mat-chip-grid>
+            <input
+                name="currentClass"
+                #classInput
+                [matChipInputFor]="chipGrid"
+                [matAutocomplete]="auto"
+                [(ngModel)]="classFilter"
+                [ngModelOptions]="{ standalone: true }"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="onAddClass($event)"
+            />
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="classSelected($event); classInput.value = ''">
+                @for (clazz of filteredClasses(); track clazz) {
+                    <mat-option [value]="clazz">{{ clazz }}</mat-option>
+                }
+            </mat-autocomplete>
         </mat-form-field>
         <mat-form-field class="half-width no-bottom-margin">
             <mat-label>Race</mat-label>
@@ -51,7 +71,7 @@
                 }
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="full-width no-bottom-margin">
+        <mat-form-field class="half-width no-bottom-margin">
             <mat-label>Deity</mat-label>
             <input matInput formControlName="deity" />
         </mat-form-field>

@@ -1,11 +1,16 @@
 import { FormGroupType } from '../../../interfaces/form-group-type'
 import { CharacterAlignment, CharacterClass, CharacterRace, CharacterSize } from '../../../types/game'
 
+export interface CharacterClassLevel {
+    class: CharacterClass
+    level: number
+}
+
 export interface IBackground {
     character: string | null
     player: string | null
     description: string | null
-    class: CharacterClass | null
+    classes: CharacterClassLevel[]
     race: CharacterRace | null
     alignment: CharacterAlignment | null
     deity: string | null
@@ -25,7 +30,7 @@ export const initialBackgroundState: IBackground = {
     character: null,
     player: null,
     description: null,
-    class: null,
+    classes: [],
     race: null,
     alignment: null,
     deity: null,
