@@ -1,1 +1,8 @@
-<app-spells />
+<app-page-divide-menu [dividers]="pageDividers" (pageSelected)="onPageSelected($event)" />
+
+@if (selectedPage() === pageDividersType.SPELLS) {
+    <app-spells />
+}
+@if (selectedPage() === pageDividersType.SUMMONED_CREATURES) {
+    <app-summoned-creatures />
+}

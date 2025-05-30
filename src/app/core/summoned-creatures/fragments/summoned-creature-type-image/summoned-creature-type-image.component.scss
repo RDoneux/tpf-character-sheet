@@ -1,0 +1,45 @@
+:host {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    z-index: 0;
+    top: 30px;
+    div {
+        width: 100%;
+        height: 100vw;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        filter: brightness(0) saturate(100%) invert(34%) sepia(81%) saturate(749%) hue-rotate(1deg) brightness(95%)
+            contrast(89%) opacity(0.3);
+
+        &.Vermin {
+            background-image: url('/assets/images/creature-types/vermin.svg');
+        }
+        &.Aberration {
+            background-image: url('/assets/images/creature-types/.aberration.svg');
+        }
+        &.MagicalBeast {
+            background-image: url('/assets/images/creature-types/.monsterosity.svg');
+        }
+        &.Undead {
+            background-image: url('/assets/images/creature-types/.undead.svg');
+        }
+        &.Humanoid {
+            background-image: url('/assets/images/creature-types/.humanoid.svg');
+        }
+        &.Outsider {
+            background-image: url('/assets/images/creature-types/.outsider.svg');
+        }
+        &.Giant {
+            background-image: url('/assets/images/creature-types/.giant.svg');
+        }
+        &.Dragon {
+            background-image: url('/assets/images/creature-types/.dragon.svg');
+        }
+        &.Animal {
+            background-image: url('/assets/images/creature-types/.animal.svg');
+        }
+    }
+}

@@ -1,0 +1,88 @@
+<div class="summoned-creature-container">
+    <div class="header">
+        <h1>
+            <a target="_blank" [href]="summonedCreature().link">{{ summonedCreature().name }}</a>
+        </h1>
+        @if (summonedCreature().maxHitPoints) {
+            <small>
+                <mat-icon>favorite</mat-icon>
+                {{ summonedCreature().currentHitPoints }}
+                /
+                {{ summonedCreature().maxHitPoints }}
+            </small>
+        }
+    </div>
+    <div class="body grid-layout">
+        <div class="ability-container full-width">
+            @for (ability of abilities; track ability[0]) {
+                <div class="ability-wrapper">
+                    <small>{{ ability[0] | abbreviateAbility: true }}</small>
+                    <small>{{ ability[1].split(' ')[1] }}</small>
+                    <small>{{ ability[1].split(' ')[0] }}</small>
+                </div>
+            }
+        </div>
+        <small>
+            <p><b>Initiative</b>{{ summonedCreature().initiative }}</p>
+        </small>
+        <small class="half-width">
+            <p><b>Speed</b>{{ summonedCreature().speed }}</p>
+        </small>
+        <small>
+            <p><b>Base Attack</b>{{ summonedCreature().baseAttack }}</p>
+        </small>
+
+        <div class="section-break">&#x2022;</div>
+
+        <small class="full-width">
+            <p><b>Armour Class</b>{{ summonedCreature().armourClass }}</p>
+        </small>
+
+        <hr class="full-width" />
+
+        <small class="full-width">
+            <p class="horizontal"><b>Attack</b>{{ summonedCreature().attack }}</p>
+        </small>
+
+        <small class="full-width">
+            <p class="horizontal"><b>Size</b>{{ summonedCreature().size }}</p>
+        </small>
+
+        <small class="full-width">
+            <p class="horizontal"><b>Type</b>{{ summonedCreature().type }}</p>
+        </small>
+
+        <small class="full-width">
+            <p class="horizontal"><b>Grapple</b>{{ summonedCreature().grapple }}</p>
+        </small>
+
+        <small class="full-width">
+            <p class="horizontal"><b>Alignment</b>{{ summonedCreature().alignment }}</p>
+        </small>
+
+        <small class="half-width">
+            <p class="text-left bold">Saving Throws</p>
+            <p class="horizontal"><b>Fortitude</b>{{ summonedCreature().saves.fortitude }}</p>
+            <p class="horizontal"><b>Reflex</b>{{ summonedCreature().saves.reflex }}</p>
+            <p class="horizontal"><b>Will</b>{{ summonedCreature().saves.will }}</p>
+        </small>
+
+        <small class="half-width">
+            <p class="bold">Feats</p>
+            @for (feat of summonedCreature().feats; track feat) {
+                <p class="horizontal text-center">{{ feat }}</p>
+            }
+        </small>
+
+        <small class="half-width">
+            <p class="text-left bold">Skills</p>
+            @for (skill of skills; track skill[0]) {
+                <p class="horizontal">
+                    <b>{{ skill[0] }}</b
+                    >{{ skill[1] }}
+                </p>
+            }
+        </small>
+    </div>
+    <app-summoned-creature-type-image [type]="summonedCreature().type" />
+</div>

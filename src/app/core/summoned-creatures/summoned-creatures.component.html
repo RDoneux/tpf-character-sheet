@@ -1,0 +1,19 @@
+<form [formGroup]="form">
+    <mat-form-field class="no-bottom-margin">
+        <mat-label>Search Creatures</mat-label>
+        <input type="text" matInput [matAutocomplete]="autoGroup" formControlName="search" />
+        <mat-autocomplete
+            #autoGroup="matAutocomplete"
+            [displayWith]="displayCreature"
+            (optionSelected)="onSelection($event.option.value)"
+        >
+            @for (creature of creatureOptions$ | async; track creature.id) {
+                <mat-option [value]="creature">{{ creature.name }}</mat-option>
+            }
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
+
+@for (creature of summonedCreatures$ | async; track creature.id) {
+    <app-summoned-creature-card [summonedCreature]="creature" />
+}

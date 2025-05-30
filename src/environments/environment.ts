@@ -6,4 +6,5 @@ export const environment: IEnvironment = {
     apiUrl: 'http://localhost:3000/dev',
     saveCharacterUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/character',
     spellSearchUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/spells',
+    summonedCreaturesUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/monsters',
 }

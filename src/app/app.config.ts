@@ -25,6 +25,7 @@ import { combatMiscReducer } from './core/combat-misc/state/combat-misc.reducer'
 import { featsReducer } from './core/feats/state/feats.reducer'
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog'
 import { backstoryReducer } from './core/backstory/state/backstory.reducer'
+import { summonedCreaturesReducer } from './core/summoned-creatures/state/summoned-creatures.reducer'
 
 export const selectAppState = (state: any) => state
 
@@ -69,6 +70,7 @@ const appReducers = {
     combatMisc: combatMiscReducer,
     feats: featsReducer,
     backstory: backstoryReducer,
+    summonedCreatures: summonedCreaturesReducer,
 }
 
 export const appConfig: ApplicationConfig = {
