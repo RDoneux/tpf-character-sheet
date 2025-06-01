@@ -1,0 +1,72 @@
+@if (summonedCreature()) {
+    <form [formGroup]="form" class="grid-layout">
+        <h1 class="full-width">{{ summonedCreature().name }}</h1>
+        <mat-form-field class="full-width no-bottom-margin">
+            <mat-label>{{ summonedCreature().name }}</mat-label>
+            <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <!-- HIT POINTS -->
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Hit Points</mat-label>
+            <input matInput type="number" formControlName="currentHitPoints" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Max Hit Points</mat-label>
+            <input matInput type="number" formControlName="maxHitPoints" />
+        </mat-form-field>
+        <mat-form-field class="no-bottom-margin">
+            <mat-label>Size</mat-label>
+            <input matInput type="string" formControlName="size" />
+        </mat-form-field>
+
+        <!-- ABILITIES -->
+        <app-section-title class="full-width" [title]="'Abilities'" />
+        <ng-container formGroupName="abilities">
+            <small>{{ 'strength' | abbreviateAbility: true }}</small>
+            <small>{{ 'dexterity' | abbreviateAbility: true }}</small>
+            <small>{{ 'constitution' | abbreviateAbility: true }}</small>
+            <mat-form-field class="no-bottom-margin">
+                <input matInput type="number" formControlName="strength" />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin">
+                <input matInput type="number" formControlName="dexterity" />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin">
+                <input matInput type="number" formControlName="constitution" />
+            </mat-form-field>
+
+            <small>{{ 'intelligence' | abbreviateAbility: true }}</small>
+            <small>{{ 'wisdom' | abbreviateAbility: true }}</small>
+            <small>{{ 'charisma' | abbreviateAbility: true }}</small>
+            <mat-form-field>
+                <input matInput type="number" formControlName="intelligence" />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" formControlName="wisdom" />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" formControlName="charisma" />
+            </mat-form-field>
+        </ng-container>
+
+        <!-- SAVING THROWS -->
+        <app-section-title class="full-width" [title]="'Saving Throws'" />
+        <ng-container formGroupName="saves">
+            <mat-form-field class="no-bottom-margin">
+                <mat-label>Fortitude</mat-label>
+                <input matInput formControlName="fortitude" />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin">
+                <mat-label>Reflex</mat-label>
+                <input matInput formControlName="reflex" />
+            </mat-form-field>
+            <mat-form-field class="no-bottom-margin">
+                <mat-label>Will</mat-label>
+                <input matInput formControlName="will" />
+            </mat-form-field>
+        </ng-container>
+
+        <button class="full-width" mat-button (click)="onDismissCreature()">Dismiss Creature</button>
+    </form>
+}

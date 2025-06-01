@@ -21,5 +21,11 @@ export class SummonedCreatureCardComponent {
         return Object.entries(this.summonedCreature().skills)
     }
 
+    get feats() {
+        return typeof this.summonedCreature().feats === 'object'
+            ? Object.values(this.summonedCreature().feats)
+            : this.summonedCreature().feats
+    }
+
     ngOnInit() {}
 }

@@ -24,3 +24,14 @@ export function convertFromCopper(copper: number): IMoney {
         pp: Math.floor(copper / 1000),
     }
 }
+
+export function calculateAbilityModifier(value: string | undefined): string {
+    console.log(value)
+    if (!value) return '0'
+    value = value?.split(' ')[0]
+    const numValue = parseInt(value, 10)
+    if (isNaN(numValue)) return '0'
+    const modifier = Math.floor((numValue - 10) / 2)
+    console.log(modifier)
+    return `${value} (${modifier >= 0 ? '+' : ''}${modifier})`
+}

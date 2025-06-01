@@ -15,5 +15,5 @@
 </form>
 
 @for (creature of summonedCreatures$ | async; track creature.id) {
-    <app-summoned-creature-card [summonedCreature]="creature" />
+    <app-summoned-creature-card [summonedCreature]="creature" (click)="onOpenDialog(creature)" />
 }

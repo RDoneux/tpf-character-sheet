@@ -13,6 +13,8 @@ import { v4 } from 'uuid'
 import { Store } from '@ngrx/store'
 import { addSummonedCreature } from './state/summoned-creatures.actions'
 import { SummonedCreatureCardComponent } from './fragments/summoned-creature-card/summoned-creature-card.component'
+import { MatDialog } from '@angular/material/dialog'
+import { SummonedCreatureModalComponent } from './fragments/summoned-creature-modal/summoned-creature-modal.component'
 
 @Component({
     selector: 'app-summoned-creatures',
@@ -38,7 +40,8 @@ export class SummonedCreaturesComponent {
         private summonedCreatureService: SummonedCreaturesService,
         private destroyRef: DestroyRef,
         private matSnackBar: MatSnackBar,
-        private store: Store<{ summonedCreatures: ISummonedCreature[] }>
+        private store: Store<{ summonedCreatures: ISummonedCreature[] }>,
+        private dialog: MatDialog
     ) {}
 
     get nameSearchValue() {
@@ -51,7 +54,12 @@ export class SummonedCreaturesComponent {
             .pipe(
                 takeUntilDestroyed(this.destroyRef),
                 map((creatures: ISummonedCreature[]) =>
-                    creatures.map((creature: ISummonedCreature) => ({ ...creature, id: v4() }))
+                    creatures.map((creature: ISummonedCreature) => ({
+                        ...creature,
+                        id: v4(),
+                        currentHitPoints: '0',
+                        maxHitPoints: '0',
+                    }))
                 )
             )
             .subscribe({
@@ -81,6 +89,14 @@ export class SummonedCreaturesComponent {
 
     displayCreature(creature: ISummonedCreature): string {
         return creature ? creature.name : ''
+    }
+
+    onOpenDialog(summonedCreature: ISummonedCreature) {
+        this.dialog.open(SummonedCreatureModalComponent, {
+            data: summonedCreature,
+            width: '90vw',
+            maxWidth: '90vw',
+        })
     }
 
     private filterCreatures(): ISummonedCreature[] {

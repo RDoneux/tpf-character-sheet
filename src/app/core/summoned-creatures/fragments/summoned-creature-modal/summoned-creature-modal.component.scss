@@ -1,0 +1,22 @@
+form {
+    padding: 10px;
+    gap: 10px;
+
+    h1 {
+        font-size: 18px;
+    }
+
+    &.grid-layout {
+        grid-template-columns: repeat(3, 1fr);
+
+        .full-width {
+            grid-column: span 3;
+        }
+        small {
+            text-align: center;
+        }
+    }
+    button {
+        background: var(--danger);
+    }
+}

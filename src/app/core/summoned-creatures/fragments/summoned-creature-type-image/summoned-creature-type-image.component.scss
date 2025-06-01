@@ -14,9 +14,8 @@
         filter: brightness(0) saturate(100%) invert(34%) sepia(81%) saturate(749%) hue-rotate(1deg) brightness(95%)
             contrast(89%) opacity(0.3);
 
-        &.Vermin {
-            background-image: url('/assets/images/creature-types/vermin.svg');
-        }
+        background-image: url('/assets/images/creature-types/vermin.svg');
+
         &.Aberration {
             background-image: url('/assets/images/creature-types/.aberration.svg');
         }

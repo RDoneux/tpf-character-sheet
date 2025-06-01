@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core'
+import { Component, input, signal } from '@angular/core'
 
 @Component({
     selector: 'app-summoned-creature-type-image',
@@ -8,4 +8,12 @@ import { Component, input } from '@angular/core'
 })
 export class SummonedCreatureTypeImageComponent {
     type = input.required<string>()
+    mappedType = signal<string>('')
+
+    ngOnInit() {
+        this.mappedType.set(this.type())
+        if (!this.mappedType()) {
+            this.mappedType.set('Vermin')
+        }
+    }
 }
