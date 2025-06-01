@@ -85,6 +85,7 @@ export class SummonedCreaturesComponent {
 
     onSelection(summonedCreature: ISummonedCreature) {
         this.store.dispatch(addSummonedCreature({ summonedCreature }))
+        this.form.get('search')?.setValue('')
     }
 
     displayCreature(creature: ISummonedCreature): string {

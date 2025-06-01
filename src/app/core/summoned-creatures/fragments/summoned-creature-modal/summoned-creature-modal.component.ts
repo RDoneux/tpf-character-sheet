@@ -47,7 +47,7 @@ export class SummonedCreatureModalComponent {
             .pipe(
                 takeUntilDestroyed(this.destroyRef),
                 debounceTime(300),
-                map((value) => value as ISummonedCreature)
+                map((value) => this.mapValues(value as ISummonedCreature))
             )
             .subscribe((summonedCreature: ISummonedCreature) => {
                 this.store.dispatch(
@@ -58,6 +58,21 @@ export class SummonedCreatureModalComponent {
 
     stripValue(value: string): string {
         return value.split(' ')[0]
+    }
+
+    mapValues(value: ISummonedCreature): ISummonedCreature {
+        return {
+            ...this.summonedCreature(),
+            ...value,
+            abilities: {
+                strength: `${value.abilities?.strength}`,
+                dexterity: `${value.abilities?.dexterity}`,
+                constitution: `${value.abilities?.constitution}`,
+                intelligence: `${value.abilities?.intelligence}`,
+                wisdom: `${value.abilities?.wisdom}`,
+                charisma: `${value.abilities?.charisma}`,
+            },
+        }
     }
 
     onDismissCreature() {

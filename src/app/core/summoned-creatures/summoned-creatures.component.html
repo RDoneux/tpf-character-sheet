@@ -17,3 +17,6 @@
 @for (creature of summonedCreatures$ | async; track creature.id) {
     <app-summoned-creature-card [summonedCreature]="creature" (click)="onOpenDialog(creature)" />
 }
+@if (!(summonedCreatures$ | async)?.length) {
+    <p class="no-creatures">No summoned creatures</p>
+}

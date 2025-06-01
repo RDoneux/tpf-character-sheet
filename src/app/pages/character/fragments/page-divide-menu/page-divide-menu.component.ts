@@ -10,6 +10,7 @@ import { SessionStorageService } from '../../../../services/session-storage.serv
 })
 export class PageDivideMenuComponent {
     readonly dividers: InputSignal<string[]> = input.required<string[]>()
+    readonly page: InputSignal<string> = input.required<string>()
     currentPage!: WritableSignal<string>
 
     pageSelected: OutputEmitterRef<string> = output<string>()
@@ -17,7 +18,7 @@ export class PageDivideMenuComponent {
     constructor(private sessionStorage: SessionStorageService) {}
 
     ngOnInit() {
-        const storedPage = this.sessionStorage.getItem<string>('currentPage')
+        const storedPage = this.sessionStorage.getItem<string>(`${this.page()}-currentPage`)
         this.currentPage = signal(storedPage ?? this.dividers()[0])
         if (storedPage) {
             this.pageSelected.emit(storedPage)
@@ -27,6 +28,6 @@ export class PageDivideMenuComponent {
     onPageSelected(page: string) {
         this.currentPage.set(page)
         this.pageSelected.emit(page)
-        this.sessionStorage.setItem('currentPage', page)
+        this.sessionStorage.setItem(`${this.page()}-currentPage`, page)
     }
 }

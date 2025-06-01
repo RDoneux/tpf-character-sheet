@@ -15,6 +15,7 @@ describe('PageDivideMenuComponent', () => {
         component = fixture.componentInstance
         const componentRef = fixture.componentRef
         componentRef.setInput('dividers', ['Details', 'Feats'])
+        componentRef.setInput('page', 'character')
         fixture.detectChanges()
     })
 
