@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { ConfirmModalComponent } from '../../fragments/confirm-modal/confirm-modal.component'
 import { LoadingService } from '../../services/loading/loading.service'
+import { ImportCharacterModalComponent } from './fragments/import-character-modal/import-character-modal.component'
 
 @Component({
     selector: 'app-settings',
@@ -37,7 +38,15 @@ export class SettingsComponent {
         })
     }
 
-    onImport() {
+    onOpenInputModal() {
+        const dialogRef = this.dialog.open(ImportCharacterModalComponent)
+
+        dialogRef.afterClosed().subscribe((result) => {
+            this.onImport(result.characterName)
+        })
+    }
+
+    onImport(characterName: string) {
         const dialogRef = this.dialog.open(ConfirmModalComponent, {
             data: {
                 title: `Are you sure you want to import the character? Doing so will override the current character`,
@@ -50,7 +59,7 @@ export class SettingsComponent {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((result) => {
                 if (result) {
-                    this.exportService.importCharacterFromJSON()
+                    this.exportService.importCharacterFromJSON(characterName)
                 }
             })
     }

@@ -5,4 +5,5 @@ export interface IEnvironment {
     saveCharacterUrl: string
     spellSearchUrl: string
     summonedCreaturesUrl: string
+    characterSheetListUrl: string
 }

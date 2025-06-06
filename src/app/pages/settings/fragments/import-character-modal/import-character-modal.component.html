@@ -1,0 +1,18 @@
+<ng-container [formGroup]="filterForm">
+    <mat-form-field>
+        <mat-label>Character Sheets</mat-label>
+        <input
+            type="text"
+            matInput
+            (keyup)="onCharacterSheetFilterChange($event)"
+            [matAutocomplete]="auto"
+            formControlName="name"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+            @for (option of filteredCharacterSheetList(); track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+            }
+        </mat-autocomplete>
+    </mat-form-field>
+    <button mat-button (click)="onImport()" [disabled]="!selectedCharacterName">Import</button>
+</ng-container>

@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store'
 import { map, Observable } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { updateSomeSettings } from './state/settings.actions'
+import { HttpClient } from '@angular/common/http'
+import { environment } from '../../../environments/environment'
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +26,8 @@ export class SettingsService {
 
     constructor(
         private store: Store<{ settings: ISettings }>,
-        private destroyRef: DestroyRef
+        private destroyRef: DestroyRef,
+        private httpClient: HttpClient
     ) {
         this.store
             .select('settings')
@@ -50,5 +53,11 @@ export class SettingsService {
                 return targetSettings
             })
         )
+    }
+
+    getCharacterSheetList$(): Observable<string[]> {
+        return this.httpClient
+            .get<string[]>(environment.characterSheetListUrl)
+            .pipe(takeUntilDestroyed(this.destroyRef))
     }
 }

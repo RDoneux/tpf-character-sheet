@@ -7,4 +7,5 @@ export const environment: IEnvironment = {
     saveCharacterUrl: 'https://',
     spellSearchUrl: 'https://',
     summonedCreaturesUrl: 'https://',
+    characterSheetListUrl: 'https://',
 }

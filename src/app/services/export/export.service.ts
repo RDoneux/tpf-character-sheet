@@ -54,11 +54,8 @@ export class ExportService {
             })
     }
 
-    public async importCharacterFromJSON(): Promise<void> {
+    public async importCharacterFromJSON(characterName: string): Promise<void> {
         this.loadingService.setLoading(true)
-        const characterName: string =
-            (await firstValueFrom(this.store.select((state: { background: IBackground }) => state.background)))
-                .character ?? ExportService.DOWNLOAD_NAME
 
         this.http.get(`${environment.saveCharacterUrl}?key=character-sheets/${characterName}.json`).subscribe({
             next: (value: any) => {

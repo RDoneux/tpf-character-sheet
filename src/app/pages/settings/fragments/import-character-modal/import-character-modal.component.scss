@@ -1,0 +1,12 @@
+:host {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    button {
+        background: var(--success);
+    }
+    button:disabled {
+        background: none;
+    }
+}
