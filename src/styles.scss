@@ -16,7 +16,8 @@ $custom-theme: mat.m2-define-dark-theme(
     )
 );
 
-@include mat.core-theme($custom-theme);
+@include mat.elevation-classes();
+@include mat.app-background();
 @include mat.all-component-themes($custom-theme);
 
 * {
