@@ -1,7 +1,9 @@
 <div class="summoned-creature-container">
     <div class="header">
         <h1>
-            <a target="_blank" [href]="summonedCreature().link">{{ summonedCreature().name }}</a>
+            <a target="_blank" [href]="summonedCreature().link" (click)="$event.stopPropagation()">{{
+                summonedCreature().name
+            }}</a>
         </h1>
         @if (summonedCreature().maxHitPoints) {
             <small>
