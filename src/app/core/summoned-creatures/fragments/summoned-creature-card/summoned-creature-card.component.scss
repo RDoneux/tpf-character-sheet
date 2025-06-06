@@ -80,6 +80,12 @@
                     align-items: flex-start;
                 }
 
+                &.text-right {
+                    text-align: right;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+                }
+
                 &.bold {
                     font-weight: 600;
                 }

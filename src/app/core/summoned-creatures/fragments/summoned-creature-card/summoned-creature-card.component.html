@@ -15,6 +15,9 @@
         }
     </div>
     <div class="body grid-layout">
+        <small class="full-width"
+            ><p class="text-center"><b>Hit Dice</b> {{ summonedCreature().hitDice }}</p></small
+        >
         <div class="ability-container full-width">
             @for (ability of abilities; track ability[0]) {
                 <div class="ability-wrapper">
