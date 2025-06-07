@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { SkillsModalComponent } from './skills-modal.component'
 import { mockStore } from '../../../../utils/mocks'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 
 describe('SkillsModalComponent', () => {
     let component: SkillsModalComponent
@@ -12,6 +14,8 @@ describe('SkillsModalComponent', () => {
         await TestBed.configureTestingModule({
             imports: [SkillsModalComponent],
             providers: [
+                provideHttpClient(),
+                provideHttpClientTesting(),
                 mockStore,
                 {
                     provide: MAT_DIALOG_DATA,

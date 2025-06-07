@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { OverviewComponent } from './overview.component'
 import { mockStore } from '../../../../utils/mocks'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 
 describe('OverviewComponent', () => {
     let component: OverviewComponent
@@ -10,7 +12,7 @@ describe('OverviewComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [OverviewComponent],
-            providers: [mockStore],
+            providers: [mockStore, provideHttpClient(), provideHttpClientTesting()],
         }).compileComponents()
 
         fixture = TestBed.createComponent(OverviewComponent)

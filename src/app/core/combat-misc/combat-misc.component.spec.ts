@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { CombatMiscComponent } from './combat-misc.component'
 import { mockStore } from '../../utils/mocks'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 
 describe('CombatMiscComponent', () => {
     let component: CombatMiscComponent
@@ -10,7 +12,7 @@ describe('CombatMiscComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [CombatMiscComponent],
-            providers: [mockStore],
+            providers: [mockStore, provideHttpClient(), provideHttpClientTesting()],
         }).compileComponents()
 
         fixture = TestBed.createComponent(CombatMiscComponent)

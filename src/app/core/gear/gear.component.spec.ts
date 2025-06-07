@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { GearComponent } from './gear.component'
 import { mockStore } from '../../utils/mocks'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 
 describe('GearComponent', () => {
     let component: GearComponent
@@ -10,7 +12,7 @@ describe('GearComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [GearComponent],
-            providers: [mockStore],
+            providers: [mockStore, provideHttpClient(), provideHttpClientTesting()],
         }).compileComponents()
 
         fixture = TestBed.createComponent(GearComponent)
