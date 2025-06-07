@@ -2,6 +2,10 @@ pipeline {
     
     agent any
 
+    tools {
+        nodejs 'node-22'
+    }
+
     environment {
         PULUMI_STACK_BUCKET = "doneuxservices-pulumi-state?region=eu-west-2"
         ENVIRONMENT = "dev"
