@@ -1,11 +1,11 @@
 {
     "name": "tpf-character-sheet",
-    "version": "1.5.4",
+    "version": "1.6.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
         "build:dev": "ng build --configuration development",
-        "build:prod": "ng build --configuration prododuction",
+        "build:prod": "ng build --configuration production",
         "watch": "ng build --watch --configuration development",
         "test": "jest",
         "prettier": "npx prettier . --write",
