@@ -1,2 +1,5 @@
-npm run prettier
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+node node_modules/prettier/bin/prettier.cjs . --write
 git add .
