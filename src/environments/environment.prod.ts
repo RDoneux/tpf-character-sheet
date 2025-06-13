@@ -8,4 +8,5 @@ export const environment: IEnvironment = {
     spellSearchUrl: 'https://',
     summonedCreaturesUrl: 'https://',
     characterSheetListUrl: 'https://',
+    campUrl: 'https://',
 }

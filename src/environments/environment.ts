@@ -8,4 +8,5 @@ export const environment: IEnvironment = {
     spellSearchUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/spells',
     summonedCreaturesUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/monsters',
     characterSheetListUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/character/list',
+    campUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/camp',
 }

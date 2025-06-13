@@ -65,14 +65,14 @@ export class ExperienceComponent {
                 .subscribe(([experience, background]) => {
                     this.experienceForm.patchValue(experience, { emitEvent: false })
 
-                    if (background.classes.length === 1) {
+                    if (background.classes && background.classes?.length === 1) {
                         const targetClass = { ...background.classes[0], level: this.experience.level }
                         if (background.classes[0].level !== this.experience.level) {
                             this.store.dispatch(updateClass({ characterClassLevel: targetClass }))
                         }
                     }
 
-                    const assignedLevels = background.classes.reduce(
+                    const assignedLevels = background.classes?.reduce(
                         (total, characterClassLevel) => total + characterClassLevel.level,
                         0
                     )

@@ -1,14 +1,14 @@
 <app-camp-outline />
 <div>
-    @if (!campCode()) {
+    @if (!camp()?.details?.code) {
         <app-create-camp />
     } @else {
         <div class="camp">
             <span class="camp-title">
-                <h1>{{ campDetails()?.name }}</h1>
-                <small>{{ campCode() }}</small>
+                <h1>{{ camp()?.details?.name }}</h1>
+                <small>{{ camp()?.details?.code }}</small>
             </span>
-            <app-camp-money [campCopper]="campDetails()?.copper ?? 0" [partyId]="campDetails()?.id ?? ''" />
+            <!-- <app-camp-money [campCopper]="campDetails()?.copper ?? 0" [partyId]="campDetails()?.id ?? ''" /> -->
             <div class="button-container">
                 <app-leave-camp />
             </div>

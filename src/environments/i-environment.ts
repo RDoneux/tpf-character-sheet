@@ -6,4 +6,5 @@ export interface IEnvironment {
     spellSearchUrl: string
     summonedCreaturesUrl: string
     characterSheetListUrl: string
+    campUrl: string
 }

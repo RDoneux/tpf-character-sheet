@@ -1,14 +1,15 @@
 export interface ICamp {
-    campCode: string | null
+    details: ICampDetails
 }
 
 export const initialCampState: ICamp = {
-    campCode: null,
+    details: {
+        code: null,
+        name: null,
+    },
 }
 
-export interface ICampDetails extends ICamp {
-    id: string
-    name: string
-    description: string
-    copper: number
+export interface ICampDetails {
+    code: string | null
+    name: string | null
 }

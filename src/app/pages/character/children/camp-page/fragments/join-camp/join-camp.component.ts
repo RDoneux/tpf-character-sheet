@@ -5,7 +5,10 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { Store } from '@ngrx/store'
-import { updateCampCode } from '../../state/camp.actions'
+import { updateCamp } from '../../state/camp.actions'
+import { CampPageService } from '../../services/camp-page.service'
+import { ICamp } from '../../interfaces/i-camp'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
     selector: 'app-join-camp',
@@ -17,7 +20,9 @@ export class JoinCampComponent {
     constructor(
         private formBuilder: FormBuilder,
         private dialog: MatDialog,
-        private store: Store
+        private store: Store,
+        private campPageService: CampPageService,
+        private snackBar: MatSnackBar
     ) {}
 
     @ViewChild('joinCampDialog') joinCampDialog!: TemplateRef<any>
@@ -40,6 +45,12 @@ export class JoinCampComponent {
 
     onJoinCamp() {
         this.dialog.closeAll()
-        this.store.dispatch(updateCampCode({ campCode: this.joinCampForm.value.campCode.toUpperCase() }))
+        this.campPageService.getCampDetails(this.joinCampForm.value.campCode.toUpperCase()).subscribe({
+            next: (camp: ICamp) => this.store.dispatch(updateCamp({ camp })),
+            error: (error: any) =>
+                this.snackBar.open(`Error getting camp details, ${error.message}`, 'Close', {
+                    panelClass: 'snackbar-error',
+                }),
+        })
     }
 }
