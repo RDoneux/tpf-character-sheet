@@ -1,3 +1,4 @@
+import { v4 } from 'uuid'
 import { FormGroupType } from '../../../interfaces/form-group-type'
 import { CharacterAlignment, CharacterClass, CharacterRace, CharacterSize } from '../../../types/game'
 
@@ -7,6 +8,7 @@ export interface CharacterClassLevel {
 }
 
 export interface IBackground {
+    id: string
     character: string | null
     player: string | null
     description: string | null
@@ -27,6 +29,7 @@ export interface IBackground {
 export interface IBackgroundForm extends FormGroupType<IBackground> {}
 
 export const initialBackgroundState: IBackground = {
+    id: v4(),
     character: null,
     player: null,
     description: null,

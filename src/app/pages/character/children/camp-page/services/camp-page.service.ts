@@ -10,9 +10,9 @@ import { ICamp } from '../interfaces/i-camp'
 export class CampPageService {
     constructor(private httpClient: HttpClient) {}
 
-    createCamp(name: string): Observable<string> {
+    createCamp(name: string, description: string): Observable<string> {
         return this.httpClient
-            .post<{ code: string }>(`${environment.campUrl}`, { name })
+            .post<{ code: string }>(`${environment.campUrl}`, { name, description })
             .pipe(map((response: { code: string }) => response.code))
     }
 

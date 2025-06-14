@@ -1,5 +1,11 @@
 export interface ICamp {
     details: ICampDetails
+    copper: number
+}
+
+export interface ICampDetails {
+    code: string | null
+    name: string | null
 }
 
 export const initialCampState: ICamp = {
@@ -7,9 +13,5 @@ export const initialCampState: ICamp = {
         code: null,
         name: null,
     },
-}
-
-export interface ICampDetails {
-    code: string | null
-    name: string | null
+    copper: 0,
 }

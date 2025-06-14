@@ -26,15 +26,18 @@ export class ExportService {
 
         const state = await firstValueFrom(this.store.select(selectAppState))
 
-        const characterName: string =
-            (await firstValueFrom(this.store.select((state: { background: IBackground }) => state.background)))
-                .character ?? ExportService.DOWNLOAD_NAME
+        const id = await firstValueFrom(
+            this.store.select(
+                (state: { background: IBackground }) =>
+                    `${state.background.character ?? ExportService.DOWNLOAD_NAME}|:|${state.background.id}`
+            )
+        )
 
         const json = JSON.stringify(state, null, 2)
 
         this.http
             .post(environment.saveCharacterUrl, {
-                key: `character-sheets/${characterName}.json`,
+                key: `character-sheets/${id}.json`,
                 body: json,
             })
             .subscribe({

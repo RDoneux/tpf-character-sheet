@@ -42,6 +42,10 @@ export class CreateCampComponent {
         return this.createCampForm.get('name')?.value || ''
     }
 
+    get campDescription(): string {
+        return this.createCampForm.get('description')?.value || ''
+    }
+
     ngOnInit() {
         this.createCampForm = this.formBuilder.group({
             name: ['', [Validators.required]],
@@ -55,7 +59,7 @@ export class CreateCampComponent {
 
     onCreateCamp() {
         this.dialog.closeAll()
-        this.campPageService.createCamp(this.campName).subscribe({
+        this.campPageService.createCamp(this.campName, this.campDescription).subscribe({
             next: (response: string) => this.store.dispatch(updateCampCode({ campCode: response })),
         })
     }

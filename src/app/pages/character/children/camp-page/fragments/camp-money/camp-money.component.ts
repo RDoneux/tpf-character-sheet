@@ -34,7 +34,7 @@ import { environment } from '../../../../../../../environments/environment'
 })
 export class CampMoneyComponent {
     campCopper: InputSignal<number> = input.required<number>()
-    partyId: InputSignal<string> = input.required<string>()
+    // partyId: InputSignal<string> = input.required<string>()
 
     dynamicCampCopper: WritableSignal<number> = signal<number>(0)
     campMoney: Signal<IMoney> = computed(() => convertFromCopper(this.dynamicCampCopper()))
@@ -111,9 +111,9 @@ export class CampMoneyComponent {
 
         this.store.dispatch(updateMoney({ money: newPlayerMoney }))
 
-        this.http
-            .put(environment.apiUrl + `/party/${this.partyId()}/money`, { money: `${campCopper}` })
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(console.log)
+        // this.http
+        //     .put(environment.apiUrl + `/party/${this.partyId()}/money`, { money: `${campCopper}` })
+        //     .pipe(takeUntilDestroyed(this.destroyRef))
+        //     .subscribe(console.log)
     }
 }
