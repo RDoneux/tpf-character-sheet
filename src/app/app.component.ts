@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { LoadingService } from './services/loading/loading.service'
 import { Observable } from 'rxjs'
 import { AsyncPipe } from '@angular/common'
+import { AutoSaveService } from './services/settings/auto-save.service'
 
 @Component({
     selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent {
 
     constructor(
         private snackBar: MatSnackBar,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private autoSaveService: AutoSaveService
     ) {}
 
     isLoading$!: Observable<boolean>

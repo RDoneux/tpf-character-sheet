@@ -1,0 +1,37 @@
+@if (!(user$ | async)) {
+    <p>You're not currently logged in meaning many of the application features are not available.</p>
+    <button mat-button (click)="onLogin()">Login</button>
+} @else {
+    <p class="user-info">
+        <strong>{{ (user$ | async)?.name }} </strong>
+        <small class="email">({{ (user$ | async)?.email }})</small>
+    </p>
+
+    <button mat-button class="logout" (click)="onLogout()">Logout</button>
+}
+
+<ng-template #loginDialog [formGroup]="form">
+    <div class="login-dialog">
+        <div class="title">
+            <h3>{{ isCreatingUser() ? 'Sign up' : 'Login' }}</h3>
+            <mat-slide-toggle
+                class="example-margin"
+                [checked]="isCreatingUser()"
+                (toggleChange)="toggleIsCreatingUser()"
+            >
+                Sign up
+            </mat-slide-toggle>
+        </div>
+        @if (isCreatingUser()) {
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" />
+            </mat-form-field>
+        }
+        <mat-form-field>
+            <mat-label>Unique Identifier (email)</mat-label>
+            <input matInput formControlName="email" type="email" />
+        </mat-form-field>
+        <button mat-button (click)="isCreatingUser() ? onCreateUser() : onProcessLogin()">Login</button>
+    </div>
+</ng-template>

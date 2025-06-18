@@ -1,6 +1,5 @@
-import { Directive, ElementRef, HostListener, inject, Optional, Renderer2, Self } from '@angular/core'
+import { Directive, ElementRef, HostListener, inject, Renderer2 } from '@angular/core'
 import { SettingsService } from '../services/settings/settings.service'
-import { NgControl } from '@angular/forms'
 
 @Directive({
     selector: '[autoCalculatedInput]',
@@ -12,8 +11,7 @@ export class AutoCalculatedInputDirective {
 
     constructor(
         private elementRef: ElementRef<HTMLInputElement>,
-        private renderer: Renderer2,
-        @Optional() @Self() private ngControl: NgControl
+        private renderer: Renderer2
     ) {}
 
     ngOnInit() {

@@ -1,5 +1,5 @@
-import { DestroyRef, Injectable, signal, WritableSignal } from '@angular/core'
-import { initialSettingsState, ISettings } from './interfaces/i-settings'
+import { DestroyRef, effect, Injectable, signal, WritableSignal } from '@angular/core'
+import { initialSettingsState, ISettings, IUser } from './interfaces/i-settings'
 import { Store } from '@ngrx/store'
 import { map, Observable } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -18,7 +18,7 @@ export class SettingsService {
     }
 
     get autoCalculateFields$(): Observable<boolean> {
-        return this.getSettings$(['autoCalculateFields']).pipe(
+        return this.getSettings$<{ autoCalculateFields: boolean }>(['autoCalculateFields']).pipe(
             takeUntilDestroyed(this.destroyRef),
             map((settings: Partial<ISettings>) => settings.autoCalculateFields as boolean)
         )
@@ -39,18 +39,15 @@ export class SettingsService {
         this.store.dispatch(updateSomeSettings({ settings }))
     }
 
-    getSettings$(key: (keyof ISettings)[]): Observable<Partial<ISettings>> {
+    getSettings$<T>(key: (keyof ISettings)[]): Observable<T> {
         return this.store.select('settings').pipe(
             takeUntilDestroyed(this.destroyRef),
             map((settings: ISettings) => {
-                const targetSettings: Partial<ISettings> = {}
-                Object.keys(settings).forEach((setting: string) => {
-                    const typedKey = setting as keyof ISettings
-                    if (key.includes(typedKey)) {
-                        targetSettings[typedKey] = settings[typedKey]
-                    }
+                const targetSettings = {}
+                key.forEach((k) => {
+                    ;(targetSettings as any)[k] = settings[k]
                 })
-                return targetSettings
+                return targetSettings as T
             })
         )
     }
@@ -58,6 +55,19 @@ export class SettingsService {
     getCharacterSheetList$(): Observable<string[]> {
         return this.httpClient
             .get<string[]>(environment.characterSheetListUrl)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+    }
+
+    createUser(user: IUser): Observable<IUser> {
+        return this.httpClient.post<{ message: string; user: IUser }>(environment.userUrl, user).pipe(
+            takeUntilDestroyed(this.destroyRef),
+            map((response) => response.user)
+        )
+    }
+
+    login(user: IUser): Observable<IUser> {
+        return this.httpClient
+            .get<IUser>(`${environment.userUrl}?email=${user.email}`)
             .pipe(takeUntilDestroyed(this.destroyRef))
     }
 }

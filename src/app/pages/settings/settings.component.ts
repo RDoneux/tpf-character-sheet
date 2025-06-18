@@ -1,22 +1,31 @@
 import { Component, DestroyRef } from '@angular/core'
 import { SettingsService } from '../../services/settings/settings.service'
-import { ISettings, ISettingsForm } from '../../services/settings/interfaces/i-settings'
+import { ISettings, ISettingsForm, IUser } from '../../services/settings/interfaces/i-settings'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { buildForm } from '../../utils/form'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import { Location } from '@angular/common'
+import { AsyncPipe, Location } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button'
 import { ExportService } from '../../services/export/export.service'
 import { MatDialog } from '@angular/material/dialog'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { ConfirmModalComponent } from '../../fragments/confirm-modal/confirm-modal.component'
-import { LoadingService } from '../../services/loading/loading.service'
 import { ImportCharacterModalComponent } from './fragments/import-character-modal/import-character-modal.component'
+import { LoginComponent } from './fragments/login/login.component'
+import { map, Observable } from 'rxjs'
+import { RequireLoginDirective } from '../../directives/require-login.directive'
 
 @Component({
     selector: 'app-settings',
-    imports: [MatCheckboxModule, ReactiveFormsModule, MatFormFieldModule, MatButtonModule],
+    imports: [
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        LoginComponent,
+        RequireLoginDirective,
+    ],
     templateUrl: './settings.component.html',
     styleUrl: './settings.component.scss',
 })
@@ -30,6 +39,13 @@ export class SettingsComponent {
     ) {}
 
     form!: FormGroup<ISettingsForm>
+
+    get user(): Observable<IUser | null> {
+        return this.settingsService.getSettings$<{ user: ISettings['user'] }>(['user']).pipe(
+            takeUntilDestroyed(this.destroyRef),
+            map((settings) => settings.user)
+        )
+    }
 
     ngOnInit() {
         this.form = buildForm<ISettings>(this.settingsService.settings())

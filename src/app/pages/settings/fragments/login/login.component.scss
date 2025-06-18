@@ -1,0 +1,37 @@
+:host {
+    display: block;
+    padding-bottom: 10px;
+}
+
+button {
+    background: var(--border-colour);
+    width: 100%;
+    cursor: pointer;
+
+    &.logout {
+        background: var(--danger);
+        color: #fff;
+    }
+}
+
+.user-info {
+    strong {
+        color: var(--accent-colour);
+    }
+}
+
+.login-dialog {
+    padding: 10px;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    button {
+        background: var(--success);
+    }
+
+    mat-form-field {
+        width: 100%;
+    }
+}

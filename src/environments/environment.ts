@@ -9,4 +9,5 @@ export const environment: IEnvironment = {
     summonedCreaturesUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/monsters',
     characterSheetListUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/character/list',
     campUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/camp',
+    userUrl: 'https://sraxl0ousf.execute-api.eu-west-2.amazonaws.com/dev/user',
 }

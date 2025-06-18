@@ -9,4 +9,5 @@ export const environment: IEnvironment = {
     summonedCreaturesUrl: 'https://',
     characterSheetListUrl: 'https://',
     campUrl: 'https://',
+    userUrl: 'https://',
 }

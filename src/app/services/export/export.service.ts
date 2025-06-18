@@ -21,7 +21,7 @@ export class ExportService {
         private loadingService: LoadingService
     ) {}
 
-    public async exportCharacterToJSON(): Promise<void> {
+    public async exportCharacterToJSON(notify: boolean = true): Promise<void> {
         this.loadingService.setLoading(true)
 
         const state = await firstValueFrom(this.store.select(selectAppState))
@@ -42,10 +42,12 @@ export class ExportService {
             })
             .subscribe({
                 next: () => {
-                    this.snackBar.open('Character saved successfully:', 'Close', {
-                        panelClass: 'snackbar-success',
-                        duration: 5000,
-                    })
+                    if (notify) {
+                        this.snackBar.open('Character saved successfully:', 'Close', {
+                            panelClass: 'snackbar-success',
+                            duration: 5000,
+                        })
+                    }
                     this.loadingService.setLoading(false)
                 },
                 error: (error) => {
