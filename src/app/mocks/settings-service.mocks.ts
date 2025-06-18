@@ -1,3 +1,4 @@
+import { of } from 'rxjs'
 import { SettingsService } from '../services/settings/settings.service'
 
 export const settingsServiceMock = {
@@ -6,5 +7,12 @@ export const settingsServiceMock = {
         settings: () => ({
             autoCalculateFields: true,
         }),
+
+        getSettings$: () =>
+            of({
+                autoCalculateFields: true,
+                autoSave: true,
+                user: null,
+            }),
     },
 }
