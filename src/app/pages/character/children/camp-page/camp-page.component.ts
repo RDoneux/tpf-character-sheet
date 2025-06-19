@@ -8,11 +8,10 @@ import { LeaveCampComponent } from './fragments/leave-camp/leave-camp.component'
 import { CampPageService } from './services/camp-page.service'
 import { firstValueFrom } from 'rxjs'
 import { LoadingService } from '../../../../services/loading/loading.service'
-import { CampMoneyComponent } from './fragments/camp-money/camp-money.component'
 
 @Component({
     selector: 'app-camp-page',
-    imports: [CampOutlineComponent, CreateCampComponent, LeaveCampComponent, CampMoneyComponent],
+    imports: [CampOutlineComponent, CreateCampComponent, LeaveCampComponent],
     templateUrl: './camp-page.component.html',
     styleUrl: './camp-page.component.scss',
 })

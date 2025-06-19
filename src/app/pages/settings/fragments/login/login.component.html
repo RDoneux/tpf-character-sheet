@@ -1,5 +1,5 @@
 @if (!(user$ | async)) {
-    <p>You're not currently logged in meaning many of the application features are not available.</p>
+    <small>You're not currently logged in meaning many of the application features are not available.</small>
     <button mat-button (click)="onLogin()">Login</button>
 } @else {
     <p class="user-info">
@@ -10,8 +10,8 @@
     <button mat-button class="logout" (click)="onLogout()">Logout</button>
 }
 
-<ng-template #loginDialog [formGroup]="form">
-    <div class="login-dialog">
+<ng-template #loginDialog>
+    <div class="login-dialog" [formGroup]="form">
         <div class="title">
             <h3>{{ isCreatingUser() ? 'Sign up' : 'Login' }}</h3>
             <mat-slide-toggle
@@ -22,16 +22,16 @@
                 Sign up
             </mat-slide-toggle>
         </div>
+        <mat-form-field>
+            <mat-label>Unique Identifier (email)</mat-label>
+            <input matInput formControlName="email" type="email" cdkFocusInitial />
+        </mat-form-field>
         @if (isCreatingUser()) {
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
             </mat-form-field>
         }
-        <mat-form-field>
-            <mat-label>Unique Identifier (email)</mat-label>
-            <input matInput formControlName="email" type="email" />
-        </mat-form-field>
         <button mat-button (click)="isCreatingUser() ? onCreateUser() : onProcessLogin()">Login</button>
     </div>
 </ng-template>
