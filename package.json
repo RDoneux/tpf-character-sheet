@@ -1,6 +1,6 @@
 {
     "name": "tpf-character-sheet",
-    "version": "1.6.3",
+    "version": "1.6.4",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -39,9 +39,20 @@
         "@types/lodash-es": "^4.17.12",
         "husky": "^9.1.7",
         "jest": "^29.7.0",
+        "jest-junit": "^16.0.0",
         "jest-preset-angular": "^14.5.5",
         "prettier": "^3.5.3",
         "ts-node": "^10.9.2",
         "typescript": "~5.8.3"
+    },
+    "jest-junit": {
+        "suiteName": "jest tests",
+        "outputDirectory": "./coverage/junit",
+        "outputName": "junit.xml",
+        "uniqueOutputName": "false",
+        "classNameTemplate": "{classname}-{title}",
+        "titleTemplate": "{classname}-{title}",
+        "ancestorSeparator": " › ",
+        "usePathForSuiteName": "true"
     }
 }
