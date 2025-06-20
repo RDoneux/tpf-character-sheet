@@ -1,6 +1,6 @@
 {
     "name": "tpf-character-sheet",
-    "version": "1.6.3",
+    "version": "1.6.4",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -14,17 +14,17 @@
     },
     "private": true,
     "dependencies": {
-        "@angular/cdk": "^20.0.2",
-        "@angular/common": "^20.0.1",
-        "@angular/compiler": "^20.0.1",
-        "@angular/core": "^20.0.1",
-        "@angular/forms": "^20.0.1",
-        "@angular/material": "^20.0.2",
-        "@angular/platform-browser": "^20.0.1",
-        "@angular/platform-browser-dynamic": "^20.0.1",
-        "@angular/router": "^20.0.1",
-        "@ngrx/store": "^19.1.0",
-        "@ngrx/store-devtools": "^19.1.0",
+        "@angular/cdk": "^20.0.3",
+        "@angular/common": "^20.0.4",
+        "@angular/compiler": "^20.0.4",
+        "@angular/core": "^20.0.4",
+        "@angular/forms": "^20.0.4",
+        "@angular/material": "^20.0.3",
+        "@angular/platform-browser": "^20.0.4",
+        "@angular/platform-browser-dynamic": "^20.0.4",
+        "@angular/router": "^20.0.4",
+        "@ngrx/store": "^19.2.1",
+        "@ngrx/store-devtools": "^19.2.1",
         "lodash-es": "^4.17.21",
         "rxjs": "~7.8.0",
         "tslib": "^2.3.0",
@@ -32,16 +32,27 @@
         "zone.js": "~0.15.0"
     },
     "devDependencies": {
-        "@angular/build": "^20.0.1",
-        "@angular/cli": "^20.0.1",
-        "@angular/compiler-cli": "^20.0.1",
+        "@angular/build": "^20.0.3",
+        "@angular/cli": "^20.0.3",
+        "@angular/compiler-cli": "^20.0.4",
         "@types/jest": "^29.5.14",
         "@types/lodash-es": "^4.17.12",
         "husky": "^9.1.7",
         "jest": "^29.7.0",
-        "jest-preset-angular": "^14.5.5",
+        "jest-junit": "^16.0.0",
+        "jest-preset-angular": "^14.6.0",
         "prettier": "^3.5.3",
         "ts-node": "^10.9.2",
         "typescript": "~5.8.3"
+    },
+    "jest-junit": {
+        "suiteName": "jest tests",
+        "outputDirectory": "./coverage/junit",
+        "outputName": "junit.xml",
+        "uniqueOutputName": "false",
+        "classNameTemplate": "{classname}-{title}",
+        "titleTemplate": "{classname}-{title}",
+        "ancestorSeparator": " › ",
+        "usePathForSuiteName": "true"
     }
 }
