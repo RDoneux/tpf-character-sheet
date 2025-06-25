@@ -7,9 +7,16 @@ export interface ISettings {
 }
 
 export interface IUser {
-    id: string
     name: string
     email: string
+    characters: ICharacterSummary[]
+}
+
+export interface ICharacterSummary {
+    name: string
+    id: string
+    classes: string[]
+    level: number
 }
 
 export interface ISettingsForm extends FormGroupType<ISettings> {}
