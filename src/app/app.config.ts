@@ -2,7 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core'
 import { provideRouter } from '@angular/router'
 
 import { routes } from './app.routes'
-import { Action, ActionReducer, createAction, createReducer, on, props, provideStore } from '@ngrx/store'
+import { Action, ActionReducer, createAction, props, provideStore } from '@ngrx/store'
 import { abilitiesReducer } from './core/abilities/state/abilities.reducer'
 import { provideStoreDevtools } from '@ngrx/store-devtools'
 import { hitPointsReducer } from './core/hit-points/state/hit-points.reducer'
@@ -30,6 +30,7 @@ import { summonedCreaturesReducer } from './core/summoned-creatures/state/summon
 export const selectAppState = (state: any) => state
 
 export const importAppState = createAction('[App] Import App State', props<{ state: any }>())
+export const resetAppState = createAction('[App] Reset App State')
 
 export function syncStateToLocalStorage<T>(state: T): void {
     for (const sliceName in state) {
@@ -46,6 +47,21 @@ export function importAppStateMetaReducer(reducer: ActionReducer<any>): ActionRe
             const newState = (action as any).state
             syncStateToLocalStorage(newState)
             return newState
+        }
+        return reducer(state, action)
+    }
+}
+
+export function resetMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+    return (state, action) => {
+        console.log(action.type)
+        if (action.type === resetAppState.type) {
+            // Clear localStorage for all slices except settings
+            Object.keys(localStorage)
+                .filter((key) => key.startsWith(STORAGE_KEY) && !key.includes('settings'))
+                .forEach((key) => (console.log(key), localStorage.removeItem(key)))
+            // Return the initial state
+            return reducer({ settings: state.settings }, action)
         }
         return reducer(state, action)
     }
@@ -79,7 +95,7 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         provideHttpClient(),
         provideStore(appReducers, {
-            metaReducers: [storageMetaReducer, importAppStateMetaReducer],
+            metaReducers: [storageMetaReducer, importAppStateMetaReducer, resetMetaReducer],
             initialState: rehydrateState(),
         }),
         provideStoreDevtools(),

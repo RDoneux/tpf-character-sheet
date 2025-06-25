@@ -17,9 +17,10 @@
                             <span>{{ character.name }}</span>
                             <small>{{ character.classes.join(', ') }}</small>
                             <small>Level: {{ character.level }}</small>
-                            <mat-icon fontSet="material-symbols-outlined">arrow_cool_down</mat-icon>
+                            <mat-icon fontSet="material-symbols-outlined">check</mat-icon>
                         </li>
                     }
+                    <button mat-button (click)="onCreateNewCharacter()">Create a new character</button>
                 </ul>
             </mat-expansion-panel>
         </mat-accordion>

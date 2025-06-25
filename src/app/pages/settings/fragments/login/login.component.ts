@@ -22,6 +22,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatIconModule } from '@angular/material/icon'
+import { ConfirmModalComponent } from '../../../../fragments/confirm-modal/confirm-modal.component'
+import { Store } from '@ngrx/store'
+import { resetAppState } from '../../../../app.config'
 
 @Component({
     selector: 'app-login',
@@ -56,7 +59,8 @@ export class LoginComponent {
         private destroyRef: DestroyRef,
         private formBuilder: FormBuilder,
         private matDialog: MatDialog,
-        private matSnackBar: MatSnackBar
+        private matSnackBar: MatSnackBar,
+        private store: Store
     ) {}
 
     ngOnInit() {
@@ -125,5 +129,21 @@ export class LoginComponent {
 
     toggleIsCreatingUser() {
         this.isCreatingUser.set(!this.isCreatingUser())
+    }
+
+    onCreateNewCharacter() {
+        const confirmModalRef = this.matDialog.open(ConfirmModalComponent, {
+            data: {
+                title: `Are you sure you want to create a new Character?`,
+                confirmText: 'Create',
+            },
+        })
+
+        confirmModalRef.afterClosed().subscribe((confirmed: boolean) => {
+            if (confirmed) {
+                this.dialogRef?.close()
+                this.store.dispatch(resetAppState())
+            }
+        })
     }
 }
