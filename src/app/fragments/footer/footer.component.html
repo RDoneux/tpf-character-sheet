@@ -1,3 +1,8 @@
 <footer>
+    @if (!isLoggedIn()) {
+        <mat-icon fontSet="material-symbols-outlined">account_circle_off</mat-icon>
+    } @else {
+        <span></span>
+    }
     <p>v{{ version }}</p>
 </footer>
