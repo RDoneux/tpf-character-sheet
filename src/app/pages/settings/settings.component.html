@@ -17,22 +17,21 @@
     </div>
     <div class="section-break">&#x2022;</div>
 
-    <h2>User</h2>
-    <app-login />
+    <app-login (onSelectCharacter)="onImport($event)" />
 
     <div class="section-break">&#x2022;</div>
 
     <div requireLogin>
-        <h2>Import / Export</h2>
-        <div>
+        <h2>Export</h2>
+        <!-- <div>
             <button class="upload" mat-button (click)="onOpenInputModal()">Import Character</button>
             <small
                 >Import a character from a JSON file. This will overwrite the current character. Make sure to backup
                 your character before importing.</small
             >
-        </div>
+        </div> -->
         <div>
-            <button mat-button (click)="onExport()">Export Character</button>
+            <button class="export" mat-button (click)="onExport()">Export Character</button>
             <small>Export the character to a JSON file. This can be used as a backup</small>
         </div>
         <div class="section-break">&#x2022;</div>

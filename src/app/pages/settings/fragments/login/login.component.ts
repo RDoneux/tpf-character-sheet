@@ -1,4 +1,13 @@
-import { Component, DestroyRef, signal, TemplateRef, ViewChild, WritableSignal } from '@angular/core'
+import {
+    Component,
+    DestroyRef,
+    output,
+    OutputEmitterRef,
+    signal,
+    TemplateRef,
+    ViewChild,
+    WritableSignal,
+} from '@angular/core'
 import { IUser } from '../../../../services/settings/interfaces/i-settings'
 import { SettingsService } from '../../../../services/settings/settings.service'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -11,6 +20,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { MatIconModule } from '@angular/material/icon'
 
 @Component({
     selector: 'app-login',
@@ -21,6 +32,8 @@ import { MatSnackBar } from '@angular/material/snack-bar'
         MatInputModule,
         ReactiveFormsModule,
         MatSlideToggleModule,
+        MatExpansionModule,
+        MatIconModule,
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
@@ -29,7 +42,11 @@ export class LoginComponent {
     @ViewChild('loginDialog') loginDialog!: TemplateRef<any>
     user$!: Observable<IUser>
 
+    onSelectCharacter: OutputEmitterRef<string> = output<string>()
+
     isCreatingUser: WritableSignal<boolean> = signal<boolean>(false)
+
+    readonly userViewState: WritableSignal<boolean> = signal<boolean>(false)
 
     private dialogRef: MatDialogRef<any> | null = null
 

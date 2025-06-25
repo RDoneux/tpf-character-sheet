@@ -1,5 +1,4 @@
-import { Component, input, InputSignal, signal } from '@angular/core'
-import { ICampMember } from '../../interfaces/i-camp'
+import { Component } from '@angular/core'
 
 @Component({
     selector: 'app-camp-members',
@@ -8,5 +7,5 @@ import { ICampMember } from '../../interfaces/i-camp'
     styleUrl: './camp-members.component.scss',
 })
 export class CampMembersComponent {
-    members: InputSignal<ICampMember[]> = input.required<ICampMember[]>()
+    // members: InputSignal<ICampMember[]> = input.required<ICampMember[]>()
 }

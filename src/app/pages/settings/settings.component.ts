@@ -62,7 +62,7 @@ export class SettingsComponent {
         })
     }
 
-    onImport(characterName: string) {
+    onImport(characterId: string) {
         const dialogRef = this.dialog.open(ConfirmModalComponent, {
             data: {
                 title: `Are you sure you want to import the character? Doing so will override the current character`,
@@ -75,7 +75,7 @@ export class SettingsComponent {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((result) => {
                 if (result) {
-                    this.exportService.importCharacterFromJSON(characterName)
+                    this.exportService.importCharacterFromJSON(characterId)
                 }
             })
     }

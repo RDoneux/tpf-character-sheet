@@ -22,7 +22,7 @@
         <mat-form-field class="full-width no-bottom-margin">
             <mat-label>Class</mat-label>
             <mat-chip-grid #chipGrid>
-                @for (clazz of (background$ | async)?.classes; track clazz) {
+                @for (clazz of (background$ | async)?.classes; track clazz.class) {
                     <mat-chip-row (removed)="onRemoveClass(clazz)">
                         {{ clazz.class }}
                         <button matChipRemove>

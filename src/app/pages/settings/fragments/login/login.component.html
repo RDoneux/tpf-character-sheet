@@ -5,6 +5,24 @@
     <p class="user-info">
         <strong>{{ (user$ | async)?.name }} </strong>
         <small class="email">({{ (user$ | async)?.email }})</small>
+
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{ (user$ | async)?.name }}'s Characters</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul class="character-wrapper">
+                    @for (character of (user$ | async)?.characters; track character.id) {
+                        <li class="character" (click)="onSelectCharacter.emit(character.id)">
+                            <span>{{ character.name }}</span>
+                            <small>{{ character.classes.join(', ') }}</small>
+                            <small>Level: {{ character.level }}</small>
+                            <mat-icon fontSet="material-symbols-outlined">arrow_cool_down</mat-icon>
+                        </li>
+                    }
+                </ul>
+            </mat-expansion-panel>
+        </mat-accordion>
     </p>
 
     <button mat-button class="logout" (click)="onLogout()">Logout</button>

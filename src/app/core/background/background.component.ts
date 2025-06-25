@@ -15,15 +15,9 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { CharacterClassLevel, IBackground, IBackgroundForm } from './interfaces/i-background'
 import { Store } from '@ngrx/store'
-import { combineLatest, debounceTime, firstValueFrom, Observable } from 'rxjs'
+import { combineLatest, debounceTime, firstValueFrom, map, Observable } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import {
-    addClass,
-    removeClass,
-    updateBackground,
-    updateBackgroundWeight,
-    updateClasses,
-} from './state/background.actions'
+import { addClass, removeClass, updateBackground, updateBackgroundWeight } from './state/background.actions'
 import { buildForm } from '../../utils/form'
 import { MatSelectModule } from '@angular/material/select'
 import { CharacterAlignment, CharacterClass, CharacterRace, CharacterSize } from '../../types/game'
@@ -37,6 +31,7 @@ import { AsyncPipe } from '@angular/common'
 import { MatIconModule } from '@angular/material/icon'
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import { values } from 'lodash-es'
 
 @Component({
     selector: 'app-background',
@@ -98,8 +93,12 @@ export class BackgroundComponent {
         firstValueFrom(this.background$).then((background: IBackground) => {
             this.backgroundForm = buildForm<IBackground>(background)
             this.backgroundForm.valueChanges
-                .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(200))
-                .subscribe((value: Partial<IBackground>) => {
+                .pipe(
+                    takeUntilDestroyed(this.destroyRef),
+                    debounceTime(200),
+                    map((value: Partial<IBackground>) => this.verifyClassesAreArray(value))
+                )
+                .subscribe((value: IBackground) => {
                     this.store.dispatch(updateBackground({ background: value as IBackground }))
                 })
             this.background$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: IBackground) => {
@@ -154,5 +153,12 @@ export class BackgroundComponent {
         event.source.closed.emit()
         event.option.deselect()
         this.classFilter.set('')
+    }
+
+    private verifyClassesAreArray(background: Partial<IBackground>): IBackground {
+        return {
+            ...background,
+            classes: Array.isArray(background.classes) ? background.classes : Object.values(background.classes ?? {}),
+        } as IBackground
     }
 }

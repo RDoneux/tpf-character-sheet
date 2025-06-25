@@ -14,9 +14,13 @@ export class AutoSaveService {
         private exportService: ExportService
     ) {
         this.store
-            .select('settings')
+            .select((state: { settings: ISettings }) => state.settings)
             .pipe(takeUntilDestroyed())
             .subscribe((settings: ISettings) => {
+                if (this.interval) {
+                    clearInterval(this.interval)
+                    this.interval = null
+                }
                 if (settings.autoSave) {
                     this.interval = setInterval(
                         () => {
@@ -25,9 +29,6 @@ export class AutoSaveService {
                         },
                         1000 * 60 * 5 // 5 minutes
                     )
-                } else if (!settings.autoSave && this.interval) {
-                    clearInterval(this.interval)
-                    this.interval = null
                 }
             })
     }
