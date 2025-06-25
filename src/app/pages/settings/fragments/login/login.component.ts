@@ -25,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { ConfirmModalComponent } from '../../../../fragments/confirm-modal/confirm-modal.component'
 import { Store } from '@ngrx/store'
 import { resetAppState } from '../../../../app.config'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-login',
@@ -60,7 +61,8 @@ export class LoginComponent {
         private formBuilder: FormBuilder,
         private matDialog: MatDialog,
         private matSnackBar: MatSnackBar,
-        private store: Store
+        private store: Store,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -143,6 +145,7 @@ export class LoginComponent {
             if (confirmed) {
                 this.dialogRef?.close()
                 this.store.dispatch(resetAppState())
+                this.router.navigateByUrl('/character/(character-page:background)')
             }
         })
     }
