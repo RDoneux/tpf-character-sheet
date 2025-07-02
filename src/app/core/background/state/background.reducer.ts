@@ -11,16 +11,10 @@ import {
 
 export const backgroundReducer = createReducer(
     initialBackgroundState,
-    on(
-        updateBackground,
-        (state, { background }) => (
-            console.log(background),
-            {
-                ...state,
-                ...background,
-            }
-        )
-    ),
+    on(updateBackground, (state, { background }) => ({
+        ...state,
+        ...background,
+    })),
     on(updateBackgroundWeight, (state, { weight }) => ({
         ...state,
         weight,

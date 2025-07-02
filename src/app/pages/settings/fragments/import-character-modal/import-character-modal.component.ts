@@ -45,11 +45,9 @@ export class ImportCharacterModalComponent {
 
     onCharacterSheetFilterChange(event: Event) {
         const target: HTMLInputElement = event.target as HTMLInputElement
-        console.log(target.value)
         this.filteredCharacterSheetList.set(
             this.characterSheetList().filter((option) => option.toLowerCase().includes(target.value.toLowerCase()))
         )
-        console.log(this.filteredCharacterSheetList())
     }
 
     onImport() {

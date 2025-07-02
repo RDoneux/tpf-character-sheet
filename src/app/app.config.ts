@@ -54,12 +54,11 @@ export function importAppStateMetaReducer(reducer: ActionReducer<any>): ActionRe
 
 export function resetMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
     return (state, action) => {
-        console.log(action.type)
         if (action.type === resetAppState.type) {
             // Clear localStorage for all slices except settings
             Object.keys(localStorage)
                 .filter((key) => key.startsWith(STORAGE_KEY) && !key.includes('settings'))
-                .forEach((key) => (console.log(key), localStorage.removeItem(key)))
+                .forEach((key) => localStorage.removeItem(key))
             // Return the initial state
             return reducer({ settings: state.settings }, action)
         }

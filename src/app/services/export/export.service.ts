@@ -41,7 +41,7 @@ export class ExportService {
         // Create character overview
         const characterOverview: ICharacterSummary = this.createCharacterOverview(stateCopy)
         // remove the id from characterOverview to avoid duplication
-        const existingCharacters = user.characters.filter((c: ICharacterSummary) => c.id !== characterOverview.id)
+        const existingCharacters = user.characters?.filter((c: ICharacterSummary) => c.id !== characterOverview.id)
         const userPayload = {
             email: user?.email,
             user: { ...user, characters: [...(existingCharacters ?? []), characterOverview] },
